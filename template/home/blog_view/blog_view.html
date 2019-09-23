@@ -157,33 +157,7 @@
             
             {% endfor %}
             {% endif %}
-             <div class="pagination">
-               
-                   
-                    {% if contacts.has_previous %}
-                    <a class="pagination-action" href="?page=1">
-                    <i class="fa fa-angle-double-left" aria-hidden="true"></i>
-                    </a>
-                    <a class="pagination-action" href="?page={{ contacts.previous_page_number }}">
-                        <i class="fa fa-angle-left" aria-hidden="true"></i>
-                    </a>
-                    {% endif %}
-                    {% for num in contacts.paginator.page_range %}
-
-                    {% if contacts.number == num %}
-                    <span>{{ num }}</span>
-                    {% elif num > contacts.number|add:'-3' and num < contacts.number|add:'3' %}
-                    <a href="?page={{ num }}">{{ num }}</a>
-                    {% endif %}
-
-                     {% endfor %} 
-                    {% if contacts.has_next %}
-
-                    <a href="?page=1">first</a>
-                    <a href="?page={{ contacts.next_page_number }}">Previous</a>
-                    <a href="?page={{ contacts.paginator.num_pages }}">Last</a>
-                    {% endif %} 
-                </div>
+             
         </div>
         
     </div>
@@ -192,4 +166,31 @@
 
 
 {% endblock blog_view %}
+<div class="pagination">
+               
+                   
+    {% if contacts.has_previous %}
+    <a class="pagination-action" href="?page=1">
+    <i class="fa fa-angle-double-left" aria-hidden="true"></i>
+    </a>
+    <a class="pagination-action" href="?page={{ contacts.previous_page_number }}">
+        <i class="fa fa-angle-left" aria-hidden="true"></i>
+    </a>
+    {% endif %}
+    {% for num in contacts.paginator.page_range %}
+
+    {% if contacts.number == num %}
+    <span>{{ num }}</span>
+    {% elif num > contacts.number|add:'-3' and num < contacts.number|add:'3' %}
+    <a href="?page={{ num }}">{{ num }}</a>
+    {% endif %}
+
+     {% endfor %} 
+    {% if contacts.has_next %}
+
+    <a href="?page=1">first</a>
+    <a href="?page={{ contacts.next_page_number }}">Previous</a>
+    <a href="?page={{ contacts.paginator.num_pages }}">Last</a>
+    {% endif %} 
+</div>
     
