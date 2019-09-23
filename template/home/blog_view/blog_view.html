@@ -1,0 +1,242 @@
+{% extends 'home/base.html' %}
+
+{% block blood_blog_post %}
+<div class="medilife-book-an-appoinment-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="appointment-form-content">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col-12 col-lg-9">
+                                <div class="medilife-appointment-form">
+                                    <form method="post" class="text-light">
+                                        {% csrf_token %}
+                                        <div class="row align-items-end">
+                                            <div class="col-12 col-md-4">
+                                                <div class="form-group">
+                                                    {{form.blood_group.label}}
+                                                    {{form.blood_group}}
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-md-4">
+                                                <div class="form-group">
+                                                    {{form.quantity.label }}
+                                                    {{form.quantity }}
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-md-4">
+                                                <div>
+                                                    {{form.location.label}}
+                                                    {{form.location}}
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-md-5">
+                                                <div class="form-group">
+                                                    {{form.date.label}}
+                                                    {{form.date}}
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-md-5">
+                                                <div class="form-group">
+                                                    {{form.time.label}}
+                                                    {{form.time}}
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-md-4">
+                                                <div class="form-group">
+                                                    {{form.phone.label}}
+                                                    {{form.phone}}
+                                                </div>
+
+                                            </div>
+                                            <div class="col-12 col-md-4">
+                                                <div class="form-group">
+                                                    {{form.name.label}}
+                                                    {{form.name}}
+                                                </div>
+
+                                            </div>
+
+                                            <div class="col-12 col-md-12">
+                                                <div class="form-group mb-0">
+                                                    <div class="form-group">
+                                                        {{form.description.label}}
+                                                        {{form.description}}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-md-5 mb-0">
+                                                <div class="form-group mb-0">
+                                                    <button type="submit" class="btn medilife-btn">Make a Post</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock blood_blog_post %}
+    
+    {% block feature_area %}
+    <div class="medilife-features-area section-padding-100">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-12 col-lg-6">
+                        <div class="features-content">
+                            <h2>A new way to treat pacients in a revolutionary facility</h2>
+                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod
+                                tincidunt ut laoreet dolore magna aliquam erat volutpat. Lorem ipsum dolor sit amet,
+                                consectetuer adipiscing eli.Lorem ipsum dolor sit amet, consec tetuer adipiscing elit, sed
+                                diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Lorem
+                                ipsum dolor sit amet, consectetuer.</p>
+                            <a href="#" class="btn medilife-btn mt-50">View the services <span>+</span></a>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-6">
+                        <div class="features-thumbnail">
+                            <img src="img/bg-img/medical1.png" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    {% endblock feature_area %}
+        
+
+{% block blog_view %}
+<div class="medilife-blog-area section-padding-100-0">
+    <div class="container">
+        <div class="row">
+
+            {% if blogs %}
+            {% for blog in blogs %}
+
+
+
+
+            <!-- Single Blog Area -->
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="single-blog-area mb-100">
+                    <div class="card text-center">
+                        <div class="card-header">
+                            {{blog.name}}
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Location: {{blog.location}}</h5>
+                            <p class="card-text">{{blog.description}}</p>
+                            
+                        </div>
+                        <!-- <div class="card-footer text-muted">
+                            <input type="text" class="form-control" placeholder="place your comment">
+                            <a href="#" class="btn btn-primary">Comment</a>
+                        </div> -->
+                        <div class="form-group mx-sm-3 mb-2">
+                            
+                          </div>
+                          <!-- <button type="submit" class="btn btn-primary mb-2">Confirm identity</button> -->
+                          <script>
+                            function myFunction() {
+                              var txt;
+                              var person = prompt("Please enter your comment:");
+                            }
+                            </script>
+                          <button class="btn btn-primary mb-2" onclick="myFunction()">Comment</button>
+                    </div>
+
+                </div>
+            </div>
+            
+            {% endfor %}
+            {% endif %}
+            <!-- {% for contact in contacts %}
+    {# Each "contact" is a Contact model object. #}
+    {{ contact.full_name|upper }}<br> -->
+    ...
+<!-- {% endfor %} -->
+<!-- {% for contact in contacts %}
+    {# Each "contact" is a Contact model object. #}
+    {{ contact.full_name|upper }}<br>
+    ...
+{% endfor %} -->
+
+
+    
+
+    
+<!-- <div class="pagination">
+    <span class="step-links">
+        {% if contacts.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ contacts.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ contacts.number }} of {{ contacts.paginator.num_pages }}.
+        </span>
+
+        {% if contacts.has_next %}
+            <a href="?page={{ contacts.next_page_number }}">next</a>
+            <a href="?page={{ contacts.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div> -->
+
+            <!-- Single Blog Area -->
+            <div class="pagination">
+                    <!-- <span class="step-links">
+                        {% if contacts.has_previous %}
+                            <a href="?page=1">&laquo; first</a>
+                            <a href="?page={{ contacts.previous_page_number }}">previous</a>
+                        {% endif %}
+                
+                        <span class="current">
+                            Page {{ contacts.number }} of {{ contacts.paginator.num_pages }}.
+                        </span>
+                
+                        {% if contacts.has_next %}
+                            <a href="?page={{ contacts.next_page_number }}">next</a>
+                            <a href="?page={{ contacts.paginator.num_pages }}">last &raquo;</a>
+                        {% endif %}
+                    </span> -->
+                   
+                    {% if contacts.has_previous %}
+                    <a class="pagination-action" href="?page=1">
+                    <i class="fa fa-angle-double-left" aria-hidden="true"></i>
+                    </a>
+                    <a class="pagination-action" href="?page={{ contacts.previous_page_number }}">
+                        <i class="fa fa-angle-left" aria-hidden="true"></i>
+                    </a>
+                    {% endif %}
+                    {% for num in contacts.paginator.page_range %}
+
+                    {% if contacts.number == num %}
+                    <span>{{ num }}</span>
+                    {% elif num > contacts.number|add:'-3' and num < contacts.number|add:'3' %}
+                    <a href="?page={{ num }}">{{ num }}</a>
+                    {% endif %}
+
+                     {% endfor %} 
+                    {% if contacts.has_next %}
+                    <a href="?page=1">First</a>
+                    <a href="?page={{ contacts.next_page_number }}">Previous</a>
+                    <a href="?page={{ contacts.paginator.num_pages }}">Last</a>
+                    {% endif %} 
+                </div>
+        </div>
+        
+    </div>
+    
+</div>
+
+
+{% endblock blog_view %}
+    

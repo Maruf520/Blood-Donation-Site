@@ -1,0 +1,38 @@
+from accounts.models import Account 
+from django.db import models
+from django.utils import timezone 
+from django.core.validators import MaxValueValidator, MinValueValidator
+
+_BLOOD_GROUPS = (
+    ("A+", "A+"),
+    ("A-", "A-"),
+    ("B+", "B+"),
+    ("B-", "B-"),
+    ("O+", "O+"),
+    ("O-", "O-"),
+    ("AB+", "AB+"),
+    ("AB-", "AB-"),
+)
+
+class Blog(models.Model):
+    name = models.CharField(max_length=80)
+    blood_group = models.CharField(max_length = 3, choices=_BLOOD_GROUPS)
+    created = models.DateTimeField(auto_now_add=True)
+    quantity = models.PositiveSmallIntegerField(default=1,
+        validators=[MaxValueValidator(5), MinValueValidator(1)]
+     )
+    location = models.TextField(blank = False, null = False)
+    description = models.TextField(blank=True, null = True)
+    phone =  models.CharField(max_length=15,blank=False,null=False)
+    date = models.DateField( blank=False)
+    time = models.TimeField( blank = False)
+
+
+class Comment(models.Model):
+    user = models.ForeignKey(Account, on_delete = models.CASCADE)
+    blog = models.ForeignKey(Blog, on_delete = models.CASCADE)
+    created = models.DateTimeField(auto_now_add=True)
+    text = models.TextField(blank=False)
+
+
+# Create your models here.

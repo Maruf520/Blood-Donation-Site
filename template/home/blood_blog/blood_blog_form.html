@@ -1,0 +1,91 @@
+ {% extends 'home/base.html' %} 
+ 
+ {% block title %}
+     home page
+ {% endblock title %}
+     
+ {% block blood_blog_post %}
+ <div class="medilife-book-an-appoinment-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="appointment-form-content">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col-12 col-lg-9">
+                                <div class="medilife-appointment-form">
+                                    <form  method="post" class="text-light">
+                                        {% csrf_token %}
+                                        <div class="row align-items-end">
+                                            <div class="col-12 col-md-4">
+                                                <div class="form-group">
+                                                    {{form.blood_group.label}}
+                                                    {{form.blood_group}}
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-md-4">
+                                                <div class="form-group">
+                                                    {{form.quantity.label }}
+                                                    {{form.quantity }}
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-md-4">
+                                                    <div >
+                                                      {{form.location.label}}
+                                                      {{form.location}}
+                                                    </div>
+                                                </div>
+                                            <div class="col-12 col-md-5">
+                                                <div class="form-group">
+                                                    {{form.date.label}}
+                                                    {{form.date}}
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-md-5">
+                                                <div class="form-group">
+                                                    {{form.time.label}}
+                                                    {{form.time}}
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-md-4">
+                                                <div class="form-group">
+                                                        {{form.phone.label}}
+                                                        {{form.phone}}
+                                                </div>
+                                               
+                                            </div>
+                                            <div class="col-12 col-md-4">
+                                                    <div class="form-group">
+                                                            {{form.name.label}}
+                                                            {{form.name}}
+                                                    </div>
+                                                   
+                                                </div>
+                                            
+                                            <div class="col-12 col-md-12">
+                                                <div class="form-group mb-0">
+                                                    <div class="form-group">
+                                                            {{form.description.label}}
+                                                            {{form.description}}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-md-5 mb-0">
+                                                <div class="form-group mb-0">
+                                                    <button type="submit" class="btn medilife-btn">Make a Post</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+  
+
+                                </div>
+                            </div>
+                           
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+ {% endblock  %}
+     

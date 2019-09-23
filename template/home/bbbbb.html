@@ -1,0 +1,53 @@
+<div class="medilife-blog-area section-padding-100-0">
+    <div class="container">
+        <div class="row">
+                
+                    
+            <!-- Single Blog Area -->
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="single-blog-area mb-100">
+                    <!-- Post Thumbnail -->
+                    
+                    
+                        
+   
+                    <div class="blog-post-thumbnail">
+                        <img src="img/blog-img/1.jpg" alt="">
+                        <!-- Post Date -->
+                        
+                        
+                            
+                
+                {% if context %}
+
+                    {% for contexts in context %}
+                         
+                     
+                               
+                            
+                        <div class="post-date">
+                            <a href="#">{{ contexts.date }}</a>
+                        </div>
+                    {%endfor %}
+                {% endif %}         
+                        </div>
+                       
+                    <!-- Post Content -->
+                    <div class="post-content">
+                        <div class="post-author">
+                            <a href="#"><img src="img/blog-img/p1.jpg" alt=""></a>
+                        </div>
+                        <a href="#" class="headline">xxx</a>
+                        <p>{{Blog.description}}</p>
+                        <a href="#" class="comments">3 Comments</a>
+                    </div>
+                         
+                </div>
+            </div>
+                    
+           
+            <!-- Single Blog Area
+                  
+        </div>
+    </div>
+</div>
