@@ -1,291 +1,45 @@
 {% extends 'home/base.html' %}
-
-
-
-
 {% block about_us %}
+{% if blog %}
+{% for blog in blog %}
 <div class="row">
-        <div class="col-sm-6">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Special title treatment</h5>
-              <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-              <a href="#" class="btn btn-primary">Go somewhere</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-6">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Special title treatment</h5>
-              <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-              <a href="#" class="btn btn-primary">Go somewhere</a>
-            </div>
-          </div>
-        </div>
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title"></h5>
+
+        <p class="card-text">{{ blog.description | upper }}</p>
+        <a href="{% url 'single_blog' blog.id %}" class="btn btn-primary">Comment</a>
+
       </div>
-      <div class="row">
-            <div class="col-sm-6">
-              <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title">Special title treatment</h5>
-                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                  <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-              </div>
-            </div>
-            <div class="col-sm-6">
-              <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title">Special title treatment</h5>
-                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                  <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-                <div class="col-sm-6">
-                  <div class="card">
-                    <div class="card-body">
-                      <h5 class="card-title">Special title treatment</h5>
-                      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                      <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-sm-6">
-                  <div class="card">
-                    <div class="card-body">
-                      <h5 class="card-title">Special title treatment</h5>
-                      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                      <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                    <div class="col-sm-6">
-                      <div class="card">
-                        <div class="card-body">
-                          <h5 class="card-title">Special title treatment</h5>
-                          <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                          <a href="#" class="btn btn-primary">Go somewhere</a>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-sm-6">
-                      <div class="card">
-                        <div class="card-body">
-                          <h5 class="card-title">Special title treatment</h5>
-                          <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                          <a href="#" class="btn btn-primary">Go somewhere</a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                        <div class="col-sm-6">
-                          <div class="card">
-                            <div class="card-body">
-                              <h5 class="card-title">Special title treatment</h5>
-                              <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                              <a href="#" class="btn btn-primary">Go somewhere</a>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-sm-6">
-                          <div class="card">
-                            <div class="card-body">
-                              <h5 class="card-title">Special title treatment</h5>
-                              <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                              <a href="#" class="btn btn-primary">Go somewhere</a>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="row">
-                            <div class="col-sm-6">
-                              <div class="card">
-                                <div class="card-body">
-                                  <h5 class="card-title">Special title treatment</h5>
-                                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                                  <a href="#" class="btn btn-primary">Go somewhere</a>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="col-sm-6">
-                              <div class="card">
-                                <div class="card-body">
-                                  <h5 class="card-title">Special title treatment</h5>
-                                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                                  <a href="#" class="btn btn-primary">Go somewhere</a>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="row">
-                                <div class="col-sm-6">
-                                  <div class="card">
-                                    <div class="card-body">
-                                      <h5 class="card-title">Special title treatment</h5>
-                                      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                                      <a href="#" class="btn btn-primary">Go somewhere</a>
-                                    </div>
-                                  </div>
-                                </div>
-                                <div class="col-sm-6">
-                                  <div class="card">
-                                    <div class="card-body">
-                                      <h5 class="card-title">Special title treatment</h5>
-                                      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                                      <a href="#" class="btn btn-primary">Go somewhere</a>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                              <div class="row">
-                                    <div class="col-sm-6">
-                                      <div class="card">
-                                        <div class="card-body">
-                                          <h5 class="card-title">Special title treatment</h5>
-                                          <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                                          <a href="#" class="btn btn-primary">Go somewhere</a>
-                                        </div>
-                                      </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                      <div class="card">
-                                        <div class="card-body">
-                                          <h5 class="card-title">Special title treatment</h5>
-                                          <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                                          <a href="#" class="btn btn-primary">Go somewhere</a>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div class="row">
-                                        <div class="col-sm-6">
-                                          <div class="card">
-                                            <div class="card-body">
-                                              <h5 class="card-title">Special title treatment</h5>
-                                              <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                                              <a href="#" class="btn btn-primary">Go somewhere</a>
-                                            </div>
-                                          </div>
-                                        </div>
-                                        <div class="col-sm-6">
-                                          <div class="card">
-                                            <div class="card-body">
-                                              <h5 class="card-title">Special title treatment</h5>
-                                              <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                                              <a href="#" class="btn btn-primary">Go somewhere</a>
-                                            </div>
-                                          </div>
-                                        </div>
-                                      </div>
-                                      <div class="row">
-                                            <div class="col-sm-6">
-                                              <div class="card">
-                                                <div class="card-body">
-                                                  <h5 class="card-title">Special title treatment</h5>
-                                                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                                                  <a href="#" class="btn btn-primary">Go somewhere</a>
-                                                </div>
-                                              </div>
-                                            </div>
-                                            <div class="col-sm-6">
-                                              <div class="card">
-                                                <div class="card-body">
-                                                  <h5 class="card-title">Special title treatment</h5>
-                                                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                                                  <a href="#" class="btn btn-primary">Go somewhere</a>
-                                                </div>
-                                              </div>
-                                            </div>
-                                          </div>
-                                          <div class="row">
-                                                <div class="col-sm-6">
-                                                  <div class="card">
-                                                    <div class="card-body">
-                                                      <h5 class="card-title">Special title treatment</h5>
-                                                      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                                                      <a href="#" class="btn btn-primary">Go somewhere</a>
-                                                    </div>
-                                                  </div>
-                                                </div>
-                                                <div class="col-sm-6">
-                                                  <div class="card">
-                                                    <div class="card-body">
-                                                      <h5 class="card-title">Special title treatment</h5>
-                                                      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                                                      <a href="#" class="btn btn-primary">Go somewhere</a>
-                                                    </div>
-                                                  </div>
-                                                </div>
-                                              </div>
-                                              <div class="row">
-                                                    <div class="col-sm-6">
-                                                      <div class="card">
-                                                        <div class="card-body">
-                                                          <h5 class="card-title">Special title treatment</h5>
-                                                          <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                                                          <a href="#" class="btn btn-primary">Go somewhere</a>
-                                                        </div>
-                                                      </div>
-                                                    </div>
-                                                    <div class="col-sm-6">
-                                                      <div class="card">
-                                                        <div class="card-body">
-                                                          <h5 class="card-title">Special title treatment</h5>
-                                                          <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                                                          <a href="#" class="btn btn-primary">Go somewhere</a>
-                                                        </div>
-                                                      </div>
-                                                    </div>
-                                                  </div>
-                                                  <div class="row">
-                                                        <div class="col-sm-6">
-                                                          <div class="card">
-                                                            <div class="card-body">
-                                                              <h5 class="card-title">Special title treatment</h5>
-                                                              <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                                                              <a href="#" class="btn btn-primary">Go somewhere</a>
-                                                            </div>
-                                                          </div>
-                                                        </div>
-                                                        <div class="col-sm-6">
-                                                          <div class="card">
-                                                            <div class="card-body">
-                                                              <h5 class="card-title">Special title treatment</h5>
-                                                              <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                                                              <a href="#" class="btn btn-primary">Go somewhere</a>
-                                                            </div>
-                                                          </div>
-                                                        </div>
-                                                      </div>
-                                                      <div class="row">
-                                                            <div class="col-sm-6">
-                                                              <div class="card">
-                                                                <div class="card-body">
-                                                                  <h5 class="card-title">Special title treatment</h5>
-                                                                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                                                                  <a href="#" class="btn btn-primary">Go somewhere</a>
-                                                                </div>
-                                                              </div>
-                                                            </div>
-                                                            <div class="col-sm-6">
-                                                              <div class="card">
-                                                                <div class="card-body">
-                                                                  <h5 class="card-title">Special title treatment</h5>
-                                                                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                                                                  <a href="#" class="btn btn-primary">Go somewhere</a>
-                                                                </div>
-                                                              </div>
-                                                            </div>
-                                                          </div>
+    </div>
+  </div>
+</div>
+{% endfor %}
+{% endif %}
+<div class="pagination">
+  {% if contacts.has_previous %}
+  <a class="pagination-action" href="?page=1">
+    <i class="fa fa-angle-double-left" aria-hidden="true"></i>
+  </a>
+  <a class="pagination-action" href="?page={{ contacts.previous_page_number }}">
+    <i class="fa fa-angle-left" aria-hidden="true"></i>
+  </a>
+  {% endif %}
+  {% for num in contacts.paginator.page_range %}
+
+  {% if contacts.number == num %}
+  <span>{{ num }}</span>
+  {% elif num > contacts.number|add:'-3' and num < contacts.number|add:'3' %}
+  <a href="?page={{ num }}">{{ num }}</a>
+  {% endif %}
+
+  {% endfor %}
+  {% if contacts.has_next %}
+
+  <a href="?page=1">first</a>
+  <a href="?page={{ contacts.next_page_number }}">Previous</a>
+  <a href="?page={{ contacts.paginator.num_pages }}">Last</a>
+  {% endif %}
+</div>
 {% endblock about_us %}
-    
-    
-    
-    

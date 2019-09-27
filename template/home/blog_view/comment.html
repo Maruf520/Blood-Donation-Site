@@ -1,0 +1,50 @@
+{% extends 'home/base.html' %}
+{% block about_us %}
+
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title"></h5>
+              {% if post %}
+              {% for post in post %}
+              <p class="card-text">{{ post.description | upper }}</p>
+              {% endfor %}
+              {% endif %}
+              
+              {% if comment %}
+              
+              {% for comment in comment  %}
+              <p class="card-text">{{ comment.text }}</p>
+              <p class="card-text">{{ comment.created }}</p>
+
+                
+              {% endfor %}
+                
+                
+              {% endif %}
+                
+ 
+            </div>
+          </div>
+                  {% if new_comment %}
+                  <h1>your comment has been posted</h1>
+                  {% else %}
+          <div class="form-group shadow-textarea">
+            <label for="exampleFormControlTextarea6"></label>
+            
+            <form method="POST" action="">
+                    {% csrf_token %}
+                    {{form.as_p}}
+                <!-- {{form.as_p}} -->
+                <input type="submit">
+            </form>
+            <!-- <textarea class="form-control z-depth-1" id="exampleFormControlTextarea6" rows="3" placeholder="Write something here..."></textarea> -->
+            
+          </div>
+                   {% endif %}
+        </div>
+      </div>
+      
+
+{% endblock %}

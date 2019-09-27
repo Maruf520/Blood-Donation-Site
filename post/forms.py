@@ -33,5 +33,5 @@ class CommentPostForm(forms.ModelForm):
         model = Comment
         fields = ['text']
         widgets = {
-            'text' : forms.TextInput(attrs = {'class' : 'form-control','placeholder': 'Enter Your Comment'})
+            'text' : forms.TextInput(attrs = {'class' : 'form-control z-depth-1','placeholder': 'Enter Your Comment'})
         }

@@ -1,4 +1,51 @@
 {% extends 'home/base.html' %}
+{% load static %}
+
+    {% block about_us %}
+    
+    {% endblock %}
+    
+{% block slideshow %}
+
+<div class="medilife-gallery-area owl-carousel">
+    <!-- Single Gallery Item -->
+    {% if image_list %}
+    {% for obj in image_list %}
+    <div class="single-gallery-item">
+       
+       
+        <img src="{{ obj.image.url }}" alt="">
+        <div class="view-more-btn">
+            <a href="img/bg-img/g1.jpg" class="btn gallery-img">See More +</a>
+        </div>
+    </div>
+    {% endfor %}
+    {% endif %}
+    <!-- Single Gallery Item -->
+    <!-- <div class="single-gallery-item">
+        <img src="https://images.pexels.com/photos/414612/pexels-photo-414612.jpeg" alt="">
+        <div class="view-more-btn">
+            <a href="img/bg-img/g2.jpg" class="btn gallery-img">See More +</a>
+        </div>
+    </div> -->
+    <!-- Single Gallery Item -->
+    <!-- <div class="single-gallery-item">
+        <img src="https://images.pexels.com/photos/414612/pexels-photo-414612.jpeg" alt="">
+        <div class="view-more-btn">
+            <a href="img/bg-img/g3.jpg" class="btn gallery-img">See More +</a>
+        </div>
+    </div> -->
+
+    <!-- Single Gallery Item -->
+    <!-- <div class="single-gallery-item">
+        <img src="https://images.pexels.com/photos/414612/pexels-photo-414612.jpeg" alt="">
+        <div class="view-more-btn">
+            <a href="img/bg-img/g4.jpg" class="btn gallery-img">See More +</a>
+        </div>
+    </div> -->
+</div>
+
+{% endblock slideshow %}
 
 {% block blood_blog_post %}
 <div class="medilife-book-an-appoinment-area">
@@ -84,7 +131,8 @@
         </div>
     </div>
 {% endblock blood_blog_post %}
-    
+
+
     {% block feature_area %}
     <div class="medilife-features-area section-padding-100">
             <div class="container">
@@ -110,6 +158,9 @@
             
         </div>
     {% endblock feature_area %}
+
+
+    
         
 
 {% block blog_view %}
@@ -119,11 +170,7 @@
 
             {% if blogs %}
             {% for blog in blogs %}
-
-
-
-
-            <!-- Single Blog Area -->
+     <!-- Single Blog Area -->
             <div class="col-12 col-md-6 col-lg-4">
                 <div class="single-blog-area mb-100">
                     <div class="card text-center">
@@ -131,8 +178,8 @@
                             {{blog.name}}
                         </div>
                         <div class="card-body">
-                            <h5 class="card-title">Location: {{blog.location}}</h5>
-                            <p class="card-text">{{blog.description}}</p>
+                            <h5 class="card-title">Location: {{blog.location| upper }}</h5>
+                            <p class="card-text">{{blog.description | upper }}</p>
                             
                         </div>
                         <!-- <div class="card-footer text-muted">
@@ -157,40 +204,39 @@
             
             {% endfor %}
             {% endif %}
+            {% if contacts in contacts %}
+            <div class="pagination">
+               
+                   
+                {% if contacts.has_previous %}
+                <a class="pagination-action" href="?page=1">
+                <i class="fa fa-angle-double-left" aria-hidden="true"></i>
+                </a>
+                <a class="pagination-action" href="?page={{ contacts.previous_page_number }}">
+                    <i class="fa fa-angle-left" aria-hidden="true"></i>
+                </a>
+                {% endif %}
+                {% for num in contacts.paginator.page_range %}
+            
+                {% if contacts.number == num %}
+                <span>{{ num }}</span>
+                {% elif num > contacts.number|add:'-3' and num < contacts.number|add:'3' %}
+                <a href="?page={{ num }}">{{ num }}</a>
+                {% endif %}
+            
+                 {% endfor %} 
+                {% if contacts.has_next %}
+            
+                <a href="?page=">first</a>
+                <a href="?page={{ contacts.next_page_number }}">Previous</a>
+                <a href="?page={{ contacts.paginator.num_pages }}">Last</a>
+                {% endif %} 
+            </div>
+            {% endif %}
              
         </div>
         
     </div>
     
 </div>
-
-
 {% endblock blog_view %}
-<div class="pagination">
-               
-                   
-    {% if contacts.has_previous %}
-    <a class="pagination-action" href="?page=1">
-    <i class="fa fa-angle-double-left" aria-hidden="true"></i>
-    </a>
-    <a class="pagination-action" href="?page={{ contacts.previous_page_number }}">
-        <i class="fa fa-angle-left" aria-hidden="true"></i>
-    </a>
-    {% endif %}
-    {% for num in contacts.paginator.page_range %}
-
-    {% if contacts.number == num %}
-    <span>{{ num }}</span>
-    {% elif num > contacts.number|add:'-3' and num < contacts.number|add:'3' %}
-    <a href="?page={{ num }}">{{ num }}</a>
-    {% endif %}
-
-     {% endfor %} 
-    {% if contacts.has_next %}
-
-    <a href="?page=1">first</a>
-    <a href="?page={{ contacts.next_page_number }}">Previous</a>
-    <a href="?page={{ contacts.paginator.num_pages }}">Last</a>
-    {% endif %} 
-</div>
-    

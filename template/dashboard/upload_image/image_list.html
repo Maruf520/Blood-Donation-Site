@@ -1,0 +1,28 @@
+{% extends 'dashboard/base.html' %}
+
+{% block 'main_body' %}
+
+<main class="app-content">
+        {% if photo_list %}
+            {% for photo in photo_list %}
+        
+           
+           
+             <div class="single-gallery-item">
+       
+       
+                <img src=" {{ photo.image.url }} " class="img-rounded" alt="">
+                
+                    <form method ="POST" action="{% url  'delete' photo.id %}">
+                        {% csrf_token %}
+                    <button type="submit" class=" btn btn-danger btn-sm " >Delete</button>
+                    
+                    </form>
+                
+            </div>
+            {% endfor %}
+            {% endif %} 
+
+</main>
+
+{% endblock %}

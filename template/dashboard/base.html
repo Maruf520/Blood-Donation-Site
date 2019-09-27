@@ -31,7 +31,9 @@
     {% include 'dashboard/partials/leftbar.html' %}
     
     <!--Main menu-->
-    {% include 'dashboard/partials/main_menu.html' %}
+    {% block 'main_body' %}
+    {% endblock %}
+    <!-- {% include 'dashboard/partials/main_menu.html' %} -->
 
     <!-- Essential javascripts for application to work-->
     <script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
