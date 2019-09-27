@@ -43,5 +43,6 @@ def individual_blog(request, id):
             'post': post,
             'form': form,
             'comment': comment
+            
         }
         return render(request, 'home/blog_view/comment.html', context)
