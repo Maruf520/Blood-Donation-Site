@@ -1,0 +1,36 @@
+{% extends 'dashboard/base.html' %}
+
+{% block 'main_body' %}
+
+
+
+    
+
+    
+
+<main class="app-content">
+        {% if post %}
+                        
+        {% for blog in post %}
+        <div class="col-sm-6">
+                <div class="card">
+                  <div class="card-body">
+                        
+                         <h5 class="card-title">{{blog.name}}</h5>
+            
+                    <p class="card-text">{{blog.description}}</p>
+                    <form method = 'POST' action="{% url 'delete_post' blog.id %}">
+                        {% csrf_token %}
+                        <button type="submit" class=" btn btn-danger btn-sm " >Delete</button>
+                    <!-- <a href="{% url 'delete_post' blog.id %}"  class="btn btn-primary">Delete</a> -->
+                    </form>
+                    
+
+                  </div>
+                </div>
+              </div>
+              {% endfor %}
+                    {% endif %}
+</main>
+
+{% endblock %}

@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect
 from django.http import HttpResponse 
 from dashboard.forms import SlidImageForm
 from dashboard.models import Image
+from post.models import Blog
 
 
 def dashboard1(request):
@@ -43,4 +44,16 @@ def delete(request, id):
         image_list = Image.objects.get(id = id)
         image_list.delete()
         return redirect('image_list')
+def manage_post(request):
+    post = Blog.objects.all()
 
+    context = {
+        'post':post
+    }
+    return render(request, 'dashboard/manage_post/manage_post.html', context)
+
+def delete_post(request,id):
+    if request.method == 'POST':
+        post = Blog.objects.get(id = id)
+        post.delete()
+        return redirect('manage_post')
