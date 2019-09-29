@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect
 from django.http import HttpResponse 
 from dashboard.forms import SlidImageForm
 from dashboard.models import Image
-from post.models import Blog
+from post.models import Blog, Comment
 
 
 def dashboard1(request):
@@ -39,16 +39,20 @@ def image_list(request):
         }
     return render(request,'dashboard/upload_image/image_list.html', context)
 
-def delete(request, id):
+def delete_image(request, id):
     if request.method == 'POST':
         image_list = Image.objects.get(id = id)
         image_list.delete()
         return redirect('image_list')
+
 def manage_post(request):
     post = Blog.objects.all()
+    comment  = Comment.objects.all()
 
     context = {
-        'post':post
+        'post':post,
+        'comments' : comment
+        
     }
     return render(request, 'dashboard/manage_post/manage_post.html', context)
 
@@ -57,3 +61,21 @@ def delete_post(request,id):
         post = Blog.objects.get(id = id)
         post.delete()
         return redirect('manage_post')
+
+def individual_post(request, id):
+    if request.method == 'GET':
+        post_item = Blog.objects.filter(id = id)
+        comments = Comment.objects.filter(blog__id = id).all()
+
+        context ={
+            'post_item' : post_item,
+            'comments' : comments
+        }
+    return render(request, 'dashboard/manage_post/individual_post.html', context)
+
+def delete_comment(request, id):
+    if request.method == 'POST':
+        comment = Comment.objects.all(blog__id = id)
+        comment.delete()
+        return redirect('individual_post')
+        

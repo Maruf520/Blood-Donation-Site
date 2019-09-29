@@ -29,7 +29,7 @@ class Blog(models.Model):
 
 
 class Comment(models.Model):
-    # user = models.ForeignKey(Account, on_delete = models.CASCADE)
+    # user = models.ForeignKey(Accou0nt, on_delete = models.CASCADE)
     blog = models.ForeignKey(Blog, on_delete = models.CASCADE)
     created = models.DateTimeField(auto_now_add=True)
     text = models.TextField(blank=False)

@@ -22,8 +22,11 @@
                     <form method = 'POST' action="{% url 'delete_post' blog.id %}">
                         {% csrf_token %}
                         <button type="submit" class=" btn btn-danger btn-sm " >Delete</button>
+                        <button></button>
                     <!-- <a href="{% url 'delete_post' blog.id %}"  class="btn btn-primary">Delete</a> -->
+                    <a href="{% url 'individual_post' blog.id %}" class="btn btn-info" role="button">Details</a>
                     </form>
+
                     
 
                   </div>
@@ -31,6 +34,13 @@
               </div>
               {% endfor %}
                     {% endif %}
+                    
+                    
+                      <h1>Maruf</h1>
+                        
+                      
+                    
+                      
 </main>
 
 {% endblock %}
