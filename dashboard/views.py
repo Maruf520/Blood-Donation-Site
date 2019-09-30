@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect, HttpResponseRedirect
 from django.http import HttpResponse 
 from dashboard.forms import SlidImageForm
 from dashboard.models import Image
@@ -73,9 +73,14 @@ def individual_post(request, id):
         }
     return render(request, 'dashboard/manage_post/individual_post.html', context)
 
+
 def delete_comment(request, id):
-    if request.method == 'POST':
-        comment = Comment.objects.all(blog__id = id)
-        comment.delete()
-        return redirect('individual_post')
+    comment = Comment.objects.filter(id = id).first()
+    comment.delete()
+
+    # To return to the pervious page use this code
+    # return redirect(request.META.get('HTTP_REFERER', '/'))
+
+    return redirect(request.META.get('HTTP_REFERER', '/'))
+
         

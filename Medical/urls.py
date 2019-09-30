@@ -24,6 +24,7 @@ urlpatterns = [
     path('blood/', include('post.urls')),
     path('admin/', admin.site.urls),
     path('', include('home.urls')),
+    path('blood_bank/', include('blood_bank.urls')),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

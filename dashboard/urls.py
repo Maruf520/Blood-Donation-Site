@@ -9,7 +9,7 @@ urlpatterns = [
     path('manage_post', views.manage_post, name= 'manage_post'),
     path('manage_post/<int:id>', views.delete_post, name='delete_post'),
     path('manage/individual/<int:id>', views.individual_post, name = 'individual_post'),
-     path('manage/individual/<int:id>', views.individual_post, name = 'delete_individual_comment'),
+    path('manage/individual/comment/<int:id>', views.delete_comment, name = 'delete_individual_comment'),
 
 
 ]
