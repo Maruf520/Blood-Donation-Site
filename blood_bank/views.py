@@ -1,14 +1,20 @@
-from django.shortcuts import render,HttpResponse,redirect
+from django.shortcuts import render,HttpResponse,redirect,HttpResponseRedirect
 from blood_bank.forms import Bank_details_Form
+from django import forms
+from blood_bank.models import Bank_details, Blood_quantity
 
 def BloodBankManage(request):
     if request.method == 'POST':
-        bank_details_form = Bank_details_Form(request.POST)
-        if bank_details_form.is_valid():
-            bloodBank = bank_details_form.save()
-            print(bloodBank)
-            return HttpResponse('fuck')
         
+        bank_details_form = Bank_details_Form(request.POST, request.FILES)
+        if bank_details_form.is_valid():
+            bank_details_form.save()
+            return HttpResponse('successful')
+            # print(bank_details_form.errors)
+            
+        else:
+            print(bank_details_form.errors)
+            return HttpResponse('Error')
     else:
         bank_details_form = Bank_details_Form()
 
@@ -18,5 +24,20 @@ def BloodBankManage(request):
         return render(request, 'dashboard/blood_bank/blood_bank.html', context)       
 
 
+def blood_banks_list(request ):
+    if request.method == 'GET':
+        banks = Bank_details.objects.all()
 
-# Create your views here.
+        context = {
+            'banks': banks
+        }
+        return render(request, 'home/blood_bank/blood_banks_list.html', context)
+
+def individual_bank (request, id):
+    if request.method == 'GET':
+        bank = Bank_details.objects.filter(id=id)
+        context = {
+            'bank':  bank
+        }
+        return render(request, 'home/blood_bank/individual_bank.html', context)
+           

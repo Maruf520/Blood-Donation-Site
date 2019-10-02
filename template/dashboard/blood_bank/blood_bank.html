@@ -54,7 +54,7 @@
     <div class="col-md-6">
       <div class="tile">
         <h3 class="tile-title">submit your bank details</h3>
-        <form  method="POST"  >
+        <form  method="POST" enctype="multipart/form-data" >
              {% csrf_token %}
          
           <div class="form-group">
@@ -76,6 +76,8 @@
             </div>
             
             <button type="submit" class="btn btn-primary">Submit</button>
+            <!-- <a href=""></a> -->
+            
           </form>
         
       </div>
