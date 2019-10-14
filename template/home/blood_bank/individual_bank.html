@@ -1,12 +1,14 @@
-{% extends 'home/base.html' %}
-
+{% extends 'home/base.html' %} 
 {% block cool_area %}
+ {% if bank %} 
+ {% for bank in bank %}
 
-{% if bank %}
-
- <h1><p>Eikhane blood bank er details thekbe.</p></h1>
-
-{% endif %}
-    
-
+<h1>
+  <p>{{ bank.bank_name }}</p>
+</h1>
+<h1>
+  <p>{{ bank.bank_location }}</p>
+</h1>
+{% endfor %} 
+{% endif %} 
 {% endblock cool_area %}

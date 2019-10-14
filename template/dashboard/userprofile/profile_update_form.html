@@ -1,0 +1,15 @@
+{% extends 'dashboard/base.html' %} {% block title %}
+
+{{ user.name }}
+
+{% endblock title %} {% block 'main_body' %}
+<main class="app-content">
+  <div>
+    <form method="POST" class="col-md-6 list-group-item">
+      {%csrf_token%}
+      {{ form }}
+      <button type="submit" class="btn btn-success">Update</button>
+    </form>
+  </div>
+</main>
+{% endblock %}

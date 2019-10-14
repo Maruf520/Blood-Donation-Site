@@ -89,3 +89,81 @@ class SigninForm(forms.Form):
 			return cleaned_data
 		raise forms.ValidationError('invalid information')
 
+class ProfleUpdateForm(forms.ModelForm):
+	blood_group = forms.CharField( widget=forms.Select( choices=blood_type , attrs={'class':'custom-select'}))
+	class Meta:
+		model = Account
+		fields = ['username','email','phone','present_add','blood_group']
+		widgets = {
+		'username' : forms.TextInput(attrs={
+				'placeholder' : 'Username', 'class' : 'form-control'
+				}),
+            'email' : forms.TextInput(attrs={
+				'placeholder' : 'Email', 'class' : 'form-control'
+				}),
+            'phone' : forms.TextInput(attrs={
+				'placeholder' : 'Phone', 'class' : 'form-control'
+				}),
+			'blood_group' : forms.TextInput(attrs={
+				'placeholder' : 'Blood Group', 'class' : 'form-control'
+				}),
+            'present_add' : forms.TextInput(attrs={
+				'placeholder' : 'Present Address', 'class' : 'form-control'
+				}),
+		}
+
+	def clean(self):
+		cleaned_data = self.cleaned_data
+		phone = cleaned_data['phone']
+		email = cleaned_data['email']
+		username = cleaned_data['username']
+		blood_group = cleaned_data['blood_group']
+		present_add = cleaned_data['present_add']
+		# valid = self.user.check_password(password)
+		# if not valid:
+		# 	raise forms.ValidationError('invalid password')
+
+		duplicate_email = Account.objects.filter(email=email).exclude(id=self.user.id)
+		if duplicate_email.exists():
+			raise forms.ValidationError('This email is already registered')
+
+		duplicate_phone = Account.objects.filter(phone=phone).exclude(id=self.user.id)
+		if duplicate_phone.exists():
+			raise forms.ValidationError('This phone is already registered')
+
+		return cleaned_data
+    
+	def is_new_email(self):
+		if self.user.email.lower() != self.cleaned_data.get('email').lower():
+			return False
+		return True
+
+
+	def save(self, commit=True):
+		username = self.cleaned_data['username']
+		email = self.cleaned_data['email']
+		present_add = self.cleaned_data['present_add']
+		phone = self.cleaned_data['phone']
+		blood_group = self.cleaned_data['blood_group']
+		self.user.username = username
+		self.user.phone = phone
+		self.user.email = email
+		self.user.present_add = present_add
+		self.user.blood_group = blood_group
+
+		if commit:
+			self.user.save()
+		return self.user        
+
+
+	def __init__(self, *args, **kwargs):
+		self.user = kwargs.pop('user', None)
+
+		super(ProfleUpdateForm, self).__init__(*args, **kwargs)		
+
+		self.fields['username'].initial = self.user.username
+		self.fields['phone'].initial = self.user.phone
+		self.fields['email'].initial = self.user.email
+		self.fields['present_add'].initial = self.user.present_add
+		self.fields['blood_group'].initial = self.user.blood_group
+		

@@ -1,0 +1,29 @@
+{% extends 'dashboard/base.html' %} {% block title %}
+
+{{ user.name }}
+
+{% endblock title %} {% block 'main_body' %}
+<main class="app-content">
+  <div class="card" style="width: 18rem;">
+    <img
+      class="card-img-top"
+      src="https://bit.ly/2MaSKk9"
+      alt="Card image cap"
+    />
+    <h5 class="card-title">{{ user.username }}</h5>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">Blood Group : {{ user.blood_group }}</li>
+      <li class="list-group-item">Address : {{ user.present_add }}</li>
+      <li class="list-group-item">Phone : {{ user.phone }}</li>
+      <li class="list-group-item">Email : {{ user.email }}</li>
+      <li class="list-group-item">
+        Donated at : {{ users.last_date_of_donation }}
+      </li>
+    </ul>
+    <div class="card-body">
+      <a href="/account/profile/update/" class="btn btn-danger">Edit</a>
+      <!-- <a href="#" class="card-link">Save</a> -->
+    </div>
+  </div>
+</main>
+{% endblock %}
