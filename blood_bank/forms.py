@@ -5,11 +5,12 @@ class Bank_details_Form(forms.ModelForm):
 
     class Meta:
         model  = Bank_details
-        fields = ['bank_name','bank_location', 'bank_logo','bank_contact']
+        fields = ['bank_name','bank_location', 'bank_logo','bank_contact','owner']
         widgets = {
             'bank_name': forms.TextInput(attrs={'class':'form-control','placeholder':'location'}),
             'bank_location': forms.TextInput(attrs={'class':'form-control','placeholder':'bank_location'}),
             'bank_contact': forms.TextInput(attrs={'class':'form-control','placeholder':'bank_conatct'}),
+            # 'owner': forms.TextInput(attrs={'class':'form-control','placeholder':'bank_conatct'}),
             'bank_logo': forms.FileInput(attrs={'class':'form-control'}),
         }
 

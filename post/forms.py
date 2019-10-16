@@ -35,3 +35,19 @@ class CommentPostForm(forms.ModelForm):
         widgets = {
             'text' : forms.TextInput(attrs = {'class' : 'form-control z-depth-1','placeholder': 'Enter Your Comment'})
         }
+    def __init__(self, *args, **kwargs):
+        user = kwargs.pop("user", None)
+        post = kwargs.pop('post', None)
+        super(CommentPostForm, self).__init__(*args, **kwargs) 
+        self.user = user
+        self.post = post
+
+    def save(self, commit=True):
+        comment = Comment()
+        comment.text = self.cleaned_data['text']
+        comment.user = self.user
+        comment.blog = self.post
+        if commit:
+            comment.save()
+        return comment
+       

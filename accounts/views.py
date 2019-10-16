@@ -63,17 +63,6 @@ def User_Profile(request):
         }
         return render(request, 'dashboard/userprofile/userprofile.html', context)
 
-# def User_Profile1(request):
-# 	if request.method == 'GET':
-# 		user = Account.objects.all()
-# 		print(user)
-# 		context = {
-# 			'users' : user
-# 		}
-# 		return render (request, 'home/partials/menu_area.html', context)
-#
-
-
 @login_required(login_url='/signin/')
 def update(request):
     context = {}

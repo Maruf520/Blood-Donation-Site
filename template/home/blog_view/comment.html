@@ -15,6 +15,7 @@
               {% if comment %}
               
               {% for comment in comment  %}
+              <p class="card-text">{{comment.user.username}}</p>
               <p class="card-text">{{ comment.text }}</p>
               <p class="card-text">{{ comment.created }}</p>
 

@@ -4,6 +4,7 @@ from django.contrib.auth.models import AbstractBaseUser, BaseUserManager,Permiss
 # Create your models here.\
 class MyAccountManager( BaseUserManager ):
     def create_user(self, email,username,blood_group, phone,present_add,permanent_add,last_date_of_donation,password=None,is_staff=False,is_superuser=False ):
+        # print('soaib')
         if not username:
             raise ValueError("User must have an username")
         if not phone:
@@ -22,27 +23,29 @@ class MyAccountManager( BaseUserManager ):
     #     user = self.create_user(email,username,blood_group, phone,present_add,permanent_add,last_date_of_donation,True,False)
     #     return user
 
-    def create_superuser(self, email,username,blood_group, phone,present_add,permanent_add,last_date_of_donation,password=None):
-        user = self.create_user(email,username,blood_group, phone,present_add,permanent_add,last_date_of_donation,False,True)
+    def create_superuser(self,username,password=None):
+        user = self.model(username=username,is_staff = True,is_superuser = True)
+        user.set_password(password)
+        user.save()
         return user
 
 
 
 class Account( AbstractBaseUser ):
-    email = models.EmailField( max_length=45, unique = True )
-    username = models.CharField( max_length=45 )
-    blood_group  = models.CharField( max_length = 5, )
-    phone  = models.CharField( max_length=20, unique = True )
-    present_add = models.TextField(max_length = 200)
-    last_date_of_donation = models.DateField(max_length = 50)
-    permanent_add  =models.TextField( max_length = 200 )
-    is_admin = models.BooleanField(default = False)
-    is_active = models.BooleanField( default= True)
+    email = models.EmailField( max_length=45, unique = True ,null=True)
+    username = models.CharField( max_length=45,  unique = True )
+    blood_group  = models.CharField( max_length = 5,null=True )
+    phone  = models.CharField( max_length=20, unique = True ,null=True)
+    present_add = models.TextField(max_length = 200,null=True)
+    last_date_of_donation = models.DateField(max_length = 50,null=True)
+    permanent_add  =models.TextField( max_length = 200,null=True )
+    is_admin = models.BooleanField(default = False,null=True)
+    is_active = models.BooleanField( default= True,null=True)
     is_staff = models.BooleanField(default = False)
     is_superuser = models.BooleanField(default = False)
 
-    USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['phone', 'blood_group','present_add','username','permanent_add','last_date_of_donation']
+    USERNAME_FIELD = 'username'
+    # REQUIRED_FIELDS = ['']
 
     objects = MyAccountManager()
     def __str__(self):

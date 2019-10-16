@@ -24,11 +24,9 @@ def individual_blog(request, id):
     if request.method == 'POST':
         post = get_object_or_404(Blog, id=id)
     
-        form = CommentPostForm(request.POST)
+        form = CommentPostForm(request.POST, user=request.user, post=post)
         if form.is_valid():
-            new_comment = form.save(commit=False)
-            new_comment.blog = post
-            new_comment.save()
+            new_comment = form.save()
             context = {
                 'new_comment': new_comment
             }
@@ -46,4 +44,5 @@ def individual_blog(request, id):
             
         }
         return render(request, 'home/blog_view/comment.html', context)
+
         

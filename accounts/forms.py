@@ -77,13 +77,16 @@ class SignupForm(forms.ModelForm):
             return user   
 class SigninForm(forms.Form):
 	email = forms.EmailField(max_length=50, widget=forms.EmailInput(attrs={'class':'form-control'}))
-	password = forms.CharField(max_length=12, min_length=6, widget=forms.PasswordInput(attrs={'class':'custom-select'}))
+	password = forms.CharField(max_length=12, min_length=6, widget=forms.PasswordInput(attrs={'class':'form-control'}))
 
 	def clean(self):
 		cleaned_data = self.cleaned_data
 		email = cleaned_data['email']
 		password = cleaned_data['password']
-		user = authenticate(email=email, password=password)
+		db_user = Account.objects.filter(email__iexact=email).first()
+		if not db_user:
+			raise forms.ValidationError("invalid user")
+		user = authenticate(username=db_user.username, password=password)
 		if user:
 			self.user = user
 			return cleaned_data
