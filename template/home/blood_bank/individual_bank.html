@@ -1,14 +1,40 @@
 {% extends 'home/base.html' %} 
 {% block cool_area %}
  {% if bank %} 
- {% for bank in bank %}
+ 
 
 <h1>
   <p>{{ bank.bank_name }}</p>
 </h1>
 <h1>
   <p>{{ bank.bank_location }}</p>
+  <div>
+    <table class="spacing-table">
+      <tr>
+        <td>
+          AB+
+        </td>
+        <td>AB-</td>
+        <td>A+</td>
+        <td>A-</td>
+        <td>B+</td>
+        <td>B-</td>
+        <td>O+</td>
+        <td>O-</td>
+      </tr>
+    <tr>
+    {% for a in detail %}
+    <td>a</td>
+    {% endfor %}
+  </tr>
+  </table>
+  </div>
+
+
+
+{% endif %}
+
+  <p></p>
 </h1>
-{% endfor %} 
-{% endif %} 
+ 
 {% endblock cool_area %}

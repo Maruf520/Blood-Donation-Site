@@ -8,13 +8,18 @@
         <button class="app-search__button"><i class="fa fa-search"></i></button>
       </li>
       <!--Notification Menu-->
-      <li class="dropdown"><a class="app-nav__item" href="#" data-toggle="dropdown" aria-label="Show notifications"><i class="fa fa-bell-o fa-lg"></i></a>
+      {% load notifications_tags %}
+      <li class="dropdown"><a class="app-nav__item" href="/inbox/notifications/" data-toggle="dropdown" aria-label="Show notifications"><i class="fa fa-bell-o fa-lg">{% notifications_unread as unread_count %}
+        {% if unread_count %}
+             <strong>{{ unread_count }}{{verb}}</strong> 
+        {% endif %}</p></i></a>
         <ul class="app-notification dropdown-menu dropdown-menu-right">
-          <li class="app-notification__title">You have 4 new notifications.</li>
+          <li class="app-notification__title"></li>
           <div class="app-notification__content">
             <li><a class="app-notification__item" href="javascript:;"><span class="app-notification__icon"><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x text-primary"></i><i class="fa fa-envelope fa-stack-1x fa-inverse"></i></span></span>
                 <div>
-                  <p class="app-notification__message">Lisa sent you a mail</p>
+                    
+                  <p class="app-notification__message">
                   <p class="app-notification__meta">2 min ago</p>
                 </div></a></li>
             <li><a class="app-notification__item" href="javascript:;"><span class="app-notification__icon"><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x text-danger"></i><i class="fa fa-hdd-o fa-stack-1x fa-inverse"></i></span></span>

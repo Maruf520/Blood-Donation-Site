@@ -1,4 +1,5 @@
 from django.db import models
+from accounts.models import Account 
 
 class Bank_details(models.Model):
     bank_name = models.CharField(max_length=300,blank=False)
@@ -6,7 +7,7 @@ class Bank_details(models.Model):
     bank_logo = models.ImageField(upload_to ='image/bank_logo/%Y/%m/%d', blank=False)
     bank_contact =models.CharField(max_length=20,blank=False)
     created_at = models.DateTimeField(auto_now_add=True)
-    owner = models.CharField(max_length=300,blank = False)
+    owner = models.ForeignKey(Account, on_delete = models.CASCADE)
     
 
 class Blood_quantity (models.Model):

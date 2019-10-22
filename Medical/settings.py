@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'home',
     'post',
     'blood_bank',
+    'notifications',
 ]
 
 MIDDLEWARE = [
@@ -138,3 +139,5 @@ STATIC_ROOT = os.path.join(BASE_DIR,'staticfiles')
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+
+NOTIFICATIONS_SOFT_DELETE=True

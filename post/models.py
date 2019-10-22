@@ -2,6 +2,9 @@ from accounts.models import Account
 from django.db import models
 from django.utils import timezone 
 from django.core.validators import MaxValueValidator, MinValueValidator
+from notifications.signals import notify
+from accounts.models import Account
+from django.db.models.signals import post_save
 
 _BLOOD_GROUPS = (
     ("A+", "A+"),
@@ -15,6 +18,7 @@ _BLOOD_GROUPS = (
 )
 
 class Blog(models.Model):
+    
     name = models.CharField(max_length=80)
     blood_group = models.CharField(max_length = 3, choices=_BLOOD_GROUPS)
     created = models.DateTimeField(auto_now_add=True)
@@ -34,5 +38,10 @@ class Comment(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     text = models.TextField(blank=False)
 
+
+def my_handler(sender, instance, created, **kwargs):
+    notify.send(instance.user, recipient = instance.user, description = Comment.text,verb='You have a fucking notification for new Comment')
+
+post_save.connect(my_handler, sender=Comment) 
 
 # Create your models here.

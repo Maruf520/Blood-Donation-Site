@@ -35,9 +35,16 @@ def blood_banks_list(request ):
 
 def individual_bank (request, id):
     if request.method == 'GET':
-        bank = Bank_details.objects.filter(id=id)
+        bank1 = Bank_details.objects.get(id=id)
+
+        detail = Blood_quantity.objects.get(bank_id = id )
         context = {
-            'bank':  bank
+            'bank':  bank1,
+            'detail':detail
         }
         return render(request, 'home/blood_bank/individual_bank.html', context)
            
+
+        #    '''
+        #    Blood_quantity.objects.get(bank__owner=request.user)
+        #    '''

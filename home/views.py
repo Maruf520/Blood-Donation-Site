@@ -3,6 +3,9 @@ from django.core.paginator import Paginator
 from post.forms import BloodPostForm
 from post.models import Blog 
 from dashboard.models import Image
+from notifications.signals import notify
+from accounts.models import Account
+from django.db.models.signals import post_save
 
 # Create your views here.
 
@@ -14,7 +17,7 @@ def index(request):
         form = BloodPostForm(request.POST)
         if form.is_valid():
             blog = form.save()
-            print(blog)
+            # notify.send(self.user, recipient=user, verb='you reached level 10')
             form = BloodPostForm()
             context = {'form': form,'blogs':blogs,'image':image}
             return render (request, 'home/blog_view/blog_view.html', context)
@@ -36,6 +39,8 @@ def index(request):
         
         context = {'form':form, 'blogs':blogs,'contacts': contacts,'image_list':image_list}
         return render (request, 'home/blog_view/blog_view.html', context)
+
+   
 
 def blog_post_view(request, id):
 

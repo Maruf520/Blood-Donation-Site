@@ -12,12 +12,20 @@ from django.contrib.auth.models import User
 
 def login(request):
     if request.user.is_authenticated:
-        return redirect('register')
-    if request.method == 'POST':
-        form = SigninForm(request.POST)
-        if form.is_valid():
-            user = form.user
-            login_dj(request, user)
+
+        if request.method == 'POST':
+            form = SigninForm(request.POST)
+            if form.is_valid():
+                user = form.user
+                login_dj(request, user)
+            # if request.user.is_admin == True:
+
+            #     details = Blood_quantity.objects.get(bank__owner=request.user)
+            #     context  ={
+            #         'detail':details
+            #     }
+            #     return render (request,)
+        
             return redirect('/')
 
     else:
