@@ -1,0 +1,41 @@
+{% extends 'dashboard/base.html' %}
+{% block 'main_body' %}
+<main class="app-content">
+<!-- <ul class="list-group">
+    <li class="list-group-item">All users </li>
+  
+    <li class="list-group-item list-group-item-primary">{{user.username}}</li>
+ 
+  </ul> -->
+  <table class="table table-striped table-dark">
+      {% if single_user %}
+    <thead>
+      <tr>
+        <th scope="col">Username : {{ single_user.username }} </th>
+    </tr>
+    <tr>
+        <th scope="col">Last Date Of Donation : {{ single_user.last_date_of_donation }}</th>
+    </tr>   
+        <th scope="col">Location : {{ single_user.present_add }}</th>
+        
+      </tr>
+    </tr>   
+    <th scope="col">Blood Group  : {{ single_user.blood_group }}</th>
+    
+  </tr>
+</tr>   
+<th scope="col">Phone  : {{ single_user.phone }}</th>
+
+</tr>
+</tr>   
+<th scope="col">Email : {{ single_user.email }}</th>
+
+</tr>
+    </thead>
+    {% endif %}
+    <tbody>
+    
+    </tbody>
+  </table>
+</main>
+  {% endblock %}

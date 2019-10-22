@@ -3,7 +3,9 @@ from django.http import HttpResponse
 from dashboard.forms import SlidImageForm
 from dashboard.models import Image
 from post.models import Blog, Comment
+from accounts.models import Account
 from django.contrib.auth.decorators import login_required
+from .filters import UserFilter
 
 @login_required(login_url='login')
 def dashboard1(request):
@@ -99,4 +101,36 @@ def delete_comment(request, id):
 
     return redirect(request.META.get('HTTP_REFERER', '/'))
 
-        
+
+@login_required(login_url='login')
+def user_list(request):
+
+    if not request.user.is_staff: 
+        return HttpResponse("Permission denied") 
+    user = Account.objects.all()
+
+    context ={
+        'users':user
+    }     
+    return render(request, 'dashboard/users/users.html', context)  
+
+def single_user (request, id):
+    single_user = Account.objects.get(id = id)
+
+    context = {
+        'single_user': single_user
+    }
+    return render (request, 'dashboard/users/single_user.html', context)
+def delete_single_user(request, id):
+        if not request.user.is_staff:
+            return HttpResponse("Permission denied")
+        delete_single_user = Account.objects.get(id = id)
+        delete_single_user.delete()
+        return redirect(request.META.get('HTTP_REFERER', '/'))
+
+def search(request):
+    user_list = Account.objects.all()
+    user_filter = UserFilter(request.GET, queryset=user_list)
+    return render(request, 'dashboard/users/search.html', {'filter': user_filter})
+
+

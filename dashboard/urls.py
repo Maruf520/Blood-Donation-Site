@@ -10,6 +10,9 @@ urlpatterns = [
     path('manage_post/<int:id>', views.delete_post, name='delete_post'),
     path('manage/individual/<int:id>', views.individual_post, name = 'individual_post'),
     path('manage/individual/comment/<int:id>', views.delete_comment, name = 'delete_individual_comment'),
+    path('users/',views.user_list, name='userlist'),
+    path('users/<int:id>/',views.single_user, name='signle_user'),
+    path('user/delete/<int:id>/', views.delete_single_user, name='delete_single_user'),
 
-
+    path('search/', views.search, name='search'),
 ]

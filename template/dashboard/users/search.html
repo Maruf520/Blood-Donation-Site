@@ -1,0 +1,18 @@
+{% extends 'dashboard/base.html' %}
+{% block 'main_body' %}
+<main class="app-content">
+
+        <form method="get">
+                {{ filter.form.as_p }}
+                <button type="submit">Search</button>
+              </form>
+              <table class="table table-striped table-dark">
+             <tbody>
+              {% for user in filter.qs %}
+                <!-- <li <a href=" {% url 'signle_user' user.id %} "> >{{ user.username }}</li> -->
+                    <td><a href=" {% url 'signle_user' user.id %} ">{{ user.username }}</a></td>
+              {% endfor %}
+            </tbody>
+        </table>
+    </main>
+    {% endblock %}
