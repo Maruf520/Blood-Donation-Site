@@ -11,13 +11,13 @@ from django.contrib.auth.models import User
 
 
 def login(request):
-    if request.user.is_authenticated:
+    # if request.user.is_authenticated:
 
-        if request.method == 'POST':
-            form = SigninForm(request.POST)
-            if form.is_valid():
-                user = form.user
-                login_dj(request, user)
+    if request.method == 'POST':
+        form = SigninForm(request.POST)
+        if form.is_valid():
+            user = form.user
+            login_dj(request, user)
             # if request.user.is_admin == True:
 
             #     details = Blood_quantity.objects.get(bank__owner=request.user)

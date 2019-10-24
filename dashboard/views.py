@@ -6,13 +6,20 @@ from post.models import Blog, Comment
 from accounts.models import Account
 from django.contrib.auth.decorators import login_required
 from .filters import UserFilter
+from datetime import datetime
 
 @login_required(login_url='login')
 def dashboard1(request):
     if not request.user.is_staff:
         return HttpResponse("Permission denied")
+    total_user = Account.objects.all().count()
+    total_post = Blog.objects.all().count()
+    context = {
+        'total_user': total_user,
+        'total_post': total_post
+    }    
     # return render(request,'Dashboard/base.html')
-    return render(request, 'dashboard/base.html')
+    return render(request, 'dashboard/base.html', context)
 
 @login_required(login_url='login')
 def image_upload(request):
@@ -116,9 +123,14 @@ def user_list(request):
 
 def single_user (request, id):
     single_user = Account.objects.get(id = id)
-
+    date_format = "%Y-%m-%d"
+    a = datetime.strptime(str(datetime.now().date()), date_format)
+    b = datetime.strptime(str(single_user.last_date_of_donation),date_format)
+    c = a-b
+    print(c)
     context = {
-        'single_user': single_user
+        'single_user': single_user,
+        'c':c,
     }
     return render (request, 'dashboard/users/single_user.html', context)
 def delete_single_user(request, id):
@@ -132,5 +144,4 @@ def search(request):
     user_list = Account.objects.all()
     user_filter = UserFilter(request.GET, queryset=user_list)
     return render(request, 'dashboard/users/search.html', {'filter': user_filter})
-
 
