@@ -120,27 +120,36 @@ def user_list(request):
         'users':user
     }     
     return render(request, 'dashboard/users/users.html', context)  
-
+@login_required(login_url = 'login')
 def single_user (request, id):
+    if not request.user.is_staff:
+        return HttpResponse('permission denied')
     single_user = Account.objects.get(id = id)
     date_format = "%Y-%m-%d"
     a = datetime.strptime(str(datetime.now().date()), date_format)
     b = datetime.strptime(str(single_user.last_date_of_donation),date_format)
     c = a-b
-    print(c)
+    # print(c.days)
+    d = c.days
+    # print(d)
     context = {
         'single_user': single_user,
-        'c':c,
+        'd':d,
+        
     }
     return render (request, 'dashboard/users/single_user.html', context)
+@login_required(login_url = 'login')    
 def delete_single_user(request, id):
-        if not request.user.is_staff:
-            return HttpResponse("Permission denied")
+    
+    if not request.user.is_staff:
+        return HttpResponse("Permission denied")
         delete_single_user = Account.objects.get(id = id)
         delete_single_user.delete()
         return redirect(request.META.get('HTTP_REFERER', '/'))
-
+@login_required(login_url = 'login')
 def search(request):
+    if not request.user.is_staff:
+        return HttpResponse('permisson denied')
     user_list = Account.objects.all()
     user_filter = UserFilter(request.GET, queryset=user_list)
     return render(request, 'dashboard/users/search.html', {'filter': user_filter})
