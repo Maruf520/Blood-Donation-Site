@@ -11,10 +11,10 @@
         
            
            
-             <div class="single-gallery-item">
+             <div class="w-25 p-3">
        
        
-                <img src=" {{ photo.image.url }} " class="img-rounded" alt="">
+                <img src=" {{ photo.image.url }} " class="img-thumbnail" alt="">
                 
                     <form method ="POST" action="{% url  'delete' photo.id %}">
                         {% csrf_token %}

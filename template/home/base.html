@@ -77,60 +77,8 @@
  
     <section class="hero-area">
         <div class="hero-slides owl-carousel">
-            <!-- Single Hero Slide -->
-            <div class="single-hero-slide bg-img bg-overlay-white"
-                style="background-image: url({% static 'front/img/bg-img/hero1.jpg' %});">
-                <div class="container h-100">
-                    <div class="row h-100 align-items-center">
-                        <div class="col-12">
-                            <div class="hero-slides-content">
-                                <h2 data-animation="fadeInUp" data-delay="100ms">Medical Services that <br>You can Trust
-                                    100%</h2>
-                                <h6 data-animation="fadeInUp" data-delay="400ms">Lorem ipsum dolor sit amet,
-                                    consectetuer adipiscing elit sed diam nonummy nibh euismod.</h6>
-                                <a href="#" class="btn medilife-btn mt-50" data-animation="fadeInUp"
-                                    data-delay="700ms">Discover Medifile <span>+</span></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Single Hero Slide -->
-            <div class="single-hero-slide bg-img bg-overlay-white"
-                style="background-image: url(img/bg-img/breadcumb3.jpg);">
-                <div class="container h-100">
-                    <div class="row h-100 align-items-center">
-                        <div class="col-12">
-                            <div class="hero-slides-content">
-                                <h2 data-animation="fadeInUp" data-delay="100ms">Medical Services that <br>You can Trust
-                                    100%</h2>
-                                <h6 data-animation="fadeInUp" data-delay="400ms">Lorem ipsum dolor sit amet,
-                                    consectetuer adipiscing elit sed diam nonummy nibh euismod.</h6>
-                                <a href="#" class="btn medilife-btn mt-50" data-animation="fadeInUp"
-                                    data-delay="700ms">Discover Medifile <span>+</span></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Single Hero Slide -->
-            <div class="single-hero-slide bg-img bg-overlay-white"
-                style="background-image: url(img/bg-img/breadcumb1.jpg);">
-                <div class="container h-100">
-                    <div class="row h-100 align-items-center">
-                        <div class="col-12">
-                            <div class="hero-slides-content">
-                                <h2 data-animation="fadeInUp" data-delay="100ms">Medical Services that <br>You can Trust
-                                    100%</h2>
-                                <h6 data-animation="fadeInUp" data-delay="400ms">Lorem ipsum dolor sit amet,
-                                    consectetuer adipiscing elit sed diam nonummy nibh euismod.</h6>
-                                <a href="#" class="btn medilife-btn mt-50" data-animation="fadeInUp"
-                                    data-delay="700ms">Discover Medifile <span>+</span></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            {% block home_slide_show %}
+            {% endblock %}
         </div>
     </section>
     
@@ -141,7 +89,7 @@
     <!-- ***** Hero Area End ***** -->
 
     <!-- ***** Blood blog form ***** -->
-    {% block  blood_blog_post %}
+    {% block  blood_blog_form %}
    
     {% endblock %}
 
@@ -227,52 +175,7 @@
     <!-- ***** Cool Facts Area Start ***** -->
     
     {% block cool_area %}
-        
-    
-        
-  
-    <section class="medilife-cool-facts-area section-padding-100-0">
-        <div class="container">
-            <div class="row">
-                <!-- Single Cool Fact-->
-                <div class="col-12 col-sm-6 col-lg-3">
-                    <div class="single-cool-fact-area text-center mb-100">
-                        <i class="icon-blood-transfusion-2"></i>
-                        <h2><span class="counter">5632</span></h2>
-                        <h6>Blood donations</h6>
-                        <p>Dolor sit amet, consecte tuer adipiscing elit, sed diam nonummy nibh euismod tincidunt.</p>
-                    </div>
-                </div>
-                <!-- Single Cool Fact-->
-                <div class="col-12 col-sm-6 col-lg-3">
-                    <div class="single-cool-fact-area text-center mb-100">
-                        <i class="icon-atoms"></i>
-                        <h2><span class="counter">23</span>k</h2>
-                        <h6>Pacients</h6>
-                        <p>Dolor sit amet, consecte tuer adipiscing elit, sed diam nonummy nibh euismod tincidunt.</p>
-                    </div>
-                </div>
-                <!-- Single Cool Fact-->
-                <div class="col-12 col-sm-6 col-lg-3">
-                    <div class="single-cool-fact-area text-center mb-100">
-                        <i class="icon-microscope"></i>
-                        <h2><span class="counter">25</span></h2>
-                        <h6>Specialities</h6>
-                        <p>Dolor sit amet, consecte tuer adipiscing elit, sed diam nonummy nibh euismod tincidunt.</p>
-                    </div>
-                </div>
-                <!-- Single Cool Fact-->
-                <div class="col-12 col-sm-6 col-lg-3">
-                    <div class="single-cool-fact-area text-center mb-100">
-                        <i class="icon-doctor-1"></i>
-                        <h2><span class="counter">723</span></h2>
-                        <h6>Doctors</h6>
-                        <p>Dolor sit amet, consecte tuer adipiscing elit, sed diam nonummy nibh euismod tincidunt.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+
     {% endblock %}
     <!-- ***** Cool Facts Area End ***** -->
 
