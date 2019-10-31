@@ -1,18 +1,24 @@
 from django.shortcuts import render, redirect
 from . import views
+from django.core.exceptions import ObjectDoesNotExist
 from django.contrib import messages, auth
 from django.contrib.auth import login as login_dj, logout, authenticate
 from django.contrib.auth.decorators import login_required
-from accounts.forms import SignupForm, SigninForm, ProfleUpdateForm
+from accounts.forms import SignupForm, SigninForm, ProfleUpdateForm,Password_reset_email_form,Password_verification_form
 from django.http import HttpResponse
 from accounts.models import Account
 from django.shortcuts import HttpResponseRedirect
 from django.contrib.auth.models import User
+from misc.token import token_decode, token_encode
+from django.core.mail import send_mail
 
+
+def send_password_reset_token(token,email):
+        send_mail('Verification Token : ', token , 'md.maruf5201@gmail.com', [email],
+            fail_silently=False)
 
 def login(request):
     # if request.user.is_authenticated:
-
     if request.method == 'POST':
         form = SigninForm(request.POST)
         if form.is_valid():
@@ -86,3 +92,49 @@ def update(request):
             'form': form
         }
         return render(request, 'dashboard/userprofile/profile_update_form.html', context)
+def password_reset(request):
+    if request.method == 'GET':
+        form = Password_reset_email_form()
+        context = {
+            'form': form
+        }
+        return render(request, 'accounts/password_reset/password_reset_email.html',context)
+
+    if request.method == 'POST':
+        form = Password_reset_email_form(request.POST)
+        if form.is_valid():
+            #check whether any account exists or not with this email
+            email = form.cleaned_data['email']
+            try:
+                account = Account.objects.get(email__iexact=email)
+                data = {
+                    'user_id' : account.id,
+                    'email' : account.email
+                }
+                token= token_encode(data)
+                print(token)
+                send_password_reset_token(token, account.email)
+
+                return redirect('confirm_passwword')
+            except ObjectDoesNotExist:
+                pass
+    
+    return HttpResponse("ERROR")
+
+
+def confirm_password(request):
+    if request.method == 'POST':
+        form = Password_verification_form(request.POST)
+        if form.is_valid():
+            token = form.cleaned_data['token']
+            data = token_decode(token)
+            if data :
+                account = Account.objects.get(id = data['user_id'])
+                account.set_password(form.cleaned_data['password'])
+                account.save()
+                return HttpResponse('password changed')
+    form = Password_verification_form()
+    context = {
+        'form': form
+    }   
+    return render(request,'accounts/password_reset/confirm_password.html', context)        

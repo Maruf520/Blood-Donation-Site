@@ -10,52 +10,33 @@
     <!-- Font-icon css-->
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>SignUp - SOMC</title>
+    <style>
+    html,body {
+      background: rgb(2,0,36);
+  background: linear-gradient(6deg, rgba(2,0,36,1) 0%, rgba(97,97,205,1) 31%, rgba(0,212,255,1) 100%);
+  background-repeat: no-repeat; min-height: 100vh;
+    }
+    </style>
   </head>
   <body>
-    <section class="material-half-bg">
-      <div class="cover"></div>
-    </section>
-    <section class="login-content">
-      <div class="logo">
-        <h1>S.O.M.C</h1>
-      </div>
-      <div class="login-box">
-            <h3 class="login-head"><i class="fa fa-lg fa-fw fa-user"></i>Sign Up</h3>
-        <div class="row">
-            <div class="col-md-12">
-              <div class="tile">
-                <div class="row">
-                  <div class="col-lg-6">
-                    <form method="POST">
-                        {% csrf_token %}
-                        {{ form.as_p }}
-                        <div class="tile-footer">
-                            <button class="btn btn-primary" type="submit">Submit</button>
-                          </div>
-                    </form>
-                  </div>
+    <div class="container-fluid mt-5">
+      <div class="row d-flex justify-content-center">
+        <div class="col-md-5 list-group-item mt-5">
+          <h4 class="text-center">Register Now</h4>
+          <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+              <div class="tile-footer">
+                  <button class="btn btn-primary" type="submit">Submit</button>
+                  <span class="ml-1 mr-1">Or</span>
+                  <a href="{% url 'login' %}" class="btn btn-primary">Log in</a>
                 </div>
-               
-              </div>
-            </div>
-          </div>
-          
-        </form>
-        <!-- <form class="forget-form" action="index.html">
-          <h3 class="login-head"><i class="fa fa-lg fa-fw fa-lock"></i>Forgot Password ?</h3>
-          <div class="form-group">
-            <label class="control-label">EMAIL</label>
-            <input class="form-control" type="text" placeholder="Email">
-          </div>
-          <div class="form-group btn-container">
-            <button class="btn btn-primary btn-block"><i class="fa fa-unlock fa-lg fa-fw"></i>RESET</button>
-          </div>
-          <div class="form-group mt-3">
-            <p class="semibold-text mb-0"><a href="#" data-toggle="flip"><i class="fa fa-angle-left fa-fw"></i> Back to Login</a></p>
-          </div>
-        </form> -->
+          </form>
+          <br>
+          <a href="#" class="btn">Forget Password?</a>
+        </div>
       </div>
-    </section>
+    </div>
     <!-- Essential javascripts for application to work-->
     <script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
     <script src="{% static 'js/popper.min.js' %}"></script>
