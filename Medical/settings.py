@@ -11,6 +11,10 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+from environs import Env
+
+env = Env()
+env.read_env()
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -20,12 +24,14 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'l_j2k=p45-7yo@wuxarb69v5#-fzrw(_^=7%(bb%4*vcuuy08h'
+# SECRET_KEY = 'l_j2k=p45-7yo@wuxarb69v5#-fzrw(_^=7%(bb%4*vcuuy08h'
+SECRET_KEY = env.str('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG = True
+DEBUG = env.bool('DEBUG')
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -80,17 +86,15 @@ WSGI_APPLICATION = 'Medical.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'medical2',
-        'USER' : 'root',
-        'Password' : '',
-        'HOST' : 'localhost',
-        'PORT' : '',
-        'OPTIONS': {
-            'sql_mode': 'traditional',
-        }
+        'ENGINE': env.str('DB_ENGINE'),
+        'NAME': env.str('DB_NAME'),
+        'HOST' : env.str('DB_HOST'),
+        'USER': env.str('DB_USER'),
+        'PASSWORD': env.str('DB_PASSWORD'),
+        'PORT': env.str('DB_PORT')
     }
 }
 
@@ -143,34 +147,10 @@ MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 NOTIFICATIONS_SOFT_DELETE=True
 
 
-# EMAIL_HOST = 'smtp.hushmail.com'
-# EMAIL_PORT = 587
-# EMAIL_HOST_USER = 'anthony@prettyprinted.com'
-# EMAIL_USE_TLS = True
-# EMAIL_USE_SSL = False
-# EMAIL_HOST = 'smtp.sendgrid.net'
-# EMAIL_PORT = 587
-# EMAIL_HOST_USER = 'parsifal_app'
-# EMAIL_HOST_PASSWORD = 'mys3cr3tp4ssw0rd'
-# EMAIL_USE_TLS = True
-
-# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-# EMAIL_HOST = 'smtp.mail.yahoo.com'
-# EMAIL_USE_TLS = True
-# EMAIL_PORT = 587
-# EMAIL_HOST_USER = 'maruf_maruf24@yahoo.com'
-# EMAIL_HOST_PASSWORD = 
-
-# SENDGRID_API_KEY = os.getenv('SENDGRID_API_KEY')
-
-# EMAIL_HOST = 'smtp.sendgrid.net'
-# EMAIL_HOST_USER = 'apikey'
-# EMAIL_HOST_PASSWORD = SENDGRID_API_KEY
-# EMAIL_PORT = 587
-# EMAIL_USE_TLS = True
-
-EMAIL_USE_TLS = True
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_HOST_USER = 'md.maruf5201@gmail.com'
-EMAIL_HOST_PASSWORD = 'MahiKeya0124'
+# Email configuration
+EMAIL_BACKEND = env.str('EMAIL_BACKEND')
+EMAIL_HOST = env.str('EMAIL_HOST')
+EMAIL_PORT = env.int('EMAIL_PORT')
+EMAIL_HOST_USER = env.str('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = env.str('EMAIL_HOST_PASSWORD')
+EMAIL_USE_TLS = env.bool('EMAIL_USE_TLS')

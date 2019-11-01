@@ -37,7 +37,7 @@ def index(request):
         form = BloodPostForm(request.POST)
         if form.is_valid():
             blog = form.save()
-            all_account = Account.objects.filter(blood_group = blog.blood_group, last_date_of_donation__lte=datetime.now().date() - timedelta(days=1000) )
+            all_account = Account.objects.filter(blood_group = blog.blood_group, last_date_of_donation__lte=datetime.now().date() - timedelta(days=100) )
             destination_emails = []
             for account in all_account:
                 destination_emails.append(account.email)
