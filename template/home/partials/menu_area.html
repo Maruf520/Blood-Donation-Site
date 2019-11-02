@@ -6,45 +6,23 @@
         >Home <span class="sr-only">(current)</span></a
       >
     </li>
-    <li class="nav-item dropdown">
-      <a
-        class="nav-link dropdown-toggle"
-        href="#"
-        id="navbarDropdown"
-        role="button"
-        data-toggle="dropdown"
-        aria-haspopup="true"
-        aria-expanded="false"
-        >Pages</a
-      >
-      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-        <a class="dropdown-item" href="index.html">Home</a>
-        <a class="dropdown-item" href="about-us.html">About Us</a>
-        <a class="dropdown-item" href="services.html">Services</a>
-        <a class="dropdown-item" href="blog.html">News</a>
-        <a class="dropdown-item" href="single-blog.html">News Details</a>
-        <a class="dropdown-item" href="contact.html">Contact</a>
-        <a class="dropdown-item" href="elements.html">Elements</a>
-        <a class="dropdown-item" href="index-icons.html">All Icons</a>
-      </div>
+    <li class="nav-item">
+      <a class="nav-link" href="#">About Us</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="about-us.html">About Us</a>
+      <a class="nav-link" href="#">Services</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="services.html">Services</a>
+      <a class="nav-link" href="{% url 'blood_blog' %}">Blood Posts</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="{% url 'blood_blog' %}">Blog</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#">Gallery</a>
+      <a class="nav-link" href="{% url 'gallery' %}">Gallery</a>
     </li>
 
     <!-- </ul> -->
     <!-- Appointment Button -->
     <li class="nav-item">
-      <a href="{% url 'blood_banks' %}" class="btn medilife-appoint-btn ml-30"
+      <a href="/#blood-post-form" class="btn medilife-appoint-btn ml-30"
         >For <span>Blood Bank</span> Click here</a
       >
     </li>

@@ -1,22 +1,66 @@
 {% extends 'home/base.html' %}
+{% load static %}
+{% block blog_css %}
+<link rel="stylesheet" href="{% static 'front/css/blog.css' %}">
+{% endblock %}
 {% block about_us %}
-{% if blog %}
-{% for blog in blog %}
-<div class="row">
-  <div class="col-sm-6">
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title"></h5>
+{% endblock %}
 
-        <p class="card-text">{{ blog.description | upper }}</p>
-        <a href="{% url 'single_blog' blog.id %}" class="btn btn-primary">Comment</a>
 
+{% block blog_view %}
+
+  <div style="height: 250px;" ></div>
+  <h2 class="text-center display-4">Blood Blog For Everyone</h2>
+  <div class="container-fluid">
+    <div class="row d-flex justify-content-center">
+      <div class="col-md-9">
+        {% if blog %}
+        {% for item in blog %}
+        <div class="list-group-item list-group-item-secondary mb-2">
+          <h5>{{ item.blood_group }} needed</h5>
+          <p class="lead">
+            {{item.name}} need {{item.quantity}} beg {{item.blood_group}} before {{ item.time}}, {{item.date}}
+          </p>
+          {% if item.description %}
+          <blockquote class="blockquote">
+            <u>Message</u>
+            <p class="mb-0">
+                {{item.description}}
+            </p>
+          </blockquote>
+          {%endif%}
+
+          {% if comments %}
+          {% for comment in comments %}
+            {% if comment.blog.id == item.id %}
+            
+            <blockquote class="blockquote">
+              <p class="mb-0">{{comment.text}}</p>
+              <footer class="blockquote-footer"><cite title="Source Title">{{comment.user.username}}</cite></footer>
+            </blockquote>
+            
+            {% endif %}
+          {% endfor %}
+          {% endif %}
+          
+          {% if request.user.is_authenticated %}
+          <form method="POST" action="/blood/blog/comment/{{item.id}}/">
+              {% csrf_token %}
+              {{form.text}}
+              <button type="submit" class="btn btn-sm btn-primary">Comment</button>
+          </form>
+          {% endif %}
+
+        </div>
+        {% endfor %}
+        {% endif %}
       </div>
     </div>
   </div>
-</div>
-{% endfor %}
-{% endif %}
+
+{% endblock %}
+
+
 <div class="pagination">
   {% if contacts.has_previous %}
   <a class="pagination-action" href="?page=1">
@@ -42,4 +86,3 @@
   <a href="?page={{ contacts.paginator.num_pages }}">Last</a>
   {% endif %}
 </div>
-{% endblock about_us %}

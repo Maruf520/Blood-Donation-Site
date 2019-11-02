@@ -51,7 +51,7 @@ def index(request):
             context = {'form': form}
             return render (request, 'home/homeSlideimage/slideimageHome.html', context) 
     else:
-        blogs = Blog.objects.all().order_by('-date')
+        blogs = Blog.objects.all().order_by('-date')[:10]
         image_list = Image.objects.all()
         paginator = Paginator(blogs, 1)
         page = request.GET.get('page')
@@ -76,5 +76,9 @@ def blog_post_view(request, id):
             'contacts': contacts
         }   
         return render(request, 'home/blog_view/blog_page.html', context)
+
+def gallery(request):
+
+    return render(request, 'home/gallery/gallery.html')        
 
     

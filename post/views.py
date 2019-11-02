@@ -1,4 +1,4 @@
-from django.shortcuts import render, HttpResponse, get_object_or_404
+from django.shortcuts import render, HttpResponse, get_object_or_404,redirect
 from django.core.paginator import Paginator
 from .models import Blog, Comment
 from accounts.models import Account
@@ -11,10 +11,13 @@ def blog_post_view(request):
     paginator = Paginator(blog, 1)
     page = request.GET.get('page')
     contacts = paginator.get_page(page)
-
+    comments = Comment.objects.all()
+    form = CommentPostForm()
     context = {
         'blog': blog,
-        'contacts': contacts
+        'comments' : comments,
+        'contacts': contacts,
+        'form' : form
     }
     return render(request, 'home/blog_view/blog_page.html', context)
 
@@ -27,22 +30,8 @@ def individual_blog(request, id):
         form = CommentPostForm(request.POST, user=request.user, post=post)
         if form.is_valid():
             new_comment = form.save()
-            context = {
-                'new_comment': new_comment
-            }
-            return render(request, 'home/blog_view/comment.html', context)
+            return redirect("blood_blog")
 
-    else:
-        comment = Comment.objects.filter(blog__id = id).all()
-        form = CommentPostForm()
-        post = Blog.objects.filter(id=id)
-
-        context = {
-            'post': post,
-            'form': form,
-            'comment': comment
-            
-        }
-        return render(request, 'home/blog_view/comment.html', context)
+    return HttpResponse("Something went wrong", status=400)
 
         
