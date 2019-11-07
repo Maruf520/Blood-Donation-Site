@@ -11,6 +11,7 @@ from django.shortcuts import HttpResponseRedirect
 from django.contrib.auth.models import User
 from misc.token import token_decode, token_encode
 from django.core.mail import send_mail
+from post.models import Blog
 
 
 def send_password_reset_token(token,email):
@@ -71,18 +72,18 @@ def logout_view(request):
 @login_required(login_url='/signin/')
 def User_Profile(request):
     if request.method == 'GET':
-
+        post = Blog.objects.filter(user_id=request.user)
         context = {
-            'user': request.user
+            'posts': post
         }
-        return render(request, 'dashboard/userprofile/userprofile.html', context)
+        return render(request, 'home/profile/profile.html', context)
 
 @login_required(login_url='/signin/')
-def update(request):
+def profile_update(request):
     context = {}
     user = request.user
     if request.method == 'POST':
-        form = ProfleUpdateForm(request.POST, user=user)
+        form = ProfleUpdateForm(request.POST ,request.FILES, user=user)
         if form.is_valid():
             form.save()
             return redirect('profile')
@@ -91,7 +92,7 @@ def update(request):
         context = {
             'form': form
         }
-        return render(request, 'dashboard/userprofile/profile_update_form.html', context)
+        return render(request, 'home/profile/profile_update_form.html', context)
 def password_reset(request):
     if request.method == 'GET':
         form = Password_reset_email_form()

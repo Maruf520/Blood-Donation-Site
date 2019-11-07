@@ -50,6 +50,8 @@ INSTALLED_APPS = [
     'post',
     'blood_bank',
     'notifications',
+    'crispy_forms',
+    
 ]
 
 MIDDLEWARE = [
@@ -131,6 +133,7 @@ USE_L10N = True
 
 USE_TZ = True
 
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
@@ -154,3 +157,5 @@ EMAIL_PORT = env.int('EMAIL_PORT')
 EMAIL_HOST_USER = env.str('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = env.str('EMAIL_HOST_PASSWORD')
 EMAIL_USE_TLS = env.bool('EMAIL_USE_TLS')
+
+DATE_INPUT_FORMATS = ('%d-%m-%Y')

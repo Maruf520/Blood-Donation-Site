@@ -16,17 +16,45 @@ class BloodPostForm(forms.ModelForm):
             'time' : forms.TimeInput(attrs={'class':'form-control','placeholder':'time', 'type':'time'}),
             'name' : forms.TextInput(attrs={'class' : 'form-control','placeholder':'name'}),
             'blood_group' : forms.Select(attrs={'class':'form-control','placeholder':'blood_group'}),
-            'quantity' : forms.NumberInput(attrs={'class':'form-control','placeholder':'quantity'})
+            'quantity' : forms.NumberInput(attrs={'max_length' :4, 'min_length':1 ,'class':'form-control','placeholder':'1 (bag)'})
         }
+    	# def clean_quantity(self):
 
+        #     quantity = self.cleaned_data['quantity']
+        #     if len(quantity) > 4:
+        #         raise forms.ValidationError('quantity should be maximum 4')
+        #     return quantityy
 
 
     def __init__(self, *args, **kwargs):
         user = kwargs.pop("user", None)
         super(BloodPostForm, self).__init__(*args, **kwargs)
+        
         if user:
-            self.fields['phone'].initial = user.phone
-            self.fields['name'].initial = user.username
+            if user.is_authenticated:
+                self.fields['phone'].initial = user.phone
+                self.fields['name'].initial = user.username
+                self.user = user
+        else:
+            self.user = None
+
+    def save(self, commit=True):
+        blog  = Blog()
+        blog.blood_group = self.cleaned_data['blood_group'] 
+        blog.description = self.cleaned_data['description'] 
+        blog.phone = self.cleaned_data['phone'] 
+        blog.date = self.cleaned_data['date'] 
+        blog.time = self.cleaned_data['time'] 
+        blog.name = self.cleaned_data['name'] 
+        blog.location = self.cleaned_data['location'] 
+        blog.quantity = self.cleaned_data['quantity'] 
+        # if self.user:
+        blog.user = self.user
+
+        if commit:
+            blog.save()
+        return blog    
+            
 
 class CommentPostForm(forms.ModelForm):
     class Meta:

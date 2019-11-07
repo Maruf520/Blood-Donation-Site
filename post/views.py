@@ -5,6 +5,7 @@ from accounts.models import Account
 from post.forms import CommentPostForm
 
 
+
 def blog_post_view(request):
 
     blog = Blog.objects.all()

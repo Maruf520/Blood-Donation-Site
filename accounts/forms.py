@@ -21,14 +21,14 @@ class SignupForm(forms.ModelForm):
 	last_date_of_donation = forms.CharField(widget=forms.DateInput(attrs = {'placeholder':'date', 'class': 'form-control'}))
 	class Meta:
 		model = Account
-		fields = ['email','phone','blood_group','present_add','permanent_add', 'username']
+		fields = ['email','phone','blood_group','address', 'username']
 		widgets = {
 			'username' : forms.TextInput(attrs={'class':'form-control'}),
 			
 			'email' : forms.EmailInput(attrs={ 'class': 'form-control' }),
 			'phone' : forms.TextInput(attrs={'class':'form-control'}),
-			'present Address' : forms.TextInput(attrs={'class':'form-control'}),
-			'permanent_add' : forms.TextInput(attrs={'class':'form-contrl'}),
+			'address' : forms.TextInput(attrs={'class':'form-control'}),
+			
 		} 
 	def email(self):
 			email = self.cleaned_data['email']
@@ -36,6 +36,8 @@ class SignupForm(forms.ModelForm):
 			if query.exists():
 				raise forms.ValidationError(' Email has already registered')
 			return email    
+
+
 	def phone(self):
 			phone = self.cleaned_data['phone']
 			query =  Account.objects.filter(phone = phone)
@@ -66,8 +68,7 @@ class SignupForm(forms.ModelForm):
 			email = self.cleaned_data['email'],
 			phone = self.cleaned_data['phone'],
 			blood_group = self.cleaned_data['blood_group'],
-			present_add = self.cleaned_data['present_add'],
-			permanent_add = self.cleaned_data['permanent_add'],
+			address = self.cleaned_data['address'],
 			last_date_of_donation = self.cleaned_data['last_date_of_donation']
 
 			)         
@@ -125,7 +126,7 @@ class ProfleUpdateForm(forms.ModelForm):
 	blood_group = forms.CharField( widget=forms.Select( choices=blood_type , attrs={'class':'custom-select'}))
 	class Meta:
 		model = Account
-		fields = ['username','email','phone','present_add','blood_group']
+		fields = ['username','email','phone','address','blood_group','last_date_of_donation','image']
 		widgets = {
 		'username' : forms.TextInput(attrs={
 				'placeholder' : 'Username', 'class' : 'form-control'
@@ -139,9 +140,12 @@ class ProfleUpdateForm(forms.ModelForm):
 			'blood_group' : forms.TextInput(attrs={
 				'placeholder' : 'Blood Group', 'class' : 'form-control'
 				}),
-			'present_add' : forms.TextInput(attrs={
-				'placeholder' : 'Present Address', 'class' : 'form-control'
+			'address' : forms.TextInput(attrs={
+				'placeholder' : ' Address', 'class' : 'form-control'
 				}),
+
+				'last_date_of_donation' : forms.DateInput(format='%d-%m-%Y',attrs={'class' : 'form-control','type':'date' }),
+			'image': forms.FileInput(attrs={'class':'form-control'}),
 		}
 
 	def clean(self):
@@ -150,7 +154,9 @@ class ProfleUpdateForm(forms.ModelForm):
 		email = cleaned_data['email']
 		username = cleaned_data['username']
 		blood_group = cleaned_data['blood_group']
-		present_add = cleaned_data['present_add']
+		address = cleaned_data['address']
+		last_date_of_donation = cleaned_data['last_date_of_donation']
+		image = cleaned_data['image']
 		# valid = self.user.check_password(password)
 		# if not valid:
 		# 	raise forms.ValidationError('invalid password')
@@ -174,14 +180,19 @@ class ProfleUpdateForm(forms.ModelForm):
 	def save(self, commit=True):
 		username = self.cleaned_data['username']
 		email = self.cleaned_data['email']
-		present_add = self.cleaned_data['present_add']
+		address = self.cleaned_data['address']
 		phone = self.cleaned_data['phone']
 		blood_group = self.cleaned_data['blood_group']
+		last_date_of_donation = self.cleaned_data['last_date_of_donation']
+		image = self.cleaned_data['image']
+
 		self.user.username = username
 		self.user.phone = phone
 		self.user.email = email
-		self.user.present_add = present_add
+		self.user.address = address
 		self.user.blood_group = blood_group
+		self.user.last_date_of_donation = last_date_of_donation
+		self.user.image = image
 
 		if commit:
 			self.user.save()
@@ -196,6 +207,8 @@ class ProfleUpdateForm(forms.ModelForm):
 		self.fields['username'].initial = self.user.username
 		self.fields['phone'].initial = self.user.phone
 		self.fields['email'].initial = self.user.email
-		self.fields['present_add'].initial = self.user.present_add
+		self.fields['address'].initial = self.user.address
 		self.fields['blood_group'].initial = self.user.blood_group
+		self.fields['last_date_of_donation'].initial = self.user.last_date_of_donation
+		self.fields['image'].initial = self.user.image
 		

@@ -1,9 +1,15 @@
-{% extends 'dashboard/base.html' %} {% block title %}
+{% extends 'home/base.html' %} {% block title %}
 
 {{ user.name }}
 
-{% endblock title %} {% block 'main_body' %}
-<main class="app-content">
+{% endblock title %} 
+{% block about_us %}
+
+
+{% endblock %}
+{% block 'blog_view' %}
+<div style="height: 250px;" ></div>
+
   <div>
     <form method="POST" class="col-md-6 list-group-item">
       {%csrf_token%}
@@ -11,5 +17,5 @@
       <button type="submit" class="btn btn-success">Update</button>
     </form>
   </div>
-</main>
+
 {% endblock %}

@@ -34,7 +34,7 @@ def index(request):
     if request.method == 'POST':
         blogs = Blog.objects.all()
         image = Image.objects.all()
-        form = BloodPostForm(request.POST)
+        form = BloodPostForm(request.POST,user=request.user)
         if form.is_valid():
             blog = form.save()
             all_account = Account.objects.filter(blood_group = blog.blood_group, last_date_of_donation__lte=datetime.now().date() - timedelta(days=100) )

@@ -7,3 +7,8 @@ class Image(models.Model):
 
 
 # Create your models here.
+class Commttee(models.Model):
+    name = models.CharField(max_length=20)
+    designation = models.CharField(max_length=20)
+    session = models.CharField(max_length=30)
+    image = models.ImageField(upload_to ='image/commttee/%Y/%m/%d',blank=False)

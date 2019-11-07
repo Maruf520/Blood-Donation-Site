@@ -7,6 +7,8 @@ from accounts.models import Account
 from django.contrib.auth.decorators import login_required
 from .filters import UserFilter
 from datetime import datetime
+from dashboard.models import Commttee
+from dashboard.forms import CommitteeForm
 
 @login_required(login_url='login')
 def dashboard1(request):
@@ -153,4 +155,20 @@ def search(request):
     user_list = Account.objects.all()
     user_filter = UserFilter(request.GET, queryset=user_list)
     return render(request, 'dashboard/users/search.html', {'filter': user_filter})
+
+
+def committee_form(request):
+    if request.method == 'POST':
+        form = CommitteeForm(request.POST,request.FILES)
+        if form.is_valid():
+            committee = form.save()
+            return redirect("/")
+    else:
+        form = CommitteeForm()
+
+        context = {
+            'form': form
+        }    
+    return render(request, 'dashboard/committee/committee_form.html',context)    
+
 

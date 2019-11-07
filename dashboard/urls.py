@@ -13,6 +13,6 @@ urlpatterns = [
     path('users/',views.user_list, name='userlist'),
     path('users/<int:id>/',views.single_user, name='signle_user'),
     path('user/delete/<int:id>/', views.delete_single_user, name='delete_single_user'),
-
     path('search/', views.search, name='search'),
+    path('committee/add_committee/', views.committee_form, name='committee'),
 ]

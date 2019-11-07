@@ -25,6 +25,7 @@ urlpatterns = [
     path('blood/', include('post.urls')),
     path('admin/', admin.site.urls),
     path('', include('home.urls')),
+    # path('sms/', include('sms.urls')),
     path('blood_bank/', include('blood_bank.urls')),
     path('inbox/notifications/', include(notifications.urls, namespace='notifications')),
 ]

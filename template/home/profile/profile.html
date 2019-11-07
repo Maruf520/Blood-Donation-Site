@@ -1,0 +1,37 @@
+{% extends 'home/base.html' %}
+{% load staticfiles %}
+{% block about_us %}
+
+
+{% endblock %}
+{% block blog_view %}
+
+  <div style="height: 250px;" ></div>
+  <div class="container">
+    <div class="row justify-content-md-center mb-4 pb-4">
+   <div class="card " style="width: 18rem;">
+   
+    <img src="{{user.image.url}}" class="card-img-top" alt="...">
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">Name : {{user.username}}</li>
+      <li class="list-group-item">Blood Group: {{ user.blood_group}}</li>
+      <li class="list-group-item">Address : {{user.present_add}}</li>
+      <li class="list-group-item">Phone : {{user.phone}}</li>
+      <li class="list-group-item">Email : {{user.email}}</li>
+      <li class="list-group-item">Last Donation : {{user.last_date_of_donation}}</li>
+      {%  if posts %}
+      {% for post in posts %}
+      <li class="list-group-item">My post :{{post.description}} </li>
+      {% endfor %}
+      {% endif %}
+    </ul>
+    <!-- <a href="{% url 'profile_update' %}" class="btn btn-primary" type="button">Edit</a> -->
+
+
+    <a href="{% url 'profile_update' %}" class="btn btn-primary" type="button">Edit</a>
+  </div>
+  </div>
+</div>
+
+{% endblock %}
+

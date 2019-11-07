@@ -18,7 +18,7 @@ _BLOOD_GROUPS = (
 )
 
 class Blog(models.Model):
-    
+    user = models.ForeignKey(Account, on_delete = models.CASCADE, blank=True )
     name = models.CharField(max_length=80)
     blood_group = models.CharField(max_length = 3, choices=_BLOOD_GROUPS)
     created = models.DateTimeField(auto_now_add=True)
