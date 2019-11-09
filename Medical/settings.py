@@ -37,21 +37,21 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
-
+    'BruteBuster',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'dashboard',
-    'accounts',
-    'home',
-    'post',
+    'dashboard.apps.DashboardConfig',
+    'accounts.apps.AccountsConfig',
+    'home.apps.HomeConfig',
+    'post.apps.PostConfig',
     'blood_bank',
     'notifications',
     'crispy_forms',
-    'bank'
+    'bank.apps.BankConfig',
 
 ]
 
@@ -161,3 +161,8 @@ EMAIL_HOST_PASSWORD = env.str('EMAIL_HOST_PASSWORD')
 EMAIL_USE_TLS = env.bool('EMAIL_USE_TLS')
 
 DATE_INPUT_FORMATS = ('%d-%m-%Y')
+
+
+# for brutebuster
+BB_MAX_FAILURES = 5
+BB_BLOCK_INTERVAL = 2
