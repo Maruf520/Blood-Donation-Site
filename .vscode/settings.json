@@ -1,9 +1,0 @@
-{
-    "python.pythonPath": "C:\\Users\\Maruf\\AppData\\Local\\Programs\\Python\\Python37-32\\python.exe"
-} // {
-//     "python.pythonPath": "C:\\Users\\Maruf\\AppData\\Local\\Programs\\Python\\Python37-32\\python.exe",
-//     "files.autoSave": "onFocusChange",
-//     "editor.formatOnSave": true,
-//     "[python]": {},
-//     "python.linting.pylintPath": "pylint-django"
-// }

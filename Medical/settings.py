@@ -37,7 +37,7 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
-    
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -51,7 +51,8 @@ INSTALLED_APPS = [
     'blood_bank',
     'notifications',
     'crispy_forms',
-    
+    'bank'
+
 ]
 
 MIDDLEWARE = [
@@ -69,7 +70,7 @@ ROOT_URLCONF = 'Medical.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR,'template')],
+        'DIRS': [os.path.join(BASE_DIR, 'template')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -93,7 +94,7 @@ DATABASES = {
     'default': {
         'ENGINE': env.str('DB_ENGINE'),
         'NAME': env.str('DB_NAME'),
-        'HOST' : env.str('DB_HOST'),
+        'HOST': env.str('DB_HOST'),
         'USER': env.str('DB_USER'),
         'PASSWORD': env.str('DB_PASSWORD'),
         'PORT': env.str('DB_PORT')
@@ -133,6 +134,7 @@ USE_L10N = True
 
 USE_TZ = True
 
+
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 # Static files (CSS, JavaScript, Images)
@@ -140,16 +142,16 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR,'static')
+    os.path.join(BASE_DIR, 'static')
 ]
-STATIC_ROOT = os.path.join(BASE_DIR,'staticfiles')
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-NOTIFICATIONS_SOFT_DELETE=True
+NOTIFICATIONS_SOFT_DELETE = True
 
-
+LOGIN_REDIRECT_URL = '/accounts/login'
 # Email configuration
 EMAIL_BACKEND = env.str('EMAIL_BACKEND')
 EMAIL_HOST = env.str('EMAIL_HOST')

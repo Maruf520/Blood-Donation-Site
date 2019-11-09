@@ -1,0 +1,59 @@
+body {
+	background: rgba(53, 44, 187, 0.76) url("../music/images/background1.jpg");
+	background-color: #cccccc; /* Used if the image is unavailable */
+	height: auto; /* You must set a specified height */
+	background-position: center; /* Center the image */
+	background-repeat: no-repeat; /* Do not repeat the image */
+	background-size: cover; /* Resize the background image to cover the entire container */
+}
+/* music\static\music\images\background.jpg */
+.navbar {
+	border-radius: 0;
+}
+
+.navbar-brand {
+	font-family: "Satisfy", cursive;
+}
+
+.card-custom {
+	max-width: 128px;
+}
+.card:hover {
+	transform: scale(1.05);
+	position: initial;
+	z-index: 111;
+	background: #fff;
+}
+.row {
+	margin-left: -20px;
+	margin-right: -15px;
+}
+
+audio:hover,
+audio:focus,
+audio:active {
+	-webkit-box-shadow: 15px 15px 20px rgba(0, 0, 0, 0.4);
+	-moz-box-shadow: 15px 15px 20px rgba(0, 0, 0, 0.4);
+	box-shadow: 15px 15px 20px rgba(0, 0, 0, 0.4);
+	-webkit-transform: scale(1.05);
+	-moz-transform: scale(1.05);
+	transform: scale(1.05);
+}
+
+audio {
+	-webkit-transition: all 0.5s linear;
+	-moz-transition: all 0.5s linear;
+	-o-transition: all 0.5s linear;
+	transition: all 0.5s linear;
+	-moz-box-shadow: 2px 2px 4px 0px #006773;
+	-webkit-box-shadow: 2px 2px 4px 0px #006773;
+	box-shadow: 2px 2px 4px 0px #006773;
+	-moz-border-radius: 7px 7px 7px 7px;
+	-webkit-border-radius: 7px 7px 7px 7px;
+	border-radius: 7px 7px 7px 7px;
+}
+/* .card-img-top {
+	width: 100%;
+	height: 15vw;
+	object-fit: cover;
+} */

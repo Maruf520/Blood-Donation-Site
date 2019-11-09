@@ -30,11 +30,15 @@
 
 <body>
     <!-- Preloader -->
+    
     <div id="preloader">
         <div class="medilife-load"></div>
     </div>
 
     <!-- ***** Header Area Start ***** -->
+    <div class="row">
+        
+    
     <header class="header-area">
         <!-- Top Header Area -->
         <!-- <div class="top-header-area">
@@ -52,11 +56,11 @@
 
         <!-- Main Header Area -->
         <div class="main-header-area" id="stickyHeader">
-            <div class="container h-100">
-                <div class="row h-100 align-items-center">
-                    <div class="col-12 h-100">
-                        <div class="main-menu h-100">
-                            <nav class="navbar h-100 navbar-expand-lg">
+            <div class="container h-80">
+                <div class="row h-80 align-items-center">
+                    <div class="col-12 h-80">
+                        <div class="main-menu h-80">
+                            <nav class="navbar h-80 navbar-expand-lg">
                                 <!-- Logo Area  -->
                                 <a class="navbar-brand" href="{% url 'index' %}"><img
                                         src="{% static  'front/img/bg-img/logoxx.png' %}" alt="Logo"></a>
@@ -75,6 +79,7 @@
             </div>
         </div>
     </header>
+</div>
     <!-- ***** Header Area End ***** -->
 
     <!-- ***** Hero Area Start ***** -->
@@ -93,16 +98,19 @@
     <!-- ***** Hero Area End ***** -->
 
     <!-- ***** Blood blog form ***** -->
-    {% block  blood_blog_form %}
-   
-    {% endblock %}
-
+    <div class="row">
+        
+    
+        {% block  blood_blog_form %}
+    
+        {% endblock %}
+    </div>
     <!-- ***** Blood blog form End ***** -->
 
     <!-- ***** About Us Area Start ***** -->
     
     {% block about_us %}   
-    <section class="medica-about-us-area section-padding-100-20">
+    <section class="medica-about-us-area section-padding-80-20">
         <div class="container">
             <div class="row">
                 <div class="col-12 col-lg-4">
