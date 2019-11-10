@@ -8,4 +8,6 @@ app_name = 'bank'
 
 urlpatterns = [
     path('', views.BankListView.as_view(), name='bank-index'),
+    path('create_bank/', views.BankCreateView.as_view(), name='bank-create'),
+
 ]

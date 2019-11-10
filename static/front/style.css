@@ -869,7 +869,7 @@ img {
 	border-radius: 0;
 	font-size: 14px;
 	font-style: italic;
-	color: #ffffff;
+	color: black;
 	margin-bottom: 30px;
 	font-weight: 500;
 	padding: 0 15px;
@@ -877,7 +877,7 @@ img {
 }
 .form-control:hover,
 .form-control:focus {
-	background-color: transparent;
+	background-color: #b5b7af87;
 	box-shadow: none;
 }
 
@@ -1881,7 +1881,7 @@ textarea {
 .medilife-contact-area .contact-form .form-control {
 	width: 100%;
 	height: 55px;
-	background-color: #f5f7f9;
+	background-color: #b5b7af87;
 	padding: 15px;
 	border: none;
 	font-size: 12px;

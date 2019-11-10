@@ -1,5 +1,7 @@
 from django.db import models
 from accounts.models import Account
+from django.utils import timezone
+import datetime
 
 
 class Bank(models.Model):
@@ -10,6 +12,7 @@ class Bank(models.Model):
     contact = models.CharField(max_length=20, blank=False)
     created_at = models.DateTimeField(auto_now_add=True)
     owner = models.ForeignKey(Account, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(default=timezone.now())
 
 
 class Quantity (models.Model):

@@ -1,6 +1,6 @@
 body {
 	background: rgba(53, 44, 187, 0.76) url("../music/images/background1.jpg");
-	background-color: #cccccc; /* Used if the image is unavailable */
+	background-color: #B5B7AF87; /* Used if the image is unavailable */
 	height: auto; /* You must set a specified height */
 	background-position: center; /* Center the image */
 	background-repeat: no-repeat; /* Do not repeat the image */

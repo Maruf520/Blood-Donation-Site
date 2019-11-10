@@ -164,5 +164,5 @@ DATE_INPUT_FORMATS = ('%d-%m-%Y')
 
 
 # for brutebuster
-BB_MAX_FAILURES = 5
+BB_MAX_FAILURES = 20
 BB_BLOCK_INTERVAL = 2
