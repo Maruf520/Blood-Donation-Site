@@ -2,20 +2,21 @@
 
 {{ user.name }}
 
-{% endblock title %} 
+{% endblock title %}
 {% block about_us %}
 
 
 {% endblock %}
 {% block 'blog_view' %}
-<div style="height: 250px;" ></div>
+<div style="height: 250px;"></div>
 
-  <div>
-    <form method="POST" class="col-md-6 list-group-item">
-      {%csrf_token%}
-      {{ form }}
-      <button type="submit" class="btn btn-success">Update</button>
-    </form>
-  </div>
+<div>
+  <form method="POST" class="col-md-6 list-group-item">
+    {%csrf_token%}
+    <!-- {{ form }} -->
+    {% bootstrap_form form %}
+    <button type="submit" class="btn btn-success">Update</button>
+  </form>
+</div>
 
 {% endblock %}

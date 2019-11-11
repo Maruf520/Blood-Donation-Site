@@ -39,14 +39,14 @@ class Account(AbstractBaseUser):
     blood_group = models.CharField(max_length=5, null=True)
     phone = models.CharField(max_length=20, unique=True, null=True)
     address = models.CharField(max_length=200, null=True)
-    last_date_of_donation = models.DateField(max_length=50, null=True)
+    last_date_of_donation = models.DateField(null=True)
     image = models.ImageField(
         upload_to='image/account/%Y/%m/%d', default='avatar.jpg')
     is_admin = models.BooleanField(default=False, null=True)
     is_active = models.BooleanField(default=True, null=True)
     is_staff = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
-    is_bank_owner = models.BooleanField(default = False)
+    is_bank_owner = models.BooleanField(default=False)
 
     USERNAME_FIELD = 'username'
     # REQUIRED_FIELDS = ['']

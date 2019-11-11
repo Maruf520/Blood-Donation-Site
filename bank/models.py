@@ -17,13 +17,17 @@ class Bank(models.Model):
     def __str__(self):
         return self.name
 
+
 class Quantity (models.Model):
     bank = models.ForeignKey(Bank, on_delete=models.CASCADE)
-    ab_p = models.FloatField(default=0.0)
-    ab_n = models.FloatField(default=0.0)
-    a_p = models.FloatField(default=0.0)
-    a_n = models.FloatField(default=0.0)
-    b_p = models.FloatField(default=0.0)
-    b_n = models.FloatField(default=0.0)
-    o_p = models.FloatField(default=0.0)
-    o_n = models.FloatField(default=0.0)
+    ab_p = models.FloatField(default=0)
+    ab_n = models.FloatField(default=0)
+    a_p = models.FloatField(default=0)
+    a_n = models.FloatField(default=0)
+    b_p = models.FloatField(default=0)
+    b_n = models.FloatField(default=0)
+    o_p = models.FloatField(default=0)
+    o_n = models.FloatField(default=0)
+
+    def __str__(self):
+        return self.bank

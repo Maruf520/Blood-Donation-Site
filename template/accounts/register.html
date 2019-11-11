@@ -1,14 +1,19 @@
 {% load static %}
+{% load bootstrap4 %}
+
 <!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% bootstrap_css %} {# Embed Bootstrap CSS #}
+    {{ form.media.css }}
     <!-- Main CSS-->
     <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
     <!-- Font-icon css-->
-    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css"
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>SignUp - SOMC</title>
     <style>
     html,body {
@@ -25,12 +30,13 @@
           <h4 class="text-center">Register Now</h4>
           <form method="POST">
             {% csrf_token %}
-            {{ form.as_p }}
-              <div class="tile-footer">
-                  <button class="btn btn-primary" type="submit">Submit</button>
-                  <span class="ml-1 mr-1">Or</span>
-                  <a href="{% url 'login' %}" class="btn btn-primary">Log in</a>
-                </div>
+            <!-- {{ form.as_p }} -->
+            {% bootstrap_form form %}
+            <div class="tile-footer">
+              <button class="btn btn-primary" type="submit">Submit</button>
+              <span class="ml-1 mr-1">Or</span>
+              <a href="{% url 'login' %}" class="btn btn-primary">Log in</a>
+            </div>
           </form>
           <br>
           <a href="#" class="btn">Forget Password?</a>
@@ -38,6 +44,9 @@
       </div>
     </div>
     <!-- Essential javascripts for application to work-->
+    {% bootstrap_javascript jquery='full' %} {# Embed Bootstrap JS+jQuery #}
+    {{ form.media.js }}
+    {{ form.media }}
     <script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
     <script src="{% static 'js/popper.min.js' %}"></script>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>

@@ -37,6 +37,7 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
+    'bootstrap_datepicker_plus',
     'BruteBuster',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -52,6 +53,7 @@ INSTALLED_APPS = [
     'notifications',
     'crispy_forms',
     'bank.apps.BankConfig',
+    'bootstrap4',
 
 ]
 
@@ -160,9 +162,13 @@ EMAIL_HOST_USER = env.str('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = env.str('EMAIL_HOST_PASSWORD')
 EMAIL_USE_TLS = env.bool('EMAIL_USE_TLS')
 
-DATE_INPUT_FORMATS = ('%d-%m-%Y')
+DATE_INPUT_FORMATS = ['%d-%m-%Y']
 
 
 # for brutebuster
 BB_MAX_FAILURES = 20
 BB_BLOCK_INTERVAL = 2
+
+# BOOTSTRAP4 = {
+#     'include_jquery': True,
+# }
