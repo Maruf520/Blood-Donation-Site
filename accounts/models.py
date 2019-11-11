@@ -46,6 +46,7 @@ class Account(AbstractBaseUser):
     is_active = models.BooleanField(default=True, null=True)
     is_staff = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
+    is_bank_owner = models.BooleanField(default = False)
 
     USERNAME_FIELD = 'username'
     # REQUIRED_FIELDS = ['']

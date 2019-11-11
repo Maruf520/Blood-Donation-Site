@@ -36,10 +36,48 @@ class BankCreateView(generic.CreateView):
         owner = self.request.user
         form.instance.owner = owner
         print(owner, owner.is_superuser)
-        if owner.is_superuser or owner.is_admin:
+        if owner.is_superuser or owner.is_admin or owner.is_bank_owner:
             return super(BankCreateView, self).form_valid(form)
         else:
             return redirect('../../accounts/login/')
 
     def get_success_url(self):
         return reverse('bank:bank-index')
+
+
+class BankUpdateView(generic.UpdateView):
+    model = Bank
+    fields = ['name', 'location', 'logo', 'contact']
+    template_name_suffix = "_update_form"
+
+    def form_valid(self, form):
+        owner = self.request.user
+        form.instance.owner = owner
+        print(owner, owner.is_superuser)
+        if owner.is_superuser or owner.is_admin or owner.is_bank_owner:
+            return super(BankUpdateView, self).form_valid(form)
+        else:
+            return redirect('../../accounts/login/')
+
+    def get_success_url(self):
+        return reverse('bank:bank-index')
+
+
+decorators = [never_cache, login_required]
+
+
+@method_decorator(decorators, name='dispatch')
+@method_decorator(login_required, name='dispatch')
+class BankDeleteView(generic.DeleteView):
+    model = Bank
+    template_name = 'bank/bank_confirm_delete.html'
+    success_url = reverse_lazy('bank:bank-index')
+
+    def delete(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        if self.object.owner == request.user or self.request.user.is_admin or self.request.user.is_bank_owner or self.request.user.is_superuser:
+            success_url = self.get_success_url()
+            self.object.delete()
+            return http.HttpResponseRedirect(success_url)
+        else:
+            return http.HttpResponseForbidden('Invalid Delete Request')

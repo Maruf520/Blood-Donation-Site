@@ -1,0 +1,31 @@
+{% extends 'home/base.html' %}
+{% load crispy_forms_tags %}
+{% block title %} Delete Blood Bank {% endblock %}
+
+{% block blood_blog_form %}
+<div style="height: 150px;"> a</div>
+<div class="container-fluid">
+        <div class="col-lg-5 col-sm-5 pb-5">
+                <div class="card col-lg-10 col-sm-10 pl-3">
+                    
+                    {% if bank.logo %}
+                    <img src="{{ bank.logo.url }}" class="card-img-top" alt="..."
+                        height="150px" width="18rem">    
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title">Confirm Deletion</h5>
+                        {% if error_message %}
+                        <p class="card-text">{{ error_message }}</p>
+                        {% endif %}
+                        <form method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <p><h5>Are you sure you want to delete '{{ object }}'?</h5></p>
+                            <button type="submit" class="btn btn-danger" value="Confirm">Delete</button>
+                        </form>
+                    </p>
+                </div>
+                </div>
+            </div>
+            
+</div>
+{% endblock %}
