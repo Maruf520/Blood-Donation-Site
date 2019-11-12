@@ -197,8 +197,7 @@ class ProfleUpdateForm(forms.ModelForm):
 		if commit:
 			self.user.save()
 		return self.user        
-
-
+		
 	def __init__(self, *args, **kwargs):
 		self.user = kwargs.pop('user', None)
 
@@ -210,5 +209,5 @@ class ProfleUpdateForm(forms.ModelForm):
 		self.fields['address'].initial = self.user.address
 		self.fields['blood_group'].initial = self.user.blood_group
 		self.fields['last_date_of_donation'].initial = self.user.last_date_of_donation
-		self.fields['image'].initial = self.user.image
+		# self.fields['image'].initial = self.user.image
 		

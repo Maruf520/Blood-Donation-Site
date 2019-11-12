@@ -8,7 +8,7 @@ from django.contrib.auth.decorators import login_required
 from .filters import UserFilter
 from datetime import datetime
 from dashboard.models import Commttee
-from dashboard.forms import CommitteeForm
+from dashboard.forms import CommitteeForm,DropDownForm,CommitteeForm
 
 @login_required(login_url='login')
 def dashboard1(request):
@@ -170,5 +170,53 @@ def committee_form(request):
             'form': form
         }    
     return render(request, 'dashboard/committee/committee_form.html',context)    
+
+def committee(request):
+
+
+    session_list = DropDownForm()
+
+    if request.GET.get('session'):
+        selected_session = request.GET.get('session')
+
+        query_results = Commttee.objects.filter(session= selected_session )
+    else:
+        query_results = Commttee.objects.filter(session__icontains ='2016-2917')
+        print(query_results)
+
+    context = {
+        'query_results':query_results,
+        'session_list':session_list,
+        # 'queryset_results':queryset_results,
+        
+    }    
+    return render(request, 'dashboard/committee/committee_list.html',context)
+        
+
+def Committee_member(request, id):
+    if request.method == 'GET':
+        member = Commttee.objects.get( id = id )
+        print(member)
+    context = {
+        'member':member,
+    }    
+
+    return render(request,'dashboard/committee/committee_member.html',context)
+
+def editCommttee(request, id):
+    if request.method == 'POST':
+        
+        form = CommitteeForm(request.POST, request.FILES)
+        if form.is_valid():
+            form1 = form.save()
+            print(form1.name)
+            return redirect('/')
+
+    else:
+        form = CommitteeForm()
+    context = {
+        'form':form
+        }
+    return render(request,'dashboard/committee/committee_member_edit.html',context)            
 
 

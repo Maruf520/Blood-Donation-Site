@@ -15,4 +15,7 @@ urlpatterns = [
     path('user/delete/<int:id>/', views.delete_single_user, name='delete_single_user'),
     path('search/', views.search, name='search'),
     path('committee/add_committee/', views.committee_form, name='committee'),
+    path('committee/list', views.committee,name='view_committee'),
+    path('committee/list/<int:id>/', views.Committee_member,name='committee_member'),
+    path('committee/list/edit/<int:id>/', views.editCommttee,name='editcommittee'),
 ]
