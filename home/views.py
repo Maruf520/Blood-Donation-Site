@@ -10,6 +10,8 @@ from django.core.mail import send_mail
 from django.conf import settings
 from django.core.mail import EmailMessage
 from datetime import datetime,timedelta
+from sendsms import api
+from sendsms.message import SmsMessage
 
 
 def send_mail_to_user(to_mail_list, data):
@@ -24,8 +26,22 @@ def send_mail_to_user(to_mail_list, data):
     Please Contact: 01710038888
     
     """.format(data.name, data.quantity, data.blood_group, data.location, data.time, data.date,data.description)
-    send_mail(my_subject, my_message, 'md.maruf5201@gmail.com', to_mail_list,
+    send_mail(my_subject, my_message, 'blood.emergency0@gmail.com', to_mail_list,
             fail_silently=False)
+def sendSms(to_number_list,data):
+    my_message = """
+    {} need {} bag {} blood at {} in {} , {}
+
+    Message:
+    {}
+
+
+    Please Contact: 01710038888
+    
+    """.format(data.name, data.quantity, data.blood_group, data.location, data.time, data.date,data.description)
+    message = SmsMessage(body=my_message, from_phone='+41791111111', to=data.phone)  
+    message.send()  
+
 
 
 
@@ -39,10 +55,14 @@ def index(request):
             blog = form.save()
             all_account = Account.objects.filter(blood_group = blog.blood_group, last_date_of_donation__lte=datetime.now().date() - timedelta(days=100) )
             destination_emails = []
+            destination_number = []
             for account in all_account:
                 destination_emails.append(account.email)
-                print(account.email)
+                destination_number.append(account.phone)
+                print(account.email)    
+                print(account.phone)
             send_mail_to_user(destination_emails,blog)
+            sendSms(destination_number,blog)
                 
             form = BloodPostForm()
             context = {'form': form,'blogs':blogs,'image':image}
