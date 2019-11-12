@@ -13,21 +13,18 @@ class Bank(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     owner = models.ForeignKey(Account, on_delete=models.CASCADE)
     created_at = models.DateTimeField(default=timezone.now())
+    ab_positive = models.FloatField(default=0)
+    ab_negative = models.FloatField(default=0)
+    a_positive = models.FloatField(default=0)
+    a_negative = models.FloatField(default=0)
+    b_positive = models.FloatField(default=0)
+    b_negative = models.FloatField(default=0)
+    o_positive = models.FloatField(default=0)
+    o_negative = models.FloatField(default=0)
 
     def __str__(self):
         return self.name
 
 
-class Quantity (models.Model):
+class Quantity(models.Model):
     bank = models.ForeignKey(Bank, on_delete=models.CASCADE)
-    ab_p = models.FloatField(default=0)
-    ab_n = models.FloatField(default=0)
-    a_p = models.FloatField(default=0)
-    a_n = models.FloatField(default=0)
-    b_p = models.FloatField(default=0)
-    b_n = models.FloatField(default=0)
-    o_p = models.FloatField(default=0)
-    o_n = models.FloatField(default=0)
-
-    def __str__(self):
-        return self.bank

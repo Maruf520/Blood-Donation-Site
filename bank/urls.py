@@ -1,5 +1,5 @@
 from django.urls import include, path
-from .models import Bank, Quantity
+from .models import Bank
 from .import views
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required, permission_required

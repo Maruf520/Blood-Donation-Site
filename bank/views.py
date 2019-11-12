@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.views import generic
-from .models import Bank, Quantity
-from django.http import HttpResponse
+from .models import Bank
+from django.http import HttpResponse, HttpResponseForbidden, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import never_cache
@@ -75,9 +75,10 @@ class BankDeleteView(generic.DeleteView):
 
     def delete(self, request, *args, **kwargs):
         self.object = self.get_object()
-        if self.object.owner == request.user or self.request.user.is_admin or self.request.user.is_bank_owner or self.request.user.is_superuser:
+        print(self.object.owner, request.user)
+        if (self.object.owner == request.user and self.request.user.is_bank_owner) or self.request.user.is_admin or self.request.user.is_superuser:
             success_url = self.get_success_url()
             self.object.delete()
-            return http.HttpResponseRedirect(success_url)
+            return HttpResponseRedirect(success_url)
         else:
-            return http.HttpResponseForbidden('Invalid Delete Request')
+            return HttpResponseForbidden('Invalid Delete Request')
