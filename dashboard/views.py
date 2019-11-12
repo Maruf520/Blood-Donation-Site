@@ -9,6 +9,7 @@ from .filters import UserFilter
 from datetime import datetime
 from dashboard.models import Commttee
 from dashboard.forms import CommitteeForm,DropDownForm,CommitteeForm
+from django.views import generic
 
 @login_required(login_url='login')
 def dashboard1(request):
@@ -203,20 +204,32 @@ def Committee_member(request, id):
 
     return render(request,'dashboard/committee/committee_member.html',context)
 
-def editCommttee(request, id):
-    if request.method == 'POST':
+# def editCommttee(request, id):
+#     if request.method == 'POST':
         
-        form = CommitteeForm(request.POST, request.FILES)
-        if form.is_valid():
-            form1 = form.save()
-            print(form1.name)
-            return redirect('/')
+#         form = CommitteeForm(request.POST, request.FILES)
+#         if form.is_valid():
+#             form1 = form.save()
+#             print(form1.name)
+#             return redirect('/')
 
-    else:
-        form = CommitteeForm()
-    context = {
-        'form':form
-        }
-    return render(request,'dashboard/committee/committee_member_edit.html',context)            
+#     else:
+#         form = CommitteeForm()
+#     context = {
+#         'form':form
+#         }
+#     return render(request,'dashboard/committee/committee_member_edit.html',context)            
+
+
+class CommtteeUpdateView(generic.UpdateView):
+    model = Commttee
+    fields = ['name','designation','session','image']
+    template_name_suffix = "_update_form"
+
+    def form_valid(self,form):
+        if self.request.user.is_admin or self.request.user.is_superuser:
+            return super(CommitteeUpdateView, self).form_valid(form)
+        else:
+            HttpResponse('Balchal')    
 
 
