@@ -11,7 +11,7 @@ class BloodPostForm(forms.ModelForm):
         widgets = {
             'location' : forms.TextInput(attrs={'class':'form-control','placeholder':'location'}),
             'description' : forms.Textarea(attrs={'class':'form-control','placeholder':'description'}),
-            'phone' : forms.CharField(validators=[RegexValidator('^(\w+\d+|\d+\w+)+$', message="Password should be a combination of Alphabets and Numbers")]),
+            'phone' : forms.TextInput(attrs={'class':'form-control','placeholder':'phone'}),
             'date' : forms.DateInput(attrs={'class':'form-control','placeholder':'date','type':'date'}),
             'time' : forms.TimeInput(attrs={'class':'form-control','placeholder':'time', 'type':'time'}),
             'name' : forms.TextInput(attrs={'class' : 'form-control','placeholder':'name'}),
