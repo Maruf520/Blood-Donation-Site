@@ -10,6 +10,7 @@ from datetime import datetime
 from dashboard.models import Commttee
 from dashboard.forms import CommitteeForm,DropDownForm,CommitteeForm
 from django.views import generic
+from django.urls import reverse
 
 @login_required(login_url='login')
 def dashboard1(request):
@@ -146,16 +147,18 @@ def delete_single_user(request, id):
     
     if not request.user.is_staff:
         return HttpResponse("Permission denied")
-        delete_single_user = Account.objects.get(id = id)
-        delete_single_user.delete()
-        return redirect(request.META.get('HTTP_REFERER', '/'))
+    delete_user = Account.objects.get(id = id)
+    print(delete_user)
+    delete_user.delete()
+    return redirect(request.META.get('HTTP_REFERER', '/'))
+
 @login_required(login_url = 'login')
 def search(request):
     if not request.user.is_staff:
         return HttpResponse('permisson denied')
     user_list = Account.objects.all()
     user_filter = UserFilter(request.GET, queryset=user_list)
-    return render(request, 'dashboard/users/search.html', {'filter': user_filter})
+    return render(request, 'dashboard/users/users.html', {'filter': user_filter})
 
 
 def committee_form(request):
@@ -203,22 +206,7 @@ def Committee_member(request, id):
     }    
 
     return render(request,'dashboard/committee/committee_member.html',context)
-
-# def editCommttee(request, id):
-#     if request.method == 'POST':
-        
-#         form = CommitteeForm(request.POST, request.FILES)
-#         if form.is_valid():
-#             form1 = form.save()
-#             print(form1.name)
-#             return redirect('/')
-
-#     else:
-#         form = CommitteeForm()
-#     context = {
-#         'form':form
-#         }
-#     return render(request,'dashboard/committee/committee_member_edit.html',context)            
+          
 
 
 class CommtteeUpdateView(generic.UpdateView):
@@ -228,8 +216,11 @@ class CommtteeUpdateView(generic.UpdateView):
 
     def form_valid(self,form):
         if self.request.user.is_admin or self.request.user.is_superuser:
-            return super(CommitteeUpdateView, self).form_valid(form)
+            return super(CommtteeUpdateView, self).form_valid(form)
         else:
             HttpResponse('Balchal')    
+    def get_success_url(self):
+        return reverse('view_committee')
+
 
 

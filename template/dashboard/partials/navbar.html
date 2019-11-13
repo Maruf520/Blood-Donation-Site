@@ -5,7 +5,10 @@
     <ul class="app-nav">
       <li class="app-search">
         <input class="app-search__input" type="search" placeholder="Search">
+        <form method="get">
+          <!-- {{ filter.form.as_p }} -->
         <button class="app-search__button"><i class="fa fa-search"></i></button>
+      </form>
       </li>
       <!--Notification Menu-->
       {% load notifications_tags %}

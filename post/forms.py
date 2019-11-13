@@ -1,6 +1,6 @@
 from django import forms
 from post.models import Comment,Blog
-
+from django.core.validators import RegexValidator
 
 
 class BloodPostForm(forms.ModelForm):
@@ -11,12 +11,12 @@ class BloodPostForm(forms.ModelForm):
         widgets = {
             'location' : forms.TextInput(attrs={'class':'form-control','placeholder':'location'}),
             'description' : forms.Textarea(attrs={'class':'form-control','placeholder':'description'}),
-            'phone' : forms.TextInput(attrs={'class':'form-control','placeholder':'phone'}),
+            'phone' : forms.CharField(validators=[RegexValidator('^(\w+\d+|\d+\w+)+$', message="Password should be a combination of Alphabets and Numbers")]),
             'date' : forms.DateInput(attrs={'class':'form-control','placeholder':'date','type':'date'}),
             'time' : forms.TimeInput(attrs={'class':'form-control','placeholder':'time', 'type':'time'}),
             'name' : forms.TextInput(attrs={'class' : 'form-control','placeholder':'name'}),
             'blood_group' : forms.Select(attrs={'class':'form-control','placeholder':'blood_group'}),
-            'quantity' : forms.NumberInput(attrs={'max_length' :4, 'min_length':1 ,'class':'form-control','placeholder':'1 (bag)'})
+            'quantity' : forms.NumberInput(attrs={'max':4, 'min':1 ,'class':'form-control','placeholder':'1 (bag)'})
         }
     	# def clean_quantity(self):
 
