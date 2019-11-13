@@ -11,11 +11,7 @@ class BloodPostForm(forms.ModelForm):
         widgets = {
             'location' : forms.TextInput(attrs={'class':'form-control','placeholder':'location'}),
             'description' : forms.Textarea(attrs={'class':'form-control','placeholder':'description'}),
-<<<<<<< HEAD
-            'phone' : forms.NumberInput(attrs={'class':'form-control','placeholder':'number'}),
-=======
             'phone' : forms.TextInput(attrs={'class':'form-control','placeholder':'phone'}),
->>>>>>> master
             'date' : forms.DateInput(attrs={'class':'form-control','placeholder':'date','type':'date'}),
             'time' : forms.TimeInput(attrs={'class':'form-control','placeholder':'time', 'type':'time'}),
             'name' : forms.TextInput(attrs={'class' : 'form-control','placeholder':'name'}),
