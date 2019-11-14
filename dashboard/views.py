@@ -7,8 +7,8 @@ from accounts.models import Account
 from django.contrib.auth.decorators import login_required
 from .filters import UserFilter
 from datetime import datetime
-from dashboard.models import Commttee
-from dashboard.forms import CommitteeForm,DropDownForm,CommitteeForm
+from dashboard.models import Commttee,Gallery
+from dashboard.forms import CommitteeForm,DropDownForm,CommitteeForm,GalleryImageForm
 from django.views import generic
 from django.urls import reverse
 
@@ -166,7 +166,7 @@ def committee_form(request):
         form = CommitteeForm(request.POST,request.FILES)
         if form.is_valid():
             committee = form.save()
-            return redirect("/")
+            return redirect("dashboard")
     else:
         form = CommitteeForm()
 
@@ -185,14 +185,11 @@ def committee(request):
 
         query_results = Commttee.objects.filter(session= selected_session )
     else:
-        query_results = Commttee.objects.filter(session__icontains ='2016-2917')
-        print(query_results)
+        query_results = Commttee.objects.filter(session__icontains ='2016-2017')
 
     context = {
         'query_results':query_results,
         'session_list':session_list,
-        # 'queryset_results':queryset_results,
-        
     }    
     return render(request, 'dashboard/committee/committee_list.html',context)
         
@@ -219,6 +216,47 @@ class CommtteeUpdateView(generic.UpdateView):
             return super(CommtteeUpdateView, self).form_valid(form)
         else:
             HttpResponse('Balchal')    
+    def get_success_url(self):
+        return reverse('view_committee')
+
+def GalleryImage(request):
+    if request.method == 'POST':
+        form = GalleryImageForm (request.POST,request.FILES)
+        if form.is_valid():
+            form.save() 
+            return redirect("gelleryImage")
+    else:
+        form =   GalleryImageForm()
+
+    context = {
+        'form':form
+    }              
+    return render(request,'dashboard/gallery/galleryimage.html',context)  
+
+def GalleryImageView(request):
+    image =  Gallery.objects.all()
+    print(image)
+    context = {
+        'image':image
+    }
+    return render (request,'dashboard/gallery/galleryimageview.html',context)
+
+def GalleryImageManage(request,id):
+    if request.method == 'POST':
+        image_del = Gallery.objects.get(id=id)
+        image_del.delete()
+    return redirect(request.META.get('HTTP_REFERER', '/'))
+
+class AccountUpdateView(generic.UpdateView):
+    model = Account
+    fields = ['last_date_of_donation','username','email','blood_group','phone','address','image']
+    template_name_suffix = "_user_form"
+
+    def form_valid(self,form):
+        if self.request.user.is_admin or self.request.user.is_superuser:
+            return super(AccountUpdateView, self).form_valid(form)
+        else:
+            HttpResponse('Balchal')
     def get_success_url(self):
         return reverse('view_committee')
 

@@ -1,0 +1,31 @@
+{% extends 'dashboard/base.html' %}
+
+{% block 'main_body' %}
+
+
+
+<main class="app-content">
+        
+        {% if image %}
+            {% for photo in image %}
+        
+           
+           
+             <div class="w-25 p-3">
+       
+       
+                <img src=" {{ photo.image.url }} " class="img-thumbnail" alt="">
+                
+                    <form method ="POST" action="{% url  'deleteImage' photo.id %}">
+                        {% csrf_token %}
+                    <button type="submit" class=" btn btn-danger btn-sm " >Delete</button>
+                    
+                    </form>
+                
+            </div>
+            {% endfor %}
+            {% endif %} 
+
+</main>
+
+{% endblock %}

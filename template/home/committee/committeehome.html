@@ -1,0 +1,23 @@
+{% extends 'home/base.html' %}
+
+{% block title %}
+Running Committee of this Medicine club.
+{% endblock %} 
+
+{% block about_us %}
+<div style="height: 250px;" ></div>
+{% if committee %}
+{% for com in committee %}
+<div class="row d-flex justify-content-sm-around">
+<div class="card " style="width: 18rem;">
+    <img src="{{com.image.url}}" class="card-img-top" alt="Maruf">
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">Name : {{com.name }}</li>
+        <li class="list-group-item">Post : {{com.designation}}</li>
+      </ul>
+  </div>
+  </div>
+  {% endfor %}
+  {% endif %}
+
+{% endblock %}

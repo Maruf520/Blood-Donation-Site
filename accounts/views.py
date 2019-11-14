@@ -76,8 +76,13 @@ def logout_view(request):
 def User_Profile(request):
     if request.method == 'GET':
         post = Blog.objects.filter(user_id=request.user)
+        post_number = Blog.objects.filter(user_id=request.user).count()
+        # Total_donation = Account.objects.filter(user=request.user).count()
+        print(post_number)
         context = {
-            'posts': post
+            'posts': post,
+            'post_number':post_number,
+            # 'Total_donation':Total_donation,
         }
         return render(request, 'home/profile/profile.html', context)
 

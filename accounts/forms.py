@@ -18,7 +18,7 @@ class SignupForm(forms.ModelForm):
 	password  = forms.CharField(widget=forms.PasswordInput(attrs={ 'placeholder': 'password (min 6 word)','class':'form-control','minLength':'5', 'maxLength':'10' }))
 	confirm_password = forms.CharField(widget=forms.PasswordInput(attrs = {'placeholder':'confirm_password', 'class': 'form-control'}))
 	blood_group = forms.CharField( widget=forms.Select( choices=blood_type , attrs={'class':'custom-select'}))
-	last_date_of_donation = forms.CharField(widget=forms.DateInput(attrs = {'placeholder':'date', 'class': 'form-control'}))
+	last_date_of_donation = forms.DateField(widget=forms.DateInput(attrs = {'placeholder':'date', 'class': 'form-control','type':'date'}))
 	class Meta:
 		model = Account
 		fields = ['email','phone','blood_group','address', 'username']

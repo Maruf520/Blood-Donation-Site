@@ -18,5 +18,9 @@ urlpatterns = [
     path('committee/list', views.committee,name='view_committee'),
     path('committee/list/<int:id>/', views.Committee_member,name='committee_member'),
     path('committee/list/edit/<int:pk>/', views.CommtteeUpdateView.as_view() ,name='editcommittee'),
+    path('gallery/image/upload',views.GalleryImage, name='gelleryImage'),
+    path('gallery/delete/image/<int:id>/',views.GalleryImageManage, name='deleteImage'),
+    path('gallery/image/view/',views.GalleryImageView, name='galleryimageview'),
+    path('users/<int:pk>/', views.AccountUpdateView.as_view(),name='userupdate'),
 
 ]

@@ -12,3 +12,7 @@ class Commttee(models.Model):
     designation = models.CharField(max_length=20)
     session = models.CharField(max_length=30)
     image = models.ImageField(upload_to ='image/commttee/%Y/%m/%d',blank=False)
+
+class Gallery(models.Model):
+    created_at = models.DateTimeField(auto_now_add=True)
+    image =  image = models.ImageField(upload_to ='image/gallery/%Y/%m/%d', blank=False)

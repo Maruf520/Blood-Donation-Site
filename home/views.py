@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect,HttpResponse
 from django.core.paginator import Paginator
 from post.forms import BloodPostForm
 from post.models import Blog 
-from dashboard.models import Image
+from dashboard.models import Image,Commttee
 from notifications.signals import notify
 from accounts.models import Account
 from django.db.models.signals import post_save
@@ -12,6 +12,7 @@ from django.core.mail import EmailMessage
 from datetime import datetime,timedelta
 from sendsms import api
 from sendsms.message import SmsMessage
+
 
 
 def send_mail_to_user(to_mail_list, data):
@@ -96,6 +97,13 @@ def blog_post_view(request, id):
             'contacts': contacts
         }   
         return render(request, 'home/blog_view/blog_page.html', context)
+def ShowCommittee(request):
+
+    committee = Commttee.objects.filter(session__icontains ='2016-2017')
+    context = {
+        'committee': committee
+    }
+    return render(request,'home/committee/committeehome.html',context)
 
 def gallery(request):
 

@@ -39,6 +39,7 @@ class Account( AbstractBaseUser ):
     address = models.CharField(max_length = 200,null=True)
     last_date_of_donation = models.DateField(max_length = 50,null=True)
     image = models.ImageField(upload_to ='image/account/%Y/%m/%d',default='avatar.jpg')
+    donate = models.PositiveIntegerField(default=0)
     is_admin = models.BooleanField(default = False,null=True)
     is_active = models.BooleanField( default= True,null=True)
     is_staff = models.BooleanField(default = False)
