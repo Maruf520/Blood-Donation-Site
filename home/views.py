@@ -11,7 +11,7 @@ from django.conf import settings
 from django.core.mail import EmailMessage
 from datetime import datetime,timedelta
 from sendsms import api
-# from sendsms.message import SmsMessage
+
 
 
 
@@ -29,24 +29,6 @@ def send_mail_to_user(to_mail_list, data):
     """.format(data.name, data.quantity, data.blood_group, data.location, data.time, data.date,data.description)
     send_mail(my_subject, my_message, 'blood.emergency0@gmail.com', to_mail_list,
             fail_silently=False)
-# def sendSms(to_number_list,data):
-#     my_message = """
-#     {} need {} bag {} blood at {} in {} , {}
-
-#     Message:
-#     {}
-
-
-#     Please Contact: 01710038888
-    
-#     """.format(data.name, data.quantity, data.blood_group, data.location, data.time, data.date,data.description)
-#     message = SmsMessage(body=my_message, from_phone='+41791111111', to=data.phone)  
-#     message.send()  
-
-
-
-
-# Create your views here.
 def index(request):
     if request.method == 'POST':
         blogs = Blog.objects.all()
@@ -63,7 +45,6 @@ def index(request):
                 print(account.email)    
                 print(account.phone)
             send_mail_to_user(destination_emails,blog)
-            # sendSms(destination_number,blog)
                 
             form = BloodPostForm()
             context = {'form': form,'blogs':blogs,'image':image}

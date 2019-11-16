@@ -159,5 +159,3 @@ EMAIL_HOST_PASSWORD = env.str('EMAIL_HOST_PASSWORD')
 EMAIL_USE_TLS = env.bool('EMAIL_USE_TLS')
 
 DATE_INPUT_FORMATS = ('%d-%m-%Y')
-
-# SENDSMS_BACKEND = 'myapp.mysmsbackend.SmsBackend'
