@@ -5,19 +5,22 @@ Running Committee of this Medicine club.
 {% endblock %} 
 
 {% block about_us %}
-<div style="height: 250px;" ></div>
+<div style="height: 150px;" ></div>
+<div class="page-title mx-auto container">
+  <h1 class="pb-3 mb-5" style="text-align: center; border-bottom: 1px solid #020F20;">Running Committee of Medicine Club</h1>
+</div>
+<div class="row d-flex justify-content-sm-around pb-5">
 {% if committee %}
 {% for com in committee %}
-<div class="row d-flex justify-content-sm-around">
-<div class="card " style="width: 18rem;">
-    <img src="{{com.image.url}}" class="card-img-top" alt="Maruf">
-    <ul class="list-group list-group-flush">
-        <li class="list-group-item">Name : {{com.name }}</li>
-        <li class="list-group-item">Post : {{com.designation}}</li>
-      </ul>
-  </div>
+<div class="card mx-auto mb-5" style="width: 18rem; background-color: #05153F;">
+    <img src="{{com.image.url}}" class="card-img-top mx-auto mt-5" alt="Maruf" style="border-radius: 50%; height: 150px; width: 150px;">
+    <div class="card-body">
+      <div class="card-title mb-0" style="font-size: 1.8rem; text-align: center; color: aliceblue;">{{com.name}}</div>
+      <div class="card-text" style="text-align: center; color: aliceblue; font-size: 1.3rem;">{{com.designation}}</div>
+    </div>
   </div>
   {% endfor %}
   {% endif %}
+</div>
 
 {% endblock %}

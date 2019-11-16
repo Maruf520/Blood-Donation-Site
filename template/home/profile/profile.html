@@ -6,7 +6,7 @@
 {% endblock %}
 {% block blog_view %}
 
-  <div style="height: 250px;" ></div>
+  <div style="height: 150px;" ></div>
 
 
 
@@ -14,8 +14,52 @@
 
 
 
-  <div class="container">
-    <div class="row justify-content-md-center mb-4 pb-4">
+  <div class="container pb-5">
+
+    <div class="row">
+
+    <div class="col-md-4 mb-5" style=" border-radius: 20px; background-color:#020F20; color: white;">
+      <div class="display-profile" style="margin-left: 20px;">
+        <img src="https://images.pexels.com/photos/67636/rose-blue-flower-rose-blooms-67636.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" class="card-img-top mx-auto mt-4" alt="Maruf" style="border-radius: 50%; height: 300px; width: 300px; object-fit: cover;">
+      </div>
+      <h1 class="mt-3" style="text-align: center; color: white;">{{user.username}}</h1>
+      <p style="text-align: center; color: white;"> Group: {{ user.blood_group}}<br/></p>
+      <p style="text-align: center; color: white;">Address : {{user.address}}<br/></p>
+      <p style="text-align: center; color: white;">Phone : {{user.phone}}<br/></p>
+      <p style="text-align: center; color: white;">Email : {{user.email}}<br/></p>
+      <p style="text-align: center; color: white;">Last Donation : {{user.last_date_of_donation}}<br/></p>
+      
+      <p style="text-align: center; color: white;">My Total Donation :{{user.donate}} <br/></p>
+      <a href="{% url 'profile_update' %}" class="btn btn-primary">Edit Profile</a>
+
+    </div>
+    
+
+
+    <div class="col-md-6 ml-md-5" style=" border-radius: 20px; background-color:#020F20; color: white;">
+      <h1 class="p-3 text-center" style="color: white;">Posts</h1>
+        {% if posts %}
+      
+      {% for post in posts %}
+
+      <div>
+        <p style="color: white;">
+            {{post.description}}
+        </p>
+        <a href="" class="btn btn-primary">Edit Post</a>
+
+        <hr style="background-color: ivory;">
+      </div>
+
+      
+      
+      
+      {% endfor %}
+      {% endif %}
+    </div>
+  </div>
+
+    <!-- <div class="row justify-content-md-center mb-4 pb-4">
    <div class="card " style="width: 18rem;">
    
     <img src="{{user.image.url}}" class="card-img-top" alt="...">
@@ -41,7 +85,7 @@
     </ul>
     <a href="{% url 'profile_update' %}" class="btn btn-primary" type="button">Edit</a>
   </div>
-  </div>
+  </div> -->
 </div>
 
 {% endblock %}

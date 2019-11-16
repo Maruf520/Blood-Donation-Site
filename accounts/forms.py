@@ -129,7 +129,7 @@ class ProfleUpdateForm(forms.ModelForm):
 		fields = ['username','email','phone','address','blood_group','last_date_of_donation','image']
 		widgets = {
 		'username' : forms.TextInput(attrs={
-				'placeholder' : 'Username', 'class' : 'form-control'
+				'placeholder' : 'Username', 'class' : 'form-control', 'style' : 'color: black'
 				}),
 			'email' : forms.TextInput(attrs={
 				'placeholder' : 'Email', 'class' : 'form-control'

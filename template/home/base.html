@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 {% block blog_css %}
-
+    
 {% endblock %}
     <!-- Title  -->
 
@@ -51,8 +51,8 @@
         </div> -->
 
         <!-- Main Header Area -->
-        <div class="main-header-area" id="stickyHeader">
-            <div class="container h-100">
+        <div class="main-header-area" style="height: 80px;" id="stickyHeader">
+            <div class="h-100 px-5">
                 <div class="row h-100 align-items-center">
                     <div class="col-12 h-100">
                         <div class="main-menu h-100">
@@ -100,7 +100,31 @@
     <!-- ***** Blood blog form End ***** -->
 
     <!-- ***** About Us Area Start ***** -->
+
+
+    <!-- ***** Features Area Start ***** -->
+
+{% block feature_area %}
+
+{% endblock feature_area %}
     
+    <!-- ***** Features Area End ***** -->
+
+    <!-- ***** Blog Area Start ***** -->
+    
+    {% block blog_view %}
+        
+    {% endblock blog_view %}
+ 
+    <!-- ***** Blog Area End ***** -->
+
+        <!-- ***** Gallery Area Start ***** -->
+        {% block slideshow %}
+    
+        {% endblock slideshow %}
+        
+        <!-- ***** Gallery Area End ***** -->
+
     {% block about_us %}   
     <section class="medica-about-us-area section-padding-100-20">
         <div class="container">
@@ -183,28 +207,6 @@
     {% endblock %}
     <!-- ***** Cool Facts Area End ***** -->
 
-    <!-- ***** Gallery Area Start ***** -->
-    {% block slideshow %}
-    
-    {% endblock slideshow %}
-    
-    <!-- ***** Gallery Area End ***** -->
-
-    <!-- ***** Features Area Start ***** -->
-
-{% block feature_area %}
-
-{% endblock feature_area %}
-    
-    <!-- ***** Features Area End ***** -->
-
-    <!-- ***** Blog Area Start ***** -->
-    
-    {% block blog_view %}
-        
-    {% endblock blog_view %}
- 
-    <!-- ***** Blog Area End ***** -->
 
     <!-- ***** Footer Area Start ***** -->
 

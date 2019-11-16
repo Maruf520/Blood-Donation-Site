@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect,HttpResponse
 from django.core.paginator import Paginator
 from post.forms import BloodPostForm
 from post.models import Blog 
-from dashboard.models import Image,Commttee
+from dashboard.models import Image,Commttee,Gallery
 from notifications.signals import notify
 from accounts.models import Account
 from django.db.models.signals import post_save
@@ -11,7 +11,7 @@ from django.conf import settings
 from django.core.mail import EmailMessage
 from datetime import datetime,timedelta
 from sendsms import api
-from sendsms.message import SmsMessage
+# from sendsms.message import SmsMessage
 
 
 
@@ -29,19 +29,19 @@ def send_mail_to_user(to_mail_list, data):
     """.format(data.name, data.quantity, data.blood_group, data.location, data.time, data.date,data.description)
     send_mail(my_subject, my_message, 'blood.emergency0@gmail.com', to_mail_list,
             fail_silently=False)
-def sendSms(to_number_list,data):
-    my_message = """
-    {} need {} bag {} blood at {} in {} , {}
+# def sendSms(to_number_list,data):
+#     my_message = """
+#     {} need {} bag {} blood at {} in {} , {}
 
-    Message:
-    {}
+#     Message:
+#     {}
 
 
-    Please Contact: 01710038888
+#     Please Contact: 01710038888
     
-    """.format(data.name, data.quantity, data.blood_group, data.location, data.time, data.date,data.description)
-    message = SmsMessage(body=my_message, from_phone='+41791111111', to=data.phone)  
-    message.send()  
+#     """.format(data.name, data.quantity, data.blood_group, data.location, data.time, data.date,data.description)
+#     message = SmsMessage(body=my_message, from_phone='+41791111111', to=data.phone)  
+#     message.send()  
 
 
 
@@ -63,7 +63,7 @@ def index(request):
                 print(account.email)    
                 print(account.phone)
             send_mail_to_user(destination_emails,blog)
-            sendSms(destination_number,blog)
+            # sendSms(destination_number,blog)
                 
             form = BloodPostForm()
             context = {'form': form,'blogs':blogs,'image':image}
@@ -74,6 +74,7 @@ def index(request):
     else:
         blogs = Blog.objects.all().order_by('-date')[:10]
         image_list = Image.objects.all()
+        print(image_list)
         paginator = Paginator(blogs, 1)
         page = request.GET.get('page')
         contacts = paginator.get_page(page)
@@ -106,7 +107,12 @@ def ShowCommittee(request):
     return render(request,'home/committee/committeehome.html',context)
 
 def gallery(request):
+    image =  Gallery.objects.all()
 
-    return render(request, 'home/gallery/gallery.html')        
+    context ={
+        'image':image
+    }
+
+    return render(request, 'home/gallery/gallery.html',context)        
 
     
