@@ -21,17 +21,16 @@ Post delete/update
                     <p class="card-text">{{blog.description}}</p>
 
                   </div>
+                  {% if not blog.managed %}
+                  <a href="{% url 'postmanaged' blog.id %}" type="button" class="btn btn-primary">Managed</a>
+                  {% endif %}
+
                 </div>
               </div>
               {% endfor %}
                     {% endif %}
                       <h1>Maruf</h1>
-
-                      
                       {% if comments %}
-                        
-                     
-                        
                       {% for comment in comments %}
                       <p class="card-text">{{ comment.text }}</p>
                       <a href="{% url 'delete_individual_comment' comment.id %}" class="btn btn-info" role="button">Delete</a>

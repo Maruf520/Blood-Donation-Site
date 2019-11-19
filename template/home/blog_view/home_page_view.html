@@ -99,9 +99,20 @@ Home Page
                                             </div>
                                             <div class="col-12 col-md-4">
                                                 <div class="form-group">
-                                                    {{form.quantity.label }}
+                                                    <label for="id_quantity" id="quantity_label"></label>
                                                     {{form.quantity }}
                                                 </div>
+                                                <script>
+                                                    var slider = document.getElementById("myRange");
+                                                    var output = document.getElementById("quantity_label");
+                                                    output.innerHTML = slider.value;
+                                                    slider.onload  = function() {
+                                                      output.innerHTML = `Quantity:1`;
+                                                    }
+                                                    slider.oninput = function() {
+                                                      output.innerHTML = `Quantity:${this.value}`;
+                                                    }
+                                                    </script>
                                             </div>
                                             <div class="col-12 col-md-4">
                                                 <div>

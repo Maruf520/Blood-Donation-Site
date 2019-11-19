@@ -16,7 +16,7 @@ class BloodPostForm(forms.ModelForm):
             'time' : forms.TimeInput(attrs={'class':'form-control','placeholder':'time', 'type':'time'}),
             'name' : forms.TextInput(attrs={'class' : 'form-control','placeholder':'name'}),
             'blood_group' : forms.Select(attrs={'class':'form-control','placeholder':'blood_group'}),
-            'quantity' : forms.NumberInput(attrs={'max':4, 'min':1 ,'class':'form-control','placeholder':'1 (bag)'})
+            'quantity' : forms.NumberInput(attrs={'max':4, 'min':1 ,'class':'form-control' ,'type':'range','name':"points" ,'min':"1" ,'max':"4",'id':"myRange"})
         }
     	# def clean_quantity(self):
 
@@ -35,6 +35,8 @@ class BloodPostForm(forms.ModelForm):
                 self.fields['phone'].initial = user.phone
                 self.fields['name'].initial = user.username
                 self.user = user
+            else:
+                self.user = None
         else:
             self.user = None
 
@@ -48,8 +50,8 @@ class BloodPostForm(forms.ModelForm):
         blog.name = self.cleaned_data['name'] 
         blog.location = self.cleaned_data['location'] 
         blog.quantity = self.cleaned_data['quantity'] 
-        # if self.user:
-        blog.user = self.user
+        if self.user:
+            blog.user = self.user
 
         if commit:
             blog.save()

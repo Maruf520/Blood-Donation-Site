@@ -18,7 +18,7 @@ _BLOOD_GROUPS = (
 )
 
 class Blog(models.Model):
-    user = models.ForeignKey(Account, on_delete = models.CASCADE, blank=True )
+    user = models.ForeignKey(Account, on_delete = models.CASCADE, blank=True, null=True )
     name = models.CharField(max_length=80)
     blood_group = models.CharField(max_length = 3, choices=_BLOOD_GROUPS)
     created = models.DateTimeField(auto_now_add=True)
@@ -28,6 +28,7 @@ class Blog(models.Model):
     location = models.TextField(blank = False, null = False)
     description = models.TextField(blank=True, null = True)
     phone =  models.CharField(max_length=15,blank=False,null=False)
+    managed = models.BooleanField(default=False)
     date = models.DateField( blank=False)
     time = models.TimeField( blank = False)
 

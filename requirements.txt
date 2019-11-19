@@ -3,3 +3,4 @@ environs>==6.0.0
 psycopg2-binary>==2.8.4
 psycopg2>==2.8.4
 django-sms-gateway>==1.2.1
+# pip install git+https://github.com/bashu/django-tracking.git

@@ -21,6 +21,10 @@ urlpatterns = [
     path('gallery/image/upload',views.GalleryImage, name='gelleryImage'),
     path('gallery/delete/image/<int:id>/',views.GalleryImageManage, name='deleteImage'),
     path('gallery/image/view/',views.GalleryImageView, name='galleryimageview'),
-    path('users/<int:pk>/', views.AccountUpdateView.as_view(),name='userupdate'),
+    path('users/<int:id>/update/', views.updateAccount,name='userupdate'),
+    path('post/<int:id>/managed/', views.managePost,name='postmanaged'),
+
+
+
 
 ]

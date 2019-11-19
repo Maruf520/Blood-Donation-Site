@@ -32,12 +32,12 @@
 </tr>
 <!-- {% endif %} -->
 <tr>  
-{% if d > 120  %}
+{% if b > 120  %}
 <th scope="col">Status : <button type="button" class="btn btn-primary">Available</button> </th>
 {% else %}
 <th scope="col">Status : <button type="button" class="btn btn-primary">Unavailable</button> </th>
 {% endif %}
-<th><a href="{% url 'userupdate' single_user.id  %}" type="button" class="btn btn-primary">Edit</a></th>
+<th><a href="{% url 'userupdate' single_user.id  %}" type="button" class="btn btn-primary">Eddit</a></th>
 </tr>
     </thead>
    

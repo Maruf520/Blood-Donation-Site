@@ -53,9 +53,10 @@ def index(request):
             context = {'form': form}
             return render (request, 'home/homeSlideimage/slideimageHome.html', context) 
     else:
-        blogs = Blog.objects.all().order_by('-date')[:10]
+        blogs = Blog.objects.all().filter(managed=False)[:10]
+        blog1 = Blog.objects.all().filter(managed=True).count()
+        print(blog1)
         image_list = Image.objects.all()
-        print(image_list)
         paginator = Paginator(blogs, 1)
         page = request.GET.get('page')
         contacts = paginator.get_page(page)

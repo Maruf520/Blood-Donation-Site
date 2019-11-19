@@ -13,6 +13,7 @@
                         <div class="row no-gutters align-items-center">
                             <div class="col-12 col-lg-9">
                                 <div class="medilife-appointment-form">
+    
                                     <form  method="post" class="text-light">
                                         {% csrf_token %}
                                         <div class="row align-items-end">
@@ -20,13 +21,31 @@
                                                 <div class="form-group">
                                                     {{form.blood_group.label}}
                                                     {{form.blood_group}}
+                                                   
                                                 </div>
                                             </div>
                                             <div class="col-12 col-md-4">
                                                 <div class="form-group">
-                                                    {{form.quantity.label }}
-                                                    {{form.quantity }}
+                                                    {{form.hello.label}}
+                                                    {{form.hello}}
+                                                    
                                                 </div>
+                                            </div>
+                                            <div class="col-12 col-md-4">
+                                                <div class="form-group">
+                                                  
+                                                </div>
+                                                <p>Value: <span id="demo"></span></p>
+                                                <script>
+                                                    var slider = document.getElementById("myRange");
+                                                    var output = document.getElementById("demo");
+                                                    output.innerHTML = slider.value;
+                                                    
+                                                    slider.oninput = function() {
+                                                      output.innerHTML = this.value;
+                                                    }
+                                                    </script>
+                                                <label for="demo">Hello</label>
                                             </div>
                                             <div class="col-12 col-md-4">
                                                     <div >
