@@ -178,6 +178,7 @@ class AccountUpdateForm(forms.ModelForm):
 		self.fields['address'].initial = user.address
 		self.fields['blood_group'].initial = user.blood_group
 		self.fields['last_date_of_donation'].initial = user.last_date_of_donation
+		self.fields['image'].initial = user.image
 
 class ReportForm(forms.ModelForm):
 	class Meta :
