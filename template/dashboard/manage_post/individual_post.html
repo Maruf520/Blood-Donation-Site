@@ -2,23 +2,23 @@
 
 {% block title %}
 
-Post delete/update
+Report Messages
     
 {% endblock title %}
 
 {% block 'main_body' %}
 
 <main class="app-content">
-        {% if post_item %}
+        {% if report %}
                         
-        {% for blog in post_item %}
+        {% for blog in report %}
         <div class="col-sm-6">
                 <div class="card">
                   <div class="card-body">
                         
                          <h5 class="card-title">{{blog.name}}</h5>
             
-                    <p class="card-text">{{blog.description}}</p>
+                    <p class="card-text">{{blog.messege}}</p>
 
                   </div>
                   {% if not blog.managed %}

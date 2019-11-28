@@ -7,7 +7,7 @@ from accounts.models import Account
 from django.contrib.auth.decorators import login_required
 from .filters import UserFilter
 from datetime import datetime
-from dashboard.models import Commttee,Gallery
+from dashboard.models import Commttee,Gallery,Report
 from dashboard.forms import CommitteeForm,DropDownForm,CommitteeForm,GalleryImageForm,ReportForm,AccountUpdateForm
 from django.views import generic
 from django.urls import reverse
@@ -293,6 +293,20 @@ def report(request):
             return redirect(request.META.get('HTTP_REFERER', '/')) 
         else:
             return HttpResponse(form.errors.__str__())
+@login_required(login_url = 'login')            
+def viewreport(request):
+    if not request.user.is_staff:
+        return render(request, 'home/ErrorPage/permission.html')
+    if request.method == 'GET':
+        report = Report.objects.all().order_by('-created_at')
+        print(report)
+        context = {
+            'report':report
+        }
+        return render (request, 'dashboard/error/error.html',context)
+
+  
+
 
 
 

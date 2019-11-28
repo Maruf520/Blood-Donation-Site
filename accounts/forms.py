@@ -48,8 +48,8 @@ class SignupForm(forms.ModelForm):
 	def clean_confirm_password(self):
 			password = self.cleaned_data['password']
 			confirm_password = self.cleaned_data['confirm_password']
-			if len(password) < 7:
-				raise forms.ValidationError(' 7 length')
+			if len(password) < 6:
+				raise forms.ValidationError(' 6 length')
 			if len(password) > 12:
 				raise forms.ValidationError('password should be at most 12 length')
 			# if not any(char.isdigit() for char in password):
