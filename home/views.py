@@ -86,7 +86,7 @@ def index(request):
             context = {'form': form}
             return render (request, 'home/homeSlideimage/slideimageHome.html', context) 
     else:
-        blogs = Blog.objects.all().filter(managed=False)[:10]
+        blogs = Blog.objects.all().filter(managed=False).order_by('-created')[:10]
         total_user = Account.objects.all().count()
         total_donation = Blog.objects.filter(managed = True).count()
         total_post = Blog.objects.all().count()

@@ -8,11 +8,12 @@ from post.forms import CommentPostForm
 
 def blog_post_view(request):
 
-    blog = Blog.objects.all()
+    blog = Blog.objects.filter(managed = False).order_by('-created')
     paginator = Paginator(blog, 1)
     page = request.GET.get('page')
     contacts = paginator.get_page(page)
     comments = Comment.objects.all()
+    print(blog)
     form = CommentPostForm()
     context = {
         'blog': blog,
