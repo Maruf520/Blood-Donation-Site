@@ -72,7 +72,7 @@
           <div class="col-12 col-sm-6 col-xl-3">
               <div class="footer-widget-area">
                   <div class="widget-title">
-                      <h6>Contact Form</h6>
+                      <h6>About Us</h6>
                   </div>
                   
               </div>
@@ -85,10 +85,10 @@
                   </div>
 
                   <div class="footer-newsletter-area">
-                      <form action="#">
-                          <input type="email" class="form-control border-0 mb-0" name="newsletterEmail"
-                              id="newsletterEmail" placeholder="Your Email Here">
-                          <button type="submit">Subscribe</button>
+                      <form method="POST"  action="{% url 'reportmessege' %}">
+                          {% csrf_token %}
+                          <input type="text" name="messege" class="form-control" required/>
+                          <button type="submit">Send</button>
                       </form>
                       <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh
                           euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Lorem ipsum dolor

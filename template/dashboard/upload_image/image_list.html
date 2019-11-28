@@ -5,25 +5,32 @@
 
 
 <main class="app-content">
+    
         
         {% if photo_list %}
-            {% for photo in photo_list %}
+
+        <div class="container-fluid">
+            <div class="row d-flex">
+                    {% for photo in photo_list %}
         
            
            
-             <div class="w-25 p-3">
-       
-       
-                <img src=" {{ photo.image.url }} " class="img-thumbnail" alt="">
-                
-                    <form method ="POST" action="{% url  'delete' photo.id %}">
-                        {% csrf_token %}
-                    <button type="submit" class=" btn btn-danger btn-sm " >Delete</button>
-                    
-                    </form>
-                
+                    <div class="w-25 p-3">
+              
+              
+                       <img src=" {{ photo.image.url }} " class="img-thumbnail" alt="">
+                       
+                           <form method ="POST" action="{% url  'delete' photo.id %}">
+                               {% csrf_token %}
+                           <button type="submit" class=" btn btn-danger btn-sm " >Delete</button>
+                           
+                           </form>
+                       
+                   </div>
+                   {% endfor %}
             </div>
-            {% endfor %}
+        </div>
+            
             {% endif %} 
 
 </main>

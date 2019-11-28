@@ -133,19 +133,19 @@ class ProfleUpdateForm(forms.ModelForm):
 				'placeholder' : 'Username', 'class' : 'form-control', 'style' : 'color: black'
 				}),
 			'email' : forms.TextInput(attrs={
-				'placeholder' : 'Email', 'class' : 'form-control'
+				'placeholder' : 'Email', 'class' : 'form-control','style' : 'color: black'
 				}),
 			'phone' : forms.TextInput(attrs={
-				'placeholder' : 'Phone', 'class' : 'form-control'
+				'placeholder' : 'Phone', 'class' : 'form-control','style' : 'color: black'
 				}),
 			'blood_group' : forms.TextInput(attrs={
 				'placeholder' : 'Blood Group', 'class' : 'form-control'
 				}),
 			'address' : forms.TextInput(attrs={
-				'placeholder' : ' Address', 'class' : 'form-control'
+				'placeholder' : ' Address', 'class' : 'form-control','style' : 'color: black'
 				}),
 
-				'last_date_of_donation' : forms.DateInput(format='%d-%m-%Y',attrs={'class' : 'form-control','type':'date' }),
+				'last_date_of_donation' : forms.DateInput(format='%d-%m-%Y',attrs={'class' : 'form-control','type':'date','style' : 'color: black' }),
 			'image': forms.FileInput(attrs={'class':'form-control'}),
 		}
 

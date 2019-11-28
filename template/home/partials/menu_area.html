@@ -6,13 +6,13 @@
         >Home <span class="sr-only">(current)</span></a
       >
     </li>
-    <li class="nav-item">
+    <!-- <li class="nav-item">
       <a class="nav-link" href="#">Activity</a>
-    </li>
+    </li> -->
   </li>
-  <li class="nav-item">
+  <!-- <li class="nav-item">
     <a class="nav-link" href="#">About Us</a>
-  </li>
+  </li> -->
     <li class="nav-item">
       <a class="nav-link" href="{% url 'committeehome' %}">Committee</a>
     </li>
@@ -49,6 +49,12 @@
             <i class=" fas fa-sign-out-alt"></i>logout
             </a> -->
     </li>
+    {% if user.is_staff %}
+    <li class="nav-item">
+         
+        <a class="nav-link" href="{%  url 'dashboard' %}">Dashboard</a>
+      </li>
+      {% endif %}
     <li class="nav-item">
       <a class="nav-link" href="{% url 'logout' %}">logout</a>
       <form action="{% url 'logout' %}" method="POST" id="logout">

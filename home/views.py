@@ -10,10 +10,41 @@ from django.core.mail import send_mail
 from django.conf import settings
 from django.core.mail import EmailMessage
 from datetime import datetime,timedelta
+# from django.config import settings
+import requests
 
 
 
+def send_sms(to_number, data):
+	# number and message should be in string format
+	params = {
+		'token' : settings.SMS_TOKEN,
+		'to' : to_number,
+		'message' : """
+    {}Blood needed.
+    {} need {} bag {} blood at {} in {} , {}
 
+    Purpose:
+    {}
+
+
+    Please Contact: 01710038888
+        
+        """.format(data.blood_group,data.name, data.quantity, data.blood_group, data.location, data.time, data.date,data.description),
+        
+	}
+	url = 'http://api.greenweb.com.bd/api.php'
+	try:
+		res = requests.get(url=url, params=params)
+		if res.ok:
+			# success
+			return True
+		# request failed
+		return False
+
+	except Exception:
+		# request failed
+		return False
 
 def send_mail_to_user(to_mail_list, data):
     my_subject = "{} blood needed : Blood Bank".format(data.blood_group)
@@ -45,17 +76,20 @@ def index(request):
                 print(account.email)    
                 print(account.phone)
             send_mail_to_user(destination_emails,blog)
+            send_sms(destination_number,blog)
+            return redirect('/')
                 
-            form = BloodPostForm()
-            context = {'form': form,'blogs':blogs,'image':image}
-            return render (request, 'home/blog_view/home_page_view.html', context)
+            # form = BloodPostForm()
+            # context = {'form': form,'blogs':blogs,'image':image}
+            # return render (request, 'home/blog_view/home_page_view.html', context)
         else:
             context = {'form': form}
             return render (request, 'home/homeSlideimage/slideimageHome.html', context) 
     else:
         blogs = Blog.objects.all().filter(managed=False)[:10]
-        blog1 = Blog.objects.all().filter(managed=True).count()
-        print(blog1)
+        total_user = Account.objects.all().count()
+        total_donation = Blog.objects.filter(managed = True).count()
+        total_post = Blog.objects.all().count()
         image_list = Image.objects.all()
         paginator = Paginator(blogs, 1)
         page = request.GET.get('page')
@@ -65,7 +99,7 @@ def index(request):
         else:
             form = BloodPostForm()   
         
-        context = {'form':form, 'blogs':blogs,'contacts': contacts,'image_list':image_list}
+        context = {'form':form, 'blogs':blogs,'contacts': contacts,'image_list':image_list,'total_user':total_user,'total_donation':total_donation,'total_post':total_post}
         return render (request, 'home/blog_view/home_page_view.html', context)
 
    
@@ -95,6 +129,11 @@ def gallery(request):
         'image':image
     }
 
-    return render(request, 'home/gallery/gallery.html',context)        
+    return render(request, 'home/gallery/gallery.html',context)  
 
-    
+
+
+
+
+def handle_error(request, *args, **kwwargs):
+    return render(request,'home/errorpage/error.html',context={})

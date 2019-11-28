@@ -49,7 +49,7 @@ Add Commttee
       </div>
     </div>
   </div>
-    <div class="col-md-6">
+    <div class="col-md-12">
       <div class="tile">
         <h3 class="tile-title">Select a session</h3>
         <div class="container">
@@ -63,15 +63,23 @@ Add Commttee
         
         
             <h1>All committee</h1>
-            <table>
+            
+            <div class="container-fluid">
+              <div class="row">
+                  {% for item in query_results %}
+                    <div class="card mx-auto mb-5" style="width: 18rem; background-color: #05153F;">
+                      <img src="{{item.image.url}}" class="card-img-top mx-auto mt-5" alt="Maruf" style="border-radius: 50%; height: 150px; width: 150px;">
+                      <div class="card-body">
+                        <div class="card-title mb-0" style="font-size: 1.8rem; text-align: center; color: aliceblue;">{{item.name}}</div>
+                        <div class="card-text" style="text-align: center; color: aliceblue; font-size: 1.3rem;">{{item.designation}}</div>
+                      </div>
+                    </div>
+                  {% endfor %}
+              </div>
+            </div>
         
-                {% for item in query_results %}
-                <tr>
-                    <td><a href=" {% url 'committee_member' item.id %} ">{{item.name}}</a><br></td>
-                    <td>{{ item.designation }}</td>
-                </tr>
-                {% endfor %}
-            </table>
+                
+         
         </div>
         
       </div>

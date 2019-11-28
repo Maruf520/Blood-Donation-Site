@@ -34,5 +34,11 @@ def individual_blog(request, id):
             return redirect("blood_blog")
 
     return HttpResponse("Something went wrong", status=400)
-
+def managedPost(request):
+    managepost = Blog.objects.filter(managed = True)
+    print(managepost)
+    context = {
+        'managedpost': managepost
+    }
+    return render (request,'home/blog_view/managedpost.html',context)
         

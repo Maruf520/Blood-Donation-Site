@@ -1,0 +1,64 @@
+{% extends 'home/base.html' %}
+{% load static %}
+{% block blog_css %}
+<link rel="stylesheet" href="{% static 'front/css/blog.css' %}">
+{% endblock %}
+{% block title %}
+    Managed Posts
+{% endblock %}
+{% block about_us %}
+{% endblock %}
+
+
+{% block blog_view %}
+
+  <div style="height: 150px;" ></div>
+  <h2 class="text-center display-4 mb-4">Managed Posts</h2>  
+  <div class="container-fluid">
+    <div class="row d-flex justify-content-center">
+      <div class="col-md-9">
+        {% if managedpost %}
+        {% for item in managedpost %}
+        <div class="list-group-item list-group-item-secondary mb-3" style="color: white; background-color: #020F20; border-radius: 10px;">
+          <h3 style="color: white; border-bottom: 1px solid white; display: inline-block;" class="px-3 py-2">{{ item.blood_group }} needed</h3>
+          <p class="lead" style="color: white;">
+            {{item.name}} need {{item.quantity}} beg {{item.blood_group}} before {{ item.time}}, {{item.date}}
+          </p>
+          {% if item.description %}
+          <blockquote class="blockquote">
+            <u  style="color: white;">Purpose:</u>
+            <p class="mb-0"  style="color: white;">
+                {{item.description}}
+            </p>
+          </blockquote>
+          {%endif%}
+
+          {% if comments %}
+          <!-- <u  style="color: white;">Comments</u> -->
+          
+          {% for comment in comments %}
+            
+          {% if comment.blog.id == item.id %}
+
+            <div class="comment p-2">
+              <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80" class="mr-3" style="height: 50px; width: 50px; border-radius: 50%; display: inline; float: left;">
+            
+            
+            <blockquote class="blockquote" style="display: inline;">
+              <cite title="Source Title" style="color: #a1a1a1;">{{comment.user.username}}</cite>
+              <p class="mb-0"  style="color: white;"><span style="color: d9d9d9;">-- </span>{{comment.text}}</p>
+            </blockquote>
+          </div>
+            
+            {% endif %}
+          {% endfor %}
+          {% endif %}
+        </div>
+        {% endfor %}
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+{% endblock %}
+

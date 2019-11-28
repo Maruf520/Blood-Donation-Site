@@ -16,3 +16,10 @@ class Commttee(models.Model):
 class Gallery(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     image =  image = models.ImageField(upload_to ='image/gallery/%Y/%m/%d', blank=False)
+
+class Report(models.Model):
+    messege = models.TextField(blank=False)
+    created_at = models.DateTimeField(auto_now=True)
+
+
+

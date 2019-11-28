@@ -8,7 +8,7 @@ from django.contrib.auth.decorators import login_required
 from .filters import UserFilter
 from datetime import datetime
 from dashboard.models import Commttee,Gallery
-from dashboard.forms import CommitteeForm,DropDownForm,CommitteeForm,GalleryImageForm,AccountUpdateForm
+from dashboard.forms import CommitteeForm,DropDownForm,CommitteeForm,GalleryImageForm,ReportForm,AccountUpdateForm
 from django.views import generic
 from django.urls import reverse
 from datetime import datetime, timedelta
@@ -16,7 +16,7 @@ from datetime import datetime, timedelta
 @login_required(login_url='login')
 def dashboard1(request):
     if not request.user.is_staff:
-        return HttpResponse("Permission denied")
+        return render(request, 'home/ErrorPage/permission.html')
     total_user = Account.objects.all().count()
     total_post = Blog.objects.all().count()
     context = {
@@ -29,7 +29,7 @@ def dashboard1(request):
 @login_required(login_url='login')
 def image_upload(request):
     if not request.user.is_staff:
-        return HttpResponse("Permission denied")
+        return render(request, 'home/ErrorPage/permission.html')
     if request.method == 'POST':
         form = SlidImageForm(request.POST, request.FILES)
         if form.is_valid():
@@ -50,7 +50,7 @@ def image_upload(request):
 @login_required(login_url='login')
 def image_list(request):
     if not request.user.is_staff:
-        return HttpResponse("Permission denied")
+        return render(request, 'home/ErrorPage/permission.html')
     if request.method == 'GET':
         photo_list = Image.objects.all()
 
@@ -61,7 +61,7 @@ def image_list(request):
 @login_required(login_url='login')
 def delete_image(request, id):
     if not request.user.is_staff:
-        return HttpResponse("Permission denied")
+        return render(request, 'home/ErrorPage/permission.html')
     if request.method == 'POST':
         image_list = Image.objects.get(id = id)
         image_list.delete()
@@ -69,7 +69,7 @@ def delete_image(request, id):
 @login_required(login_url='login')
 def manage_post(request):
     if not request.user.is_staff:
-        return HttpResponse("Permission denied")
+        return render(request, 'home/ErrorPage/permission.html')
     post = Blog.objects.all()
     comment  = Comment.objects.all()
 
@@ -82,7 +82,7 @@ def manage_post(request):
 @login_required(login_url='login')    
 def delete_post(request,id):
     if not request.user.is_staff:
-        return HttpResponse("Permission denied")
+        return render(request, 'home/ErrorPage/permission.html')
     if request.method == 'POST':
         post = Blog.objects.get(id = id)
         post.delete()
@@ -90,7 +90,7 @@ def delete_post(request,id):
 @login_required(login_url='login')
 def individual_post(request, id):
     if not request.user.is_staff:
-        return HttpResponse("Permission denied")
+        return render(request, 'home/ErrorPage/permission.html')
     if request.method == 'GET':
         post_item = Blog.objects.filter(id = id)
         comments = Comment.objects.filter(blog__id = id).all()
@@ -104,7 +104,7 @@ def individual_post(request, id):
 @login_required(login_url='login')
 def delete_comment(request, id):
     if not request.user.is_staff:
-        return HttpResponse("Permission denied")
+        return render(request, 'home/ErrorPage/permission.html')
     comment = Comment.objects.filter(id = id).first()
     comment.delete()
 
@@ -118,7 +118,7 @@ def delete_comment(request, id):
 def user_list(request):
 
     if not request.user.is_staff: 
-        return HttpResponse("Permission denied") 
+        return render(request, 'home/ErrorPage/permission.html') 
     user = Account.objects.all()
 
     context ={
@@ -128,7 +128,7 @@ def user_list(request):
 @login_required(login_url = 'login')
 def single_user (request, id):
     if not request.user.is_staff:
-        return HttpResponse('permission denied')
+        return render(request, 'home/ErrorPage/permission.html')
     single_user = Account.objects.get(id = id)
     
     a = datetime.now().date()-single_user.last_date_of_donation
@@ -145,7 +145,7 @@ def single_user (request, id):
 def delete_single_user(request, id):
     
     if not request.user.is_staff:
-        return HttpResponse("Permission denied")
+        return render(request, 'home/ErrorPage/permission.html')
     delete_user = Account.objects.get(id = id)
     print(delete_user)
     delete_user.delete()
@@ -154,15 +154,15 @@ def delete_single_user(request, id):
 @login_required(login_url = 'login')
 def search(request):
     if not request.user.is_staff:
-        return HttpResponse('permisson denied')
+        return render(request, 'home/ErrorPage/permission.html')
     user_list = Account.objects.all()
     user_filter = UserFilter(request.GET, queryset=user_list)
-    return render(request, 'dashboard/users/users.html', {'filter': user_filter})
+    return render(request, 'dashboard/users/search.html', {'filter': user_filter})
 
 @login_required(login_url = 'login')
 def committee_form(request):
     if not request.user.is_staff:
-        return HttpResponse('permisson denied')
+        return render(request, 'home/ErrorPage/permission.html')
     if request.method == 'POST':
         form = CommitteeForm(request.POST,request.FILES)
         if form.is_valid():
@@ -178,7 +178,7 @@ def committee_form(request):
 @login_required(login_url = 'login')
 def committee(request):
     if not request.user.is_staff:
-        return HttpResponse('permisson denied')
+        return render(request, 'home/ErrorPage/permission.html')
 
     session_list = DropDownForm()
 
@@ -198,7 +198,7 @@ def committee(request):
 @login_required(login_url = 'login')
 def Committee_member(request, id):
     if not request.user.is_staff:
-        return HttpResponse('permisson denied')
+        return render(request, 'home/ErrorPage/permission.html')
     if request.method == 'GET':
         member = Commttee.objects.get( id = id )
         print(member)
@@ -225,7 +225,7 @@ class CommtteeUpdateView(generic.UpdateView):
 @login_required(login_url = 'login')
 def GalleryImage(request):
     if not request.user.is_staff:
-        return HttpResponse('permisson denied')
+        return render(request, 'home/ErrorPage/permission.html')
     if request.method == 'POST':
         form = GalleryImageForm (request.POST,request.FILES)
         if form.is_valid():
@@ -241,7 +241,7 @@ def GalleryImage(request):
 @login_required(login_url = 'login')
 def GalleryImageView(request):
     if not request.user.is_staff:
-        return HttpResponse('permisson denied')
+        return render(request, 'home/ErrorPage/permission.html')
     image =  Gallery.objects.all()
     print(image)
     context = {
@@ -251,7 +251,7 @@ def GalleryImageView(request):
 @login_required(login_url = 'login')
 def GalleryImageManage(request,id):
     if not request.user.is_staff:
-        return HttpResponse('permisson denied')
+        return render(request, 'home/ErrorPage/permission.html')
     if request.method == 'POST':
         image_del = Gallery.objects.get(id=id)
         image_del.delete()
@@ -259,7 +259,7 @@ def GalleryImageManage(request,id):
 @login_required(login_url = 'login')
 def updateAccount(request, id ):
     if not request.user.is_staff:
-        return HttpResponse('permisson denied')
+        return render(request, 'home/ErrorPage/permission.html')
     user = Account.objects.get(id=id)
     if request.method == 'POST':
         form = AccountUpdateForm(request.POST,request.FILES,user=user)
@@ -276,12 +276,26 @@ def updateAccount(request, id ):
 @login_required(login_url = 'login')
 def managePost(request,id):
     if not request.user.is_staff:
-        return HttpResponse('permisson denied')
+        return render(request, 'home/ErrorPage/permission.html')
     if request.method == 'GET':
         post = Blog.objects.get(id=id)
         post.managed = True
         post.save()
         return redirect(request.META.get('HTTP_REFERER', '/'))
+
+def report(request):
+    if request.method == 'POST':
+        print(request.POST)
+        form = ReportForm(request.POST)
+
+        if form.is_valid():
+            form.save()
+            return redirect(request.META.get('HTTP_REFERER', '/')) 
+        else:
+            return HttpResponse(form.errors.__str__())
+
+
+
 
 
 

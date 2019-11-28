@@ -12,13 +12,14 @@
         {% if post %}
                         
         {% for blog in post %}
-        <div class="col-sm-6">
+        <div class="col-sm-10">
                 <div class="card">
                   <div class="card-body">
                         
-                         <h5 class="card-title">{{blog.name}}</h5>
+                         <h5 class="card-title lead">{{blog.id}} - {{blog.name}} : {{blog.blood_group}}</h5>
             
-                    <p class="card-text">{{blog.description}}</p>
+                    <p class="card-text" style=" letter-spacing: 1px; ">Purpose: {{blog.description}}</p>
+                    <footer class="blockquote-footer mt-3 mb-4">Phone : {{blog.phone}}<br> <cite title="Source Title">{{blog.date }} {{blog.time}}</cite></footer>
                     <form method = 'POST' action="{% url 'delete_post' blog.id %}">
                         {% csrf_token %}
                         <button type="submit" class=" btn btn-danger btn-sm " >Delete</button>

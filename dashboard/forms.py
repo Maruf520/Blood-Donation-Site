@@ -1,5 +1,5 @@
 from django import forms
-from  dashboard.models import Image,Commttee,Gallery
+from  dashboard.models import Image,Commttee,Gallery,Report
 from  accounts.models import Account
 
 blood_type = (
@@ -93,6 +93,7 @@ class GalleryImageForm(forms.ModelForm):
 class AccountUpdateForm(forms.ModelForm):
 	
 	blood_group = forms.CharField( widget=forms.Select( choices=blood_type , attrs={'class':'custom-select'}))
+	image = forms.ImageField(required=False,widget=forms.FileInput(attrs={'class':'form-control'}))
 	class Meta:
 		model = Account
 		fields = ['username','email','phone','address','blood_group','last_date_of_donation','image']
@@ -114,7 +115,7 @@ class AccountUpdateForm(forms.ModelForm):
 				}),
 
 				'last_date_of_donation' : forms.DateInput(format='%d-%m-%Y',attrs={'class' : 'form-control','type':'date' }),
-			'image': forms.FileInput(attrs={'class':'form-control'}),
+			
 		}
 
 	def clean(self):
@@ -177,3 +178,11 @@ class AccountUpdateForm(forms.ModelForm):
 		self.fields['address'].initial = user.address
 		self.fields['blood_group'].initial = user.blood_group
 		self.fields['last_date_of_donation'].initial = user.last_date_of_donation
+
+class ReportForm(forms.ModelForm):
+	class Meta :
+		model = Report
+		fields = ['messege']
+		widgets = {
+			'messege': forms.TextInput(attrs={'class':'form-control','placeholder':'For any complane'}),
+		}

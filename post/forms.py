@@ -16,7 +16,7 @@ class BloodPostForm(forms.ModelForm):
             'time' : forms.TimeInput(attrs={'class':'form-control','placeholder':'time', 'type':'time'}),
             'name' : forms.TextInput(attrs={'class' : 'form-control','placeholder':'name'}),
             'blood_group' : forms.Select(attrs={'class':'form-control','placeholder':'blood_group'}),
-            'quantity' : forms.NumberInput(attrs={'max':4, 'min':1 ,'class':'form-control' ,'type':'range','name':"points" ,'min':"1" ,'max':"4",'id':"myRange"})
+            'quantity' : forms.NumberInput(attrs={'class':'form-control' ,'type':'range','name':"points" ,'min':"2" ,'max':"3",'id':"myRange"})
         }
     	# def clean_quantity(self):
 

@@ -10,7 +10,12 @@
 {% block blog_view %}
 
   <div style="height: 150px;" ></div>
-  <h2 class="text-center display-4 mb-4">Blood Blog For Everyone</h2>
+  <h2 class="text-center display-4 mb-4">Blood Blog For Everyone</h2> 
+
+  <div class="d-flex justify-content-center mb-3">
+      <a class="btn btn-success" style="color: white;" href="{% url 'managedpost' %}"><h3>Managed Posts</h3></a> 
+  </div>
+
   <div class="container-fluid">
     <div class="row d-flex justify-content-center">
       <div class="col-md-9">
@@ -23,7 +28,7 @@
           </p>
           {% if item.description %}
           <blockquote class="blockquote">
-            <u  style="color: white;">Message</u>
+            <u  style="color: white;">Purpose:</u>
             <p class="mb-0"  style="color: white;">
                 {{item.description}}
             </p>
@@ -38,7 +43,7 @@
           {% if comment.blog.id == item.id %}
 
             <div class="comment p-2">
-              <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80" class="mr-3" style="height: 50px; width: 50px; border-radius: 50%; display: inline; float: left;">
+              <img src= "{{comment.user.image.url}}" class="mr-3" style="height: 50px; width: 50px; border-radius: 50%; display: inline; float: left;">
             
             
             <blockquote class="blockquote" style="display: inline;">

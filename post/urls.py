@@ -4,6 +4,7 @@ from . import views
 urlpatterns = [
     path('blog/', views.blog_post_view, name='blood_blog'),
     path('blog/comment/<int:id>/', views.individual_blog, name='single_blog'),
+    path('managed/post/',views.managedPost, name = 'managedpost'),
 
 
 ]

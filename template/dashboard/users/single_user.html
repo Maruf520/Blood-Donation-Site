@@ -7,43 +7,61 @@
     <li class="list-group-item list-group-item-primary">{{user.username}}</li>
  
   </ul> -->
-  <table class="table table-striped table-dark">
-      <!-- {% if single_user %} -->
-    <thead>
-      <tr>
-        <th scope="col">Username : {{ single_user.username }} </th>
-    </tr>
-    <tr>
-        <th scope="col">Last Date Of Donation : {{ single_user.last_date_of_donation }}</th>
-    </tr>   
-        <th scope="col">Location : {{ single_user.present_add }}</th>
-        <tr>
+
+  <div class="container-fluid">
+    <div class="row">
+      
+
+      <div class="col-sm-9">
+          <table class="table table-striped table-dark">
+              <!-- {% if single_user %} -->
+            <thead>
+              <tr>
+                <th scope="col">Username : {{ single_user.username }} </th>
+            </tr>
+            <tr>
+                <th scope="col">Last Date Of Donation : {{ single_user.last_date_of_donation }}</th>
+            </tr>   
+                <th scope="col">Location : {{ single_user.present_add }}</th>
+                <tr>
+                  <tr>   
+            <th scope="col">Blood Group  : {{ single_user.blood_group }}</th>
+            
+          </tr>
           <tr>   
-    <th scope="col">Blood Group  : {{ single_user.blood_group }}</th>
-    
-  </tr>
-  <tr>   
-<th scope="col">Phone  : {{ single_user.phone }}</th>
+        <th scope="col">Phone  : {{ single_user.phone }}</th>
+        
+        </tr>
+        <tr>   
+        <th scope="col">Email : {{ single_user.email }}</th>
+        
+        </tr>
+        <!-- {% endif %} -->
+        <tr>  
+        {% if b > 120  %}
+        <th scope="col">Status : <button type="button" class="btn btn-primary">Available</button> </th>
+        {% else %}
+        <th scope="col">Status : <button type="button" class="btn btn-primary">Unavailable</button> </th>
+        {% endif %}
+        <th><a href="{% url 'userupdate' single_user.id  %}" type="button" class="btn btn-primary">Eddit</a></th>
+        </tr>
+            </thead>
+           
+            <tbody>
+            
+            </tbody>
+          </table>
+      </div>
+      <div class="col-sm-3">
+          <div style="width: 200px;height: 200px; border-radius: 50%; border: 1px dashed black;padding: 20px; 
+          position: relative;">
+              <img class="card-img-top" src="http://cdn.onlinewebfonts.com/svg/img_568657.png" 
+               style="width: 100%; height: auto; max-height: 100%; z-index: -1;" alt="Card image cap">
+          </div>
+      </div>
+    </div>
+  </div>
 
-</tr>
-<tr>   
-<th scope="col">Email : {{ single_user.email }}</th>
-
-</tr>
-<!-- {% endif %} -->
-<tr>  
-{% if b > 120  %}
-<th scope="col">Status : <button type="button" class="btn btn-primary">Available</button> </th>
-{% else %}
-<th scope="col">Status : <button type="button" class="btn btn-primary">Unavailable</button> </th>
-{% endif %}
-<th><a href="{% url 'userupdate' single_user.id  %}" type="button" class="btn btn-primary">Eddit</a></th>
-</tr>
-    </thead>
-   
-    <tbody>
-    
-    </tbody>
-  </table>
+  
 </main>
   {% endblock %}
