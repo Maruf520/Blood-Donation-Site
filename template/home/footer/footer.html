@@ -1,105 +1,115 @@
 {% load staticfiles %}
-<footer class="footer-area  px-5 py-5">
+<footer class="footer-area px-5 py-5">
     <!-- Main Footer Area -->
     <div class="main-footer-area">
-      <div class="container-fluid">
-        <div class="row">
+        <div class="container-fluid">
+            <div class="row">
 
-          <div class="col-12 col-sm-6 col-xl-3">
-            <div class="footer-widget-area">
-                
-              <div style="background-color: rgba(15, 34, 141, 0.281); padding: 30px 0px;
-              border-radius: 4px; box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.418);
-              ">
-                <div style="height: 100px; width: 100px;position: relative; margin: auto;">
-                  <img  
-                    src="{% static 'front/img/bg-img/me.jpg' %}"
-                    alt="maruf"
-                    style="width: 100%; height: auto; min-height: 100%; object-fit: cover;
-                      border-radius: 50%; border: 1px solid black;
-                     "
-                    >
-                
+                <div class="col-12 col-sm-6 col-xl-3">
+                    <div class="footer-widget-area">
+
+                        <div style="background-color: rgba(15, 34, 141, 0.281);
+                            padding: 30px 0px;
+                            border-radius: 4px; box-shadow: 0px 5px 10px rgba(0,
+                            0, 0, 0.418);">
+                            <div style="height: 100px; width: 100px;position:
+                                relative; margin: auto;">
+                                <img
+                                    src="{% static 'front/img/bg-img/me.jpg' %}"
+                                    alt="maruf"
+                                    style="width: 100%; height: auto;
+                                    min-height: 100%; object-fit: cover;
+                                    border-radius: 50%; border: 1px solid black;">
+                            </div>
+                            <p class="lead text-center m-0">
+                                Developed by Maruf
+                            </p>
+                            <div class="d-flex justify-content-center">
+                                <div class="footer-social-info">
+                                    <a href="https://github.com/Maruf520">
+                                        <i class="fa fa-github"
+                                            aria-hidden="true"></i>
+                                    </a>
+                                    <a
+                                        href="https://www.instagram.com/maaaruuf/">
+                                        <i class="fa fa-instagram"
+                                            aria-hidden="true"></i>
+                                    </a>
+                                    <a
+                                        href="https://www.facebook.com/maruf.maruf.58">
+                                        <i class="fa fa-facebook"
+                                            aria-hidden="true"></i>
+                                    </a>
+                                    <a href="#"><i class="fa fa-twitter"
+                                            aria-hidden="true"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <p class="lead text-center m-0">
-                  Developed by Maruf
-                </p>
-                <div class="d-flex justify-content-center">
-                  <div class="footer-social-info">
-                      <a href="https://github.com/Maruf520">
-                        <i class="fa fa-github" aria-hidden="true"></i>
-                      </a>
-                      <a href="https://www.instagram.com/maaaruuf/">
-                        <i class="fa fa-instagram" aria-hidden="true"></i>
-                      </a>
-                      <a href="https://www.facebook.com/maruf.maruf.58">
-                        <i class="fa fa-facebook" aria-hidden="true"></i>
-                      </a>
-                      <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-                  </div>
+
+                <div class="col-12 col-sm-6 col-xl-3">
+                    <div class="footer-widget-area">
+                        <div class="widget-title">
+                            <h6>Latest News</h6>
+                        </div>
+                        <div class="widget-blog-post">
+                            <!-- Single Blog Post -->
+                            <!-- Single Blog Post -->
+                            <div class="widget-single-blog-post d-flex">
+
+                                <div class="widget-post-content">
+                                    <a href="#">A new drug is tested</a>
+                                    <p>Dec 02, 2017</p>
+                                </div>
+                            </div>
+                            <!-- Single Blog Post -->
+                            <div class="widget-single-blog-post d-flex">
+
+                                <div class="widget-post-content">
+                                    <a href="#">Health department advice</a>
+                                    <p>Dec 02, 2017</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
+
+                <div class="col-12 col-sm-6 col-xl-3">
+                    <div class="footer-widget-area">
+                        <div class="widget-title">
+                            <h6>About Us</h6>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="col-12 col-sm-6 col-xl-3">
+                    <div class="footer-widget-area">
+                        <div class="widget-title">
+                            <h6>News Letter</h6>
+                        </div>
+
+                        <div class="footer-newsletter-area">
+                            <form method="POST" action="{% url 'reportmessege'
+                                %}">
+                                {% csrf_token %}
+                                <input type="text" name="messege"
+                                    class="form-control" required/>
+                                <button type="submit">Send</button>
+                            </form>
+                            <p>Lorem ipsum dolor sit amet, consectetuer
+                                adipiscing elit, sed diam nonummy nibh
+                                euismod tincidunt ut laoreet dolore magna
+                                aliquam erat volutpat. Lorem ipsum dolor
+                                sit amet, consectetuer.</p>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-
-          <div class="col-12 col-sm-6 col-xl-3">
-              <div class="footer-widget-area">
-                  <div class="widget-title">
-                      <h6>Latest News</h6>
-                  </div>
-                  <div class="widget-blog-post">
-                      <!-- Single Blog Post -->
-                      <!-- Single Blog Post -->
-                      <div class="widget-single-blog-post d-flex">
-                          
-                          <div class="widget-post-content">
-                              <a href="#">A new drug is tested</a>
-                              <p>Dec 02, 2017</p>
-                          </div>
-                      </div>
-                      <!-- Single Blog Post -->
-                      <div class="widget-single-blog-post d-flex">
-                          
-                          <div class="widget-post-content">
-                              <a href="#">Health department advice</a>
-                              <p>Dec 02, 2017</p>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-          </div>
-
-          <div class="col-12 col-sm-6 col-xl-3">
-              <div class="footer-widget-area">
-                  <div class="widget-title">
-                      <h6>About Us</h6>
-                  </div>
-                  
-              </div>
-          </div>
-
-          <div class="col-12 col-sm-6 col-xl-3">
-              <div class="footer-widget-area">
-                  <div class="widget-title">
-                      <h6>News Letter</h6>
-                  </div>
-
-                  <div class="footer-newsletter-area">
-                      <form method="POST"  action="{% url 'reportmessege' %}">
-                          {% csrf_token %}
-                          <input type="text" name="messege" class="form-control" required/>
-                          <button type="submit">Send</button>
-                      </form>
-                      <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh
-                          euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Lorem ipsum dolor
-                          sit amet, consectetuer.</p>
-                  </div>
-              </div>
-          </div>
         </div>
-      </div>
     </div>
-        <!-- Bottom Footer Area -->
+    <!-- Bottom Footer Area -->
     <div class="bottom-footer-area">
         <div class="container-fluid">
             <div class="row">
@@ -110,8 +120,9 @@
                             <p>
                                 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                                 Copyright &copy;
-                                <script>document.write(new Date().getFullYear());</script> All rights reserved |
-                                 Maruf
+                                <script>document.write(new Date().getFullYear());</script>
+                                All rights reserved |
+                                Maruf
                                 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                             </p>
                         </div>
@@ -120,4 +131,4 @@
             </div>
         </div>
     </div>
-    </footer>
+</footer>

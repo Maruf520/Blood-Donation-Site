@@ -1,0 +1,39 @@
+{% extends 'home/base.html' %}
+
+{% block blood_blog_form %}
+
+
+<div style="height: 150px;"> a</div>
+{% if bank_list %}
+
+<div class="card-deck">
+    {% for bank in bank_list %}
+    <div class="col-sm-4 col-lg-4 col-xl-4 pb-1">
+        <div class="card h-100 bg-light mb-3">
+            {%if bank.logo %}
+            <img src="{{ bank.logo.url }}" class="card-img-top"
+                height="220px">
+            {%endif%}
+            <div class="card-body">
+                <h5 class="card-title">{{bank.name}}</h5>
+                <p class="card-text">Some quick example text to build on the
+                    card title and
+                    make up the bulk of the card's content.</p>
+                <a href="{{bank.get_absolute_url}}"
+                    class="btn
+                    btn-primary">
+                    Details </a>
+            </div>
+            <div class="card-footer">
+                <small class="text-muted">created at:
+                    {{bank.created_at}}</small>
+            </div>
+        </div>
+    </div>
+
+    {% endfor %}
+</div>
+{% else %}
+<h1>No bank's available</h1>
+{% endif %}
+{% endblock %}

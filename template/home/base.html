@@ -38,6 +38,18 @@
 </head>
 
 <body>
+    <div class="row">
+        {% with totail_items=cart|length %}
+            {% if cart|length > 0 %}
+                My Shopping Order:
+                <a href="{% url 'cart:cart_detail' %}" style="color: #ffffff">
+                    {{ totail_items }} item {{ totail_items|pluralize }}, Kshs. {{ cart.get_total_price }}
+                </a>
+            {% else %}
+                Your cart is empty.
+            {% endif %}
+        {% endwith %}
+    </div>
     <!-- Preloader -->
     <div id="preloader">
         <div class="medilife-load"></div>
