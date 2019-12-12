@@ -104,7 +104,6 @@ def blood_detail(request, id, slug):
     return render(request, 'blood/detail.html', context)
 
 
-# ############################## BankCreate
 
 
 @method_decorator(decorators, name='dispatch')

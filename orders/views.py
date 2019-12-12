@@ -1,9 +1,15 @@
 from django.shortcuts import render
-from .models import OrderItem
+from .models import OrderItem, Order
 from .forms import OrderCreateForm
 from cart.cart import Cart
 from django.views.decorators.cache import never_cache
 from blood.models import Bank, Blood
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
+from django.urls import reverse
+from django.shortcuts import HttpResponseRedirect
+
+decorators = [never_cache, login_required]
 
 
 @never_cache
@@ -32,7 +38,12 @@ def order_create(request):
             cart.clear()
             form = OrderCreateForm()
 
-        return render(request, 'order/created.html', {'order': order})
+        return HttpResponseRedirect(reverse('orders:thank-giving', kwargs={'order_id': order.id}))
     else:
         form = OrderCreateForm(initial={'total_cost': cart.get_total_price()})
     return render(request, 'order/create.html', {'form': form})
+
+
+def thank_giving(request, order_id):
+    order = Order.objects.get(pk=order_id)
+    return render(request, 'order/created.html', {'order': order})
