@@ -19,4 +19,5 @@ urlpatterns = [
          views.BloodUpdateView.as_view(), name='blood-update'),
     path('bank/<int:pk>/blood/<int:blood_pk>/delete/',
          views.BloodDeleteView.as_view(), name='blood-delete'),
+    path('search/', views.SearchView, name='bank-search'),
 ]

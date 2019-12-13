@@ -9,6 +9,7 @@ from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import never_cache
 from django.shortcuts import redirect
+from django.db.models import Q
 
 decorators = [never_cache, login_required]
 
@@ -72,6 +73,7 @@ class BloodCreateView(generic.CreateView):
 
 
 def blood_list(request, bank_slug=None):
+    print(request.GET)
     bank = None
     banks = Bank.objects.all()
     bloods = Blood.objects.filter(available=True)
@@ -102,8 +104,6 @@ def blood_detail(request, id, slug):
         'cart_blood_form': cart_blood_form
     }
     return render(request, 'blood/detail.html', context)
-
-
 
 
 @method_decorator(decorators, name='dispatch')
@@ -233,3 +233,14 @@ class BloodDeleteView(generic.DeleteView):
         if queryset == []:
             return HttpResponse("Invalid delete request")
         return queryset
+
+
+def SearchView(request):
+    print(123456789)
+    if request.method == 'GET':
+        query= request.GET.get('q')
+
+    print("Hello", query)
+    results = Bank.objects.filter(Q(name=query) | Q(name__icontains=query))
+
+    return render(request, 'bank/search.html', {'results': results})
