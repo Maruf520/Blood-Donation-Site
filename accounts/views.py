@@ -13,6 +13,7 @@ from misc.token import token_decode, token_encode
 from django.core.mail import send_mail
 from post.models import Blog
 from django.views.decorators.cache import never_cache
+from cart.cart import Cart
 
 
 def send_password_reset_token(token, email):
@@ -68,6 +69,8 @@ def register(request):
 
 
 def logout_view(request):
+    cart = Cart(request)
+    cart.clear()
     logout(request)
     return HttpResponseRedirect('/')
 
@@ -81,7 +84,7 @@ def User_Profile(request):
         print(post_number)
         context = {
             'posts': post,
-            'post_number':post_number,
+            'post_number': post_number,
             # 'Total_donation':Total_donation,
         }
         return render(request, 'home/profile/profile.html', context)

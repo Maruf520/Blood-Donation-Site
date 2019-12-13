@@ -27,7 +27,10 @@
         {% endblock %}</title>
 
 
-
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  
+  
+  
     <!-- Favicon  -->
     <link rel="icon" href="{% static  'front/img/core-img/favicon.ico' %}">
 
@@ -38,6 +41,18 @@
 </head>
 
 <body>
+    <div class="row">
+        {% with total_items=cart|length %}
+            {% if cart|length > 0 %}
+                My Shopping Order:
+                <a href="{% url 'cart:cart_detail' %}" style="color: #ffffff">
+                    {{ total_items }} item {{ total_items|pluralize }}, TK. {{ cart.get_total_price }}
+                </a>
+            {% else %}
+                Your cart is empty.
+            {% endif %}
+        {% endwith %}
+    </div>
     <!-- Preloader -->
     <div id="preloader">
         <div class="medilife-load"></div>
@@ -223,6 +238,8 @@
     <!-- ***** Footer Area End ***** -->
 
     <!-- jQuery (Necessary for All JavaScript Plugins) -->
+    <script src="{% static 'front/js/search_bar.js' %}"></script>
+
     <script src="{% static 'front/js/jquery/jquery-2.2.4.min.js' %}"></script>
     <!-- Popper js -->
     <script src="{% static 'js/popper.min.js' %}"></script>
@@ -232,7 +249,7 @@
     <script src="{% static 'front/js/plugins.js' %}"></script>
     <!-- Active js -->
     <script src="{% static 'front/js/active.js' %}"></script>
-
+    
 </body>
 
 </html>

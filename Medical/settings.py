@@ -38,7 +38,9 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
-    
+    'cart.apps.CartConfig',
+    'bootstrap_datepicker_plus',
+    'BruteBuster',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -52,8 +54,11 @@ INSTALLED_APPS = [
     'blood_bank',
     'notifications',
     'crispy_forms',
-  
-    
+    'bootstrap4',
+    'blood.apps.BloodConfig',
+    'orders.apps.OrdersConfig',
+
+
 ]
 
 MIDDLEWARE = [
@@ -64,7 +69,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    
+
 ]
 
 ROOT_URLCONF = 'Medical.urls'
@@ -72,7 +77,7 @@ ROOT_URLCONF = 'Medical.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR,'template')],
+        'DIRS': [os.path.join(BASE_DIR, 'template')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -80,6 +85,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'cart.context_processors.cart',
             ],
         },
     },
@@ -96,7 +102,7 @@ DATABASES = {
     'default': {
         'ENGINE': env.str('DB_ENGINE'),
         'NAME': env.str('DB_NAME'),
-        'HOST' : env.str('DB_HOST'),
+        'HOST': env.str('DB_HOST'),
         'USER': env.str('DB_USER'),
         'PASSWORD': env.str('DB_PASSWORD'),
         'PORT': env.str('DB_PORT')
@@ -143,14 +149,14 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR,'static')
+    os.path.join(BASE_DIR, 'static')
 ]
-STATIC_ROOT = os.path.join(BASE_DIR,'staticfiles')
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-NOTIFICATIONS_SOFT_DELETE=True
+NOTIFICATIONS_SOFT_DELETE = True
 
 
 # Email configuration
@@ -161,5 +167,10 @@ EMAIL_HOST_USER = env.str('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = env.str('EMAIL_HOST_PASSWORD')
 EMAIL_USE_TLS = env.bool('EMAIL_USE_TLS')
 
-DATE_INPUT_FORMATS = ('%d-%m-%Y')
+DATE_INPUT_FORMATS = ['%d-%m-%Y']
 SMS_TOKEN = env.str('SMS_TOKEN')
+
+BB_MAX_FAILURES = 5
+BB_BLOCK_INTERVAL = 2
+
+CART_SESSION_ID = 'cart'

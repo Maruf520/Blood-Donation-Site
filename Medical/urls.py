@@ -14,23 +14,28 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import include,path
+from django.urls import include, path
 from django.conf import settings
 from django.conf.urls.static import static
 import notifications.urls
 
 urlpatterns = [
-    path('account/', include('accounts.urls')),
+    path('blood/cart/', include('cart.urls')),
+    path('blood/orders/', include('orders.urls')),
+    path('accounts/', include('accounts.urls')),
     path('dashboard/', include('dashboard.urls')),
     path('blood/', include('post.urls')),
     path('admin/', admin.site.urls),
     path('', include('home.urls')),
     # path('sms/', include('sms.urls')),
     path('blood_bank/', include('blood_bank.urls')),
-    path('inbox/notifications/', include(notifications.urls, namespace='notifications')),
+    path('inbox/notifications/',
+         include(notifications.urls, namespace='notifications')),
+    path('find-blood/', include('blood.urls')),
 ]
 if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.MEDIA_URL,
+                          document_root=settings.MEDIA_ROOT)
 
 
 handler404 = 'home.views.handle_error'

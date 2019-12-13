@@ -1,3 +1,4 @@
+{% load static %}
 <div class="collapse navbar-collapse" id="medilifeMenu">
   <!-- Menu Area -->
   <ul class="navbar-nav mr-auto">
@@ -31,13 +32,11 @@
       >
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="#">Blood Bank</a>
+        <a class="nav-link" href="{% url 'blood:bank-list' %}">Blood Bank</a>
       </li>
       <li class="nav-item">
-        <!-- {% if user.is_staff %}
-          <a class="nav-link" href="{% url 'dashboard' %}">Dashboard</a>
-          {% endif %} -->
-        </li>
+        <a class="nav-link" href="{% url 'cart:cart_detail' %}"><img src="{% static 'front/img/icons/cart.png'%}" style="width:25px;height:25px;"></a>
+      </li>
     <!-- <ul class="navbar-nav ml-auto"> -->
     <li class="nav-item">
       {% if user.is_authenticated %}

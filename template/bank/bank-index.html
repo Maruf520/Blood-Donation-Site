@@ -1,0 +1,36 @@
+{% extends 'home/base.html' %} {% block blood_blog_form %}
+{% if bank_list %}
+<div style="height: 150px;"> a</div>
+<div class="container-fluid">
+
+    <div class="card-deck">
+        {% for bank in bank_list %}
+        <div class="col-sm-3 col-lg-3 col-xl-3 p-5 m-5">
+            <div class="card h-100 bg-light mb-3">
+                {% if bank.logo %}
+                <img src="{{ bank.logo.url }}" class="card-img-top"
+                    height="10px">
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title">{{bank.name}}</h5>
+                    <p class="card-text">{{bank.location}}</p>
+                    <a href="#" class="btn
+                        btn-primary">
+                        Details </a>
+                </div>
+                <div class="card-footer">
+                    <small class="text-muted">created at:
+                        {{ bank.created_at}}
+                    </small>
+                </div>
+            </div>
+        </div>
+        <!-- <li>
+	</li> -->
+        {% endfor %}
+    </div>
+
+</div>
+{% else %}
+<h1>No Bank's available</h1>
+{% endif %} {% endblock %}

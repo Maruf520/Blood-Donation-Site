@@ -1,0 +1,44 @@
+{% extends 'home/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% load bootstrap4 %}
+
+{% block title %}
+Shopping Cart| Checkout</title>
+{% endblock %}
+    Shopping Cart| Checkout</title>
+
+
+{% block blood_blog_form %} 
+<div style="height: 150px;"> </div>
+<div class="container">
+    <div class="row" style="margin-top: 6%">
+        <div class="col-md-8">
+            <h4 class="page-header">Checkout</h4>
+            <form action="." method="post">
+                {% csrf_token %}
+                {% bootstrap_form form %}<br>
+                <input type="submit" class="btn btn-primary" value="Submit
+                    order">
+            </form>
+        </div>
+        <div class="col-md-4">
+            <div class="page-header">
+                Your Order
+            </div>
+            <ul class="list-group">
+                {% for item in cart %}
+                <li class="list-group-item">
+                    {{ item.quantity }}x {{ item.product.name }}
+                    <span>TK. {{ item.total_price }}</span>
+                </li>
+                {% endfor %}
+
+                <li class="list-group-item active">Total Cost: TK. {{
+                    cart.get_total_price }}</li>
+            </ul>
+
+        </div>
+    </div>
+</div>
+{% endblock %}

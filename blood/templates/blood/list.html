@@ -1,0 +1,74 @@
+{% extends 'home/base.html' %}
+{% load static %}
+
+{% block blood_blog_form %}
+<div class="container-fluid">
+    <div style="height: 150px;"> </div>
+    <div class="row" style="margin-top: 6%">
+
+        <div class="col-sm-8 blog-main">
+
+            <div class="blog-post">
+                <div class="card-deck">
+                    {% for blood in bloods %}
+                    <div class="col-sm-4 col-lg-4 col-xl-4 pb-1">
+                        <div class="card h-100 bg-light mb-3">
+
+                            <div class="card-body">
+                                <h5 class="card-title"><a
+                                        href="{{blood.get_absolute_url }}">
+                                        <h3>{{ blood.group }}</h3>
+                                        <h4>Stock -{{blood.stock}}</h4></a></h5>
+                                <p class="card-text">TK. {{ blood.price }}</p>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    {% endfor %}
+                </div>
+
+
+            </div><!-- /.blog-post -->
+
+        </div><!-- /.blog-main -->
+
+        <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
+            <div class="sidebar-module">
+                <h4>Banks</h4>
+                <ol class="list-unstyled">
+                    <li {% if not bank %} class="active" {% endif %}><a href="{%
+                            url 'blood:blood_list' %}">All</a></li>
+                    {% for b in banks %}
+
+                    <li {% if bank.slug == b.slug %} class="active" {% endif %}>
+                        <a href="{{b.get_absolute_url}}">{{ b.name }}
+                            {{b.get_absolute_url}}</a>
+                    </li>
+                    {% endfor %}
+                </ol>
+            </div>
+        </div><!-- /.blog-sidebar -->
+
+    </div><!-- /.row -->
+
+</div><!-- /.container -->
+{% endblock %}
+
+
+
+<div class="card-deck">
+    <div class="card">
+        <img src="..." class="card-img-top" alt="...">
+        <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">This is a wider card with supporting text below
+                as a natural lead-in to additional content. This content is a
+                little bit longer.</p>
+        </div>
+        <div class="card-footer">
+            <small class="text-muted">Last updated 3 mins ago</small>
+        </div>
+    </div>
+
+</div>

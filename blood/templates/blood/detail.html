@@ -1,0 +1,107 @@
+{% extends 'home/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+{% if bank %}{{ bank.name }}
+{% else %} Bloods {% endif %}
+{% endblock %}
+
+{% block blood_blog_form %}
+<div style="height: 150px;"> .</div>
+{% with totail_items=cart|length %}
+{% if cart|length > 0 %}
+My Shopping Order:
+<a href="{% url 'cart:cart_detail' %}" style="color: black">
+    {{ totail_items }} item {{ totail_items|pluralize }}, TK.
+    {{cart.get_total_price }}
+</a>
+{% else %}
+Your cart is empty.
+{% endif %}
+{% endwith %}
+<div class="container">
+    <div class="row" style="margin-top: 6%">
+
+        
+
+
+                <div class="row">
+                        <div class="card-deck">
+
+                                <div class="col-sm-8 col-lg-8 col-xl-8 pb-1">
+                                    <div class="card h-150 bg-light mb-3">
+                                        {%if blood.bank.logo %}
+                                        <img src="{{ blood.bank.logo.url }}" class="card-img-top"
+                                            height="220px">
+                                        {%endif%}
+                                        <div class="card-body">
+                                            <h5 class="card-title">{{blood.bank.name}}
+                                                {{blood.name}}
+                                            </h5>
+                                            <p class="card-text"><p class="text-muted">TK. {{ blood.price }}</p>
+                                                <p><form action="{% url 'cart:cart_add' blood.id%}"
+                                                    method="post">
+                                                    {% csrf_token %}
+                                                    {{ cart_blood_form|crispy  }}
+                                                    <input type="submit" value="add to cart" class="btn btn-primary">
+                                                </form>
+                                                </p>
+                                                <p>{{ blood.description|safe|linebreaksbr }}</p>
+                                            </p>
+                            
+                                        </div>
+                                    </div>
+                                </div>
+                            
+                            
+                            </div>
+                </div>
+            </div>
+        
+
+
+    
+
+</div><!-- /.row -->
+
+</div><!-- /.container -->
+{% endblock %}
+
+
+
+
+
+<div class="card-deck">
+
+    <div class="col-sm-4 col-lg-4 col-xl-4 pb-1">
+        <div class="card h-100 bg-light mb-3">
+            {%if blood.bank.logo %}
+            <img src="{{ blood.bank.logo.url }}" class="card-img-top"
+                height="220px">
+            {%endif%}
+            <div class="card-body">
+                <h5 class="card-title">{{blood.bank.name}}
+                    {{blood.name}}
+                </h5>
+                <p class="card-text"><p class="text-muted">TK. {{ blood.price }}</p>
+                    <form action="{% url 'cart:cart_add' blood.id%}"
+                        method="post">
+                        {% csrf_token %}
+                        {{ cart_blood_form }}
+                        <input type="submit" value="add to cart"
+                            class="btn btn-primary">
+                    </form>
+                    <p>{{ blood.description|safe|linebreaksbr }}</p>
+                </p>
+
+            </div>
+            <div class="card-footer">
+                <small class="text-muted">created at:
+                    {{bank.created_at}}</small>
+            </div>
+        </div>
+    </div>
+
+
+</div>
